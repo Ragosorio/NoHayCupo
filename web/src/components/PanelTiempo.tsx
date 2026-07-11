@@ -6,9 +6,9 @@ import { $v, E, guardarLocal, touch } from "@/lib/cliente/estado";
 import { aHHMM, DIAS_CORTO, DIAS_NOMBRE, DIAS_ORDEN, GRID_FIN, GRID_INI, SLOT_MIN } from "@/lib/cliente/util";
 
 const PINCELES = [
-  { nivel: "imposible", nombre: "Imposible", title: "Tiempo intocable (trabajo, etc.): ninguna propuesta lo usará jamás." },
-  { nivel: "evitar", nombre: "Mejor no", title: "Preferís no usarlo, pero si es necesario se puede. Se minimiza al rankear." },
-  { nivel: "borrar", nombre: "Borrar", title: "Borrar lo pintado" },
+  { nivel: "imposible", nombre: "No puedo", title: "Horas intocables (trabajo, etc.): ninguna propuesta las usará jamás." },
+  { nivel: "evitar", nombre: "Prefiero no", title: "Preferís no usarlas, pero si es necesario se puede. Se minimizan al rankear." },
+  { nivel: "borrar", nombre: "Borrar", title: "Quitar lo pintado" },
 ] as const;
 
 export default function PanelTiempo() {
@@ -46,10 +46,10 @@ export default function PanelTiempo() {
     touch();
   };
 
+  /* Pintar siempre pinta: repasar una celda ya pintada NO la borra (en el
+   * teléfono el dedo repasa celdas sin querer). Quitar es solo con «Borrar». */
   const alBajar = (dia: string, min: number) => {
-    const pincel = E.pincel;
-    pintando.current =
-      pincel !== "borrar" && E.bloqueos.get(claveSlot(dia, min)) === pincel ? "borrar" : pincel;
+    pintando.current = E.pincel;
     ultima.current = null;
     pintarHasta(dia, min);
   };

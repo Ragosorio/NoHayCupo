@@ -135,6 +135,10 @@ export function ModalAcerca() {
             <span>Proyecto open source — estrellitas bienvenidas</span>
             <strong>github.com/Ragosorio/NoHayCupo →</strong>
           </a>
+          <p className="acerca-amor">
+            Hecho con <span className="corazon">❤</span> por <strong>ragosorio</strong> para
+            la USAC — que esta vez sí haya cupo.
+          </p>
         </div>
       </div>
     </div>
@@ -172,4 +176,30 @@ export function Toast() {
   useStore($v);
   if (!E.toast) return null;
   return <div className="toast">{E.toast}</div>;
+}
+
+/** Bienvenida de algunos temas: una pelota que cruza la cancha (fútbol) o la
+ * cinta de peligro anti-aburrimiento (USAC). Se autodestruye a los ~3 s. */
+export function AnimacionTema() {
+  useStore($v);
+  if (!E.animTema) return null;
+  if (E.animTema === "futbol") {
+    return (
+      <div className="anim-tema" aria-hidden="true">
+        <svg className="anim-pelota" viewBox="0 0 100 100" width="70" height="70">
+          <circle cx="50" cy="50" r="47" fill="#fff" stroke="#1a1a1a" strokeWidth="5" />
+          <polygon points="50,32 66,44 60,63 40,63 34,44" fill="#1a1a1a" />
+          <path d="M50 32 50 8M66 44l22-8M60 63l14 19M40 63 26 82M34 44 12 36"
+            stroke="#1a1a1a" strokeWidth="5" fill="none" />
+        </svg>
+        <div className="anim-grito">¡GOOOL DE HORARIO!</div>
+      </div>
+    );
+  }
+  const aviso = "PELIGRO · ABURRIMIENTO DETECTADO · GENERANDO HORARIO DE EMERGENCIA · ";
+  return (
+    <div className="anim-tema" aria-hidden="true">
+      <div className="anim-cinta"><span>{aviso.repeat(6)}</span></div>
+    </div>
+  );
 }

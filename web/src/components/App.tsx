@@ -5,7 +5,7 @@ import { abrirMenuMovil, cerrarMenuMovil, generar, iniciarApp, setModal } from "
 import { $v, E } from "@/lib/cliente/estado";
 import { iniciarTour } from "@/lib/cliente/tour";
 import { IconoCalendarioHero } from "./Iconos";
-import { ModalAcerca, ModalBienvenida, ModalPensum, Toast } from "./Modales";
+import { AnimacionTema, ModalAcerca, ModalBienvenida, ModalPensum, Toast } from "./Modales";
 import PanelCursos from "./PanelCursos";
 import PanelPerfil from "./PanelPerfil";
 import PanelTiempo from "./PanelTiempo";
@@ -21,10 +21,13 @@ export default function App() {
         setModal("pensum", false);
         setModal("acerca", false);
         setModal("export", false);
+        setModal("temas", false);
       }
     };
     const alClic = (ev: MouseEvent) => {
-      if (!(ev.target as HTMLElement).closest(".menu-export")) setModal("export", false);
+      const objetivo = ev.target as HTMLElement;
+      if (!objetivo.closest(".menu-export")) setModal("export", false);
+      if (!objetivo.closest(".menu-temas")) setModal("temas", false);
     };
     document.addEventListener("keydown", alTeclear);
     document.addEventListener("click", alClic);
@@ -79,6 +82,7 @@ export default function App() {
       <ModalPensum />
       <ModalAcerca />
       <ModalBienvenida />
+      <AnimacionTema />
       <Toast />
     </>
   );

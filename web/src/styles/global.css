@@ -39,10 +39,148 @@
   --sombra: 0 1px 2px rgba(0, 0, 0, .3), 0 6px 24px rgba(0, 0, 0, .25);
 }
 
+/* ===== Temas extra =====
+   Cada tema redefine LOS MISMOS tokens; nada más. Para crear uno nuevo:
+   docs/TEMAS.md (bloque acá + metadata en src/lib/cliente/temas.ts). */
+
+/* Medianoche — negro total, pensado para OLED y trasnochadores. */
+[data-theme="negro"] {
+  --fondo: #050507;
+  --tarjeta: #0e0e13;
+  --tarjeta-2: #16161d;
+  --tinta: #ececf1;
+  --tinta-suave: #9b9ba8;
+  --tinta-tenue: #5c5c6b;
+  --borde: #1f1f2a;
+  --linea: #15151d;
+  --acento: #8b5cf6;
+  --acento-tinta: #ffffff;
+  --acento-suave: #1d1533;
+  --ok-bg: #0e2417;  --ok-fg: #7fd6a4;  --ok-borde: #2f9e5f;
+  --warn-bg: #261e0c; --warn-fg: #ecc87e; --warn-borde: #a8842f;
+  --mal-bg: #291316;  --mal-fg: #f1a0a3;  --mal-borde: #c24045;
+  --sombra: 0 1px 2px rgba(0, 0, 0, .5), 0 6px 24px rgba(0, 0, 0, .4);
+}
+
+/* Lavanda — morado profundo con lila, tranquilo y con personalidad. */
+[data-theme="morado"] {
+  --fondo: #14101f;
+  --tarjeta: #1c1629;
+  --tarjeta-2: #251d36;
+  --tinta: #ece7f7;
+  --tinta-suave: #a99fc4;
+  --tinta-tenue: #6f6590;
+  --borde: #2f2547;
+  --linea: #221a35;
+  --acento: #a78bfa;
+  --acento-tinta: #221a35;
+  --acento-suave: #2b2148;
+  --ok-bg: #16291f;  --ok-fg: #7fd6a4;  --ok-borde: #2f9e5f;
+  --warn-bg: #2c2312; --warn-fg: #ecc87e; --warn-borde: #a8842f;
+  --mal-bg: #2e181d;  --mal-fg: #f1a0a3;  --mal-borde: #c24045;
+  --sombra: 0 1px 2px rgba(10, 0, 30, .4), 0 6px 24px rgba(10, 0, 30, .3);
+}
+
+/* Pinky — rosa claro con acento fucsia, dulce pero decidido. */
+[data-theme="rosa"] {
+  --fondo: #fdf1f7;
+  --tarjeta: #ffffff;
+  --tarjeta-2: #fbe4ef;
+  --tinta: #391627;
+  --tinta-suave: #7c4f65;
+  --tinta-tenue: #b38a9d;
+  --borde: #f2d3e2;
+  --linea: #f9e6ef;
+  --acento: #db2777;
+  --acento-tinta: #ffffff;
+  --acento-suave: #fce7f3;
+  --ok-bg: #e5f4eb;  --ok-fg: #15613b;  --ok-borde: #2f9e5f;
+  --warn-bg: #fdf3dd; --warn-fg: #7a5410; --warn-borde: #e2b75c;
+  --mal-bg: #fdecec;  --mal-fg: #8c1d21;  --mal-borde: #e5484d;
+  --sombra: 0 1px 2px rgba(120, 30, 80, .05), 0 6px 20px rgba(120, 30, 80, .07);
+}
+
+/* Matcha — verde salvia claro, calmado, cero estrés. */
+[data-theme="matcha"] {
+  --fondo: #f3f7ef;
+  --tarjeta: #ffffff;
+  --tarjeta-2: #e9f1e2;
+  --tinta: #1f2a1a;
+  --tinta-suave: #59684f;
+  --tinta-tenue: #91a186;
+  --borde: #dbe7d1;
+  --linea: #ecf2e6;
+  --acento: #4d7c0f;
+  --acento-tinta: #ffffff;
+  --acento-suave: #eef7dc;
+  --ok-bg: #e5f4eb;  --ok-fg: #15613b;  --ok-borde: #2f9e5f;
+  --warn-bg: #fdf3dd; --warn-fg: #7a5410; --warn-borde: #e2b75c;
+  --mal-bg: #fdecec;  --mal-fg: #8c1d21;  --mal-borde: #e5484d;
+  --sombra: 0 1px 2px rgba(30, 60, 20, .05), 0 6px 20px rgba(30, 60, 20, .06);
+}
+
+/* Cafecito — tonos cálidos de café (guiño al Mocha Mousse de Pantone). */
+[data-theme="mocha"] {
+  --fondo: #f7f1ea;
+  --tarjeta: #fffdf9;
+  --tarjeta-2: #f0e6d9;
+  --tinta: #302116;
+  --tinta-suave: #6f5c4e;
+  --tinta-tenue: #a5917f;
+  --borde: #e6d8c7;
+  --linea: #f0e8db;
+  --acento: #8a5a3b;
+  --acento-tinta: #ffffff;
+  --acento-suave: #f3e5d8;
+  --ok-bg: #e5f4eb;  --ok-fg: #15613b;  --ok-borde: #2f9e5f;
+  --warn-bg: #fdf3dd; --warn-fg: #7a5410; --warn-borde: #d0a44e;
+  --mal-bg: #fdecec;  --mal-fg: #8c1d21;  --mal-borde: #e5484d;
+  --sombra: 0 1px 2px rgba(80, 50, 20, .06), 0 6px 20px rgba(80, 50, 20, .07);
+}
+
+/* Modo fútbol — césped nocturno con dorado de copa (mundial 2026). */
+[data-theme="futbol"] {
+  --fondo: #07130a;
+  --tarjeta: #0e1f13;
+  --tarjeta-2: #16291b;
+  --tinta: #eaf6ec;
+  --tinta-suave: #9fc0a8;
+  --tinta-tenue: #5d7a65;
+  --borde: #1f3526;
+  --linea: #132417;
+  --acento: #e7b416;
+  --acento-tinta: #221a04;
+  --acento-suave: #2a2408;
+  --ok-bg: #12301c;  --ok-fg: #7fd6a4;  --ok-borde: #2f9e5f;
+  --warn-bg: #2c2312; --warn-fg: #ecc87e; --warn-borde: #a8842f;
+  --mal-bg: #2e181b;  --mal-fg: #f1a0a3;  --mal-borde: #c24045;
+  --sombra: 0 1px 2px rgba(0, 10, 0, .4), 0 6px 24px rgba(0, 10, 0, .3);
+}
+
+/* Modo USAC — azul y blanco de la tricentenaria. */
+[data-theme="usac"] {
+  --fondo: #f1f6fb;
+  --tarjeta: #ffffff;
+  --tarjeta-2: #e6eef7;
+  --tinta: #12263f;
+  --tinta-suave: #4a617c;
+  --tinta-tenue: #8ba0b5;
+  --borde: #d6e2ef;
+  --linea: #e8f0f8;
+  --acento: #1355a5;
+  --acento-tinta: #ffffff;
+  --acento-suave: #e2edf9;
+  --ok-bg: #e5f4eb;  --ok-fg: #15613b;  --ok-borde: #2f9e5f;
+  --warn-bg: #fdf3dd; --warn-fg: #7a5410; --warn-borde: #e2b75c;
+  --mal-bg: #fdecec;  --mal-fg: #8c1d21;  --mal-borde: #e5484d;
+  --sombra: 0 1px 2px rgba(10, 40, 90, .05), 0 6px 20px rgba(10, 40, 90, .07);
+}
+
 * { box-sizing: border-box; }
 
 html { color-scheme: light; }
-html[data-theme="dark"] { color-scheme: dark; }
+html[data-theme="dark"], html[data-theme="negro"],
+html[data-theme="morado"], html[data-theme="futbol"] { color-scheme: dark; }
 
 body {
   margin: 0;
@@ -78,6 +216,32 @@ input { font: inherit; color: inherit; }
 .brand p { margin: 0; font-size: 12px; color: var(--tinta-suave); }
 .topbar-controls { display: flex; align-items: center; gap: 8px; }
 .estado-catalogo { font-size: 12px; color: var(--tinta-tenue); margin-right: 6px; }
+
+/* ===== Picker de temas ===== */
+.menu-temas { position: relative; }
+.menu-temas-lista {
+  position: absolute; right: 0; top: calc(100% + 8px); z-index: 60;
+  background: var(--tarjeta); border: 1px solid var(--borde); border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(10, 14, 28, .18); padding: 6px; min-width: 230px;
+  max-height: min(70vh, 480px); overflow-y: auto;
+  display: flex; flex-direction: column; gap: 1px;
+  animation: aparecer .16s ease-out;
+}
+.menu-temas-lista[hidden] { display: none; }
+.menu-temas-lista button {
+  border: none; background: none; text-align: left; padding: 7px 10px;
+  border-radius: 8px; display: flex; align-items: center; gap: 10px;
+}
+.menu-temas-lista button:hover { background: var(--acento-suave); }
+.menu-temas-lista button.activo { background: var(--acento-suave); }
+.tema-punto {
+  width: 16px; height: 16px; border-radius: 6px; flex: none;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15);
+}
+.tema-info { flex: 1; min-width: 0; line-height: 1.25; }
+.tema-info strong { display: block; font-size: 12.5px; }
+.tema-info small { display: block; font-size: 10.5px; color: var(--tinta-suave); }
+.tema-check { color: var(--acento); font-weight: 800; flex: none; }
 
 /* ===== Botones ===== */
 .btn {
@@ -590,6 +754,60 @@ body.sidebar-oculta .sidebar { display: none; }
 }
 .acerca-repo span { font-size: 11.5px; color: var(--tinta-suave); }
 .acerca-repo strong { font-size: 13px; color: var(--acento); overflow-wrap: anywhere; }
+.acerca-amor {
+  margin: 14px 0 0; text-align: center;
+  font-size: 12px; color: var(--tinta-suave);
+}
+.acerca-amor .corazon { color: #e5484d; font-size: 13px; }
+
+/* ===== Animaciones de bienvenida de temas ===== */
+.anim-tema {
+  position: fixed; inset: 0; z-index: 300;
+  pointer-events: none; overflow: hidden;
+}
+.anim-pelota {
+  position: absolute; bottom: 9vh; left: -90px;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .35));
+  animation: rodar-pelota 1.7s cubic-bezier(.25, .1, .45, 1) forwards;
+}
+@keyframes rodar-pelota {
+  0%   { transform: translateX(0) rotate(0turn); }
+  100% { transform: translateX(calc(100vw + 180px)) rotate(3turn); }
+}
+.anim-grito {
+  position: absolute; left: 50%; top: 38%;
+  transform: translateX(-50%) rotate(-4deg);
+  font-size: clamp(26px, 7vw, 52px); font-weight: 900; letter-spacing: .02em;
+  color: var(--acento); text-transform: uppercase;
+  text-shadow: 0 3px 0 rgba(0, 0, 0, .25);
+  animation: grito 2.6s ease-out forwards;
+}
+@keyframes grito {
+  0%   { opacity: 0; transform: translateX(-50%) rotate(-4deg) scale(.4); }
+  12%  { opacity: 1; transform: translateX(-50%) rotate(-4deg) scale(1.08); }
+  20%  { transform: translateX(-50%) rotate(-4deg) scale(1); }
+  80%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+.anim-cinta {
+  position: absolute; left: -12%; right: -12%; top: 44%;
+  transform: rotate(-3.5deg);
+  background: rgba(220, 38, 38, .93); color: #fff;
+  border-top: 3px dashed rgba(255, 255, 255, .8);
+  border-bottom: 3px dashed rgba(255, 255, 255, .8);
+  padding: 13px 0; white-space: nowrap; overflow: hidden;
+  font-weight: 900; font-size: 15px; letter-spacing: .14em; text-transform: uppercase;
+  animation: cinta-entra 3.1s ease forwards;
+}
+.anim-cinta span { display: inline-block; animation: cinta-corre 3.1s linear forwards; }
+@keyframes cinta-entra {
+  0%   { opacity: 0; transform: rotate(-3.5deg) translateY(30px); }
+  8%   { opacity: 1; transform: rotate(-3.5deg) translateY(0); }
+  88%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes cinta-corre { from { transform: translateX(0); } to { transform: translateX(-18%); } }
+@media (prefers-reduced-motion: reduce) { .anim-tema { display: none; } }
 
 /* ===== Pie (texto indexable) ===== */
 .pie-seo {

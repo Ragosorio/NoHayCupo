@@ -38,6 +38,15 @@ export const IconoMenu = () => (
   </svg>
 );
 
+export const IconoPaleta = () => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 2.8a9.2 9.2 0 1 0 0 18.4c1.5 0 2.2-.9 2.2-1.9 0-.9-.5-1.4-.5-2.2 0-1.1.9-1.9 2.1-1.9h1.9c2 0 3.5-1.5 3.5-3.4A9.4 9.4 0 0 0 12 2.8Z" />
+    <circle cx="7.6" cy="10" r="1.15" fill="currentColor" stroke="none" />
+    <circle cx="11" cy="6.8" r="1.15" fill="currentColor" stroke="none" />
+    <circle cx="15.6" cy="7.8" r="1.15" fill="currentColor" stroke="none" />
+  </svg>
+);
+
 export const IconoX = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
     <path d="m3.5 3.5 9 9M12.5 3.5l-9 9" />

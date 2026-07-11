@@ -7,6 +7,7 @@
  * vanilla, con React solo como capa de render — cero lógica reescrita.
  */
 import { atom } from "nanostores";
+import { esTemaOscuro } from "./temas";
 import { PALETA_CLARA, PALETA_OSCURA } from "./util";
 
 export interface ComponenteJson {
@@ -81,9 +82,11 @@ export const E = {
   carnet: "",
   bloqueos: new Map<string, "imposible" | "evitar">(),
   pincel: "imposible" as "imposible" | "evitar" | "borrar",
-  tema: null as "light" | "dark" | null,
+  tema: null as string | null,   // id de temas.ts; null = según el sistema
   sidebarOculta: false,
   menuMovil: false,   // drawer móvil abierto (efímero, no se persiste)
+  menuTemas: false,   // picker de temas abierto (efímero)
+  animTema: null as "futbol" | "usac" | null,   // animación de bienvenida del tema
   topN: 3,
   resultado: null as Resultado | null,
   estadoGenerar: "",
@@ -111,7 +114,7 @@ export const E = {
 export const $v = atom(0);
 export const touch = () => $v.set($v.get() + 1);
 
-export const paleta = () => (E.tema === "dark" ? PALETA_OSCURA : PALETA_CLARA);
+export const paleta = () => (esTemaOscuro(E.tema) ? PALETA_OSCURA : PALETA_CLARA);
 
 export const colorDe = (codigo: string): [string, string, string] => {
   const orden = E.resultado?.cursos_incluidos?.length

@@ -1,6 +1,7 @@
 /** Exportar el horario: PNG (canvas), .ics y prompt para IA — puerto de app.js. */
 import { bloqueosComoRangos, comboMostrado, etiquetaComponentes, toast } from "./acciones";
 import { colorDe, E } from "./estado";
+import { esTemaOscuro } from "./temas";
 import { aMin, DIAS_NOMBRE, DIAS_ORDEN, nombreBonito, nombrePeriodo } from "./util";
 
 function eventosDe(mostrado: NonNullable<ReturnType<typeof comboMostrado>>) {
@@ -30,7 +31,7 @@ export function exportarPng() {
   const usados = new Set(eventos.map((e) => e.dia));
   const dias = DIAS_ORDEN.filter((d, i) => i < 5 || usados.has(d));
 
-  const oscuro = E.tema === "dark";
+  const oscuro = esTemaOscuro(E.tema);
   const C = oscuro
     ? { fondo: "#0e1220", linea: "#242c40", tinta: "#e8ebf4", suave: "#a2abbe" }
     : { fondo: "#ffffff", linea: "#eceef2", tinta: "#191d2b", suave: "#616a7b" };
@@ -226,7 +227,7 @@ function zipStore(archivos: Array<[nombre: string, contenido: string]>): Blob {
   ev.setUint16(10, archivos.length, true);
   ev.setUint32(12, tamCentral, true);
   ev.setUint32(16, offset, true);
-  return new Blob([...partes, ...centrales, eocd], {
+  return new Blob([...partes, ...centrales, eocd] as BlobPart[], {
     type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
   });
 }

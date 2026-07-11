@@ -7,6 +7,7 @@ import {
   type CursoCatalogo, type ComboJson, type OpcionJson,
 } from "./estado";
 import { generarResultado, metricasDeOpciones, type BloqueoRango } from "./generarCliente";
+import { TEMAS, temaPorId } from "./temas";
 import {
   aHHMM, aMin, debounce, DIAS_ORDEN, GRID_FIN, GRID_INI, normalizar, SLOT_MIN,
 } from "./util";
@@ -23,17 +24,54 @@ export function toast(msg: string) {
 
 /* ---------- tema ---------- */
 
+/** Favicon y <meta theme-color> acompañan al tema: la pestaña del navegador
+ * se pinta del acento elegido. */
+function actualizarCromoDelNavegador() {
+  const t = temaPorId(E.tema) ?? TEMAS[0];
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>`
+    + `<rect width='100' height='100' rx='22' fill='${t.acento}'/>`
+    + `<text x='50' y='62' font-size='34' text-anchor='middle' fill='${t.acentoTinta}'`
+    + ` font-family='system-ui' font-weight='900' letter-spacing='-2.5'>NHC</text></svg>`;
+  let icono = document.querySelector<HTMLLinkElement>("link[rel='icon']");
+  if (!icono) {
+    icono = document.createElement("link");
+    icono.rel = "icon";
+    document.head.appendChild(icono);
+  }
+  icono.href = `data:image/svg+xml,${encodeURIComponent(svg)}`;
+  document.querySelectorAll("meta[name='theme-color']").forEach((m, i) => i > 0 && m.remove());
+  let meta = document.querySelector<HTMLMetaElement>("meta[name='theme-color']");
+  if (!meta) {
+    meta = document.createElement("meta");
+    meta.name = "theme-color";
+    document.head.appendChild(meta);
+  }
+  meta.removeAttribute("media");
+  meta.content = t.marco;
+}
+
 export function aplicarTema() {
-  if (!E.tema) {
+  if (!temaPorId(E.tema)) {
     E.tema = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
   }
-  document.documentElement.dataset.theme = E.tema;
+  document.documentElement.dataset.theme = E.tema!;
+  actualizarCromoDelNavegador();
   touch();
 }
 
-export function alternarTema() {
-  E.tema = E.tema === "dark" ? "light" : "dark";
-  document.documentElement.dataset.theme = E.tema;
+let animTimer: ReturnType<typeof setTimeout>;
+export function cambiarTema(id: string) {
+  const t = temaPorId(id);
+  if (!t) return;
+  E.tema = id;
+  E.menuTemas = false;
+  document.documentElement.dataset.theme = id;
+  actualizarCromoDelNavegador();
+  if (t.animacion && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    E.animTema = t.animacion;
+    clearTimeout(animTimer);
+    animTimer = setTimeout(() => { E.animTema = null; touch(); }, 3200);
+  }
   guardarLocal();
   touch();
 }
@@ -610,11 +648,12 @@ export function deshacerSwap() {
 
 /* ---------- modales ---------- */
 
-export function setModal(cual: "pensum" | "acerca" | "bienvenida" | "export", abierto: boolean) {
+export function setModal(cual: "pensum" | "acerca" | "bienvenida" | "export" | "temas", abierto: boolean) {
   if (cual === "pensum") E.modalPensum = abierto;
   if (cual === "acerca") E.modalAcerca = abierto;
   if (cual === "bienvenida") E.modalBienvenida = abierto;
   if (cual === "export") E.menuExportar = abierto;
+  if (cual === "temas") E.menuTemas = abierto;
   touch();
 }
 

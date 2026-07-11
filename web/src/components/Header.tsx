@@ -1,8 +1,9 @@
 /** Barra superior — isla propia que comparte estado con la app vía nanostores. */
 import { useStore } from "@nanostores/react";
-import { alternarSidebar, alternarTema, setModal } from "@/lib/cliente/acciones";
+import { alternarSidebar, cambiarTema, setModal } from "@/lib/cliente/acciones";
 import { $v, E } from "@/lib/cliente/estado";
-import { IconoLuna, IconoMenu, IconoSol, IconoX, LogoNHC } from "./Iconos";
+import { TEMAS } from "@/lib/cliente/temas";
+import { IconoMenu, IconoPaleta, IconoX, LogoNHC } from "./Iconos";
 
 export default function Header() {
   useStore($v);
@@ -24,11 +25,26 @@ export default function Header() {
         <span className="estado-catalogo">{E.estadoCatalogo}</span>
         <button className="btn btn-icono" title="Acerca de NoHayCupo"
           onClick={() => setModal("acerca", true)}>?</button>
-        <button className="btn btn-icono"
-          title={E.tema === "dark" ? "Cambiar a tema claro" : "Cambiar a tema oscuro"}
-          onClick={alternarTema}>
-          {E.tema === "dark" ? <IconoSol /> : <IconoLuna />}
-        </button>
+        <div className="menu-temas">
+          <button className="btn btn-icono" title="Cambiar tema" aria-label="Cambiar tema"
+            aria-expanded={E.menuTemas}
+            onClick={(ev) => { ev.stopPropagation(); setModal("temas", !E.menuTemas); }}>
+            <IconoPaleta />
+          </button>
+          <div className="menu-temas-lista" hidden={!E.menuTemas}>
+            {TEMAS.map((t) => (
+              <button key={t.id} className={t.id === E.tema ? "activo" : ""}
+                onClick={() => cambiarTema(t.id)}>
+                <span className="tema-punto" style={{ background: t.acento }} />
+                <span className="tema-info">
+                  <strong>{t.nombre}</strong>
+                  <small>{t.descripcion}</small>
+                </span>
+                {t.id === E.tema && <span className="tema-check">✓</span>}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
     </header>
   );

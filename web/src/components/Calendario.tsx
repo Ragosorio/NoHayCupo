@@ -5,6 +5,7 @@ import {
   type CursoMostrado,
 } from "@/lib/cliente/acciones";
 import { $v, colorDe, E } from "@/lib/cliente/estado";
+import { esTemaOscuro } from "@/lib/cliente/temas";
 import { aMin, DIAS_NOMBRE, DIAS_ORDEN, nombreBonito } from "@/lib/cliente/util";
 
 export function eventosDe(mostrado: CursoMostrado[]) {
@@ -102,7 +103,7 @@ export default function Calendario({ mostrado }: { mostrado: CursoMostrado[] }) 
                       + (sel && sel !== e.codigo ? " atenuado" : "")}
                     style={{
                       "--ev-fondo": e.fondo, "--ev-borde": e.borde, "--ev-tinta": e.tinta,
-                      "--ev-raya": E.tema === "dark" ? "rgba(255,255,255,.06)" : "rgba(255,255,255,.72)",
+                      "--ev-raya": esTemaOscuro(E.tema) ? "rgba(255,255,255,.06)" : "rgba(255,255,255,.72)",
                       "--i": orden++,
                       top: y(e.inicio),
                       height: Math.max(24, (e.fin - e.inicio) * pxPorMin - 3),
