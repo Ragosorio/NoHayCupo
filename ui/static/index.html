@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NoHayCupo · Optimizador de horarios FIUSAC</title>
+<link rel="stylesheet" href="vendor/driver.css">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%234f46e5'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-family='system-ui' font-weight='bold'>N</text></svg>">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <button id="btnMenu" class="btn btn-icono no-print" title="Mostrar u ocultar el panel lateral" aria-label="Alternar panel lateral">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 4h12M2 8h12M2 12h7"/></svg>
+    </button>
+    <div class="brand-mark">N</div>
+    <div>
+      <h1>NoHayCupo</h1>
+      <p>Horarios sin traslapes · FIUSAC</p>
+    </div>
+  </div>
+  <div class="topbar-controls no-print">
+    <span id="estadoCatalogo" class="estado-catalogo"></span>
+    <button id="btnAyuda" class="btn btn-icono" title="Acerca de NoHayCupo">?</button>
+    <button id="btnTema" class="btn btn-icono" title="Cambiar tema claro/oscuro">◐</button>
+  </div>
+</header>
+
+<main class="layout">
+
+  <!-- ===== Menú lateral ===== -->
+  <aside class="sidebar no-print">
+
+    <section class="panel" id="panelPerfil">
+      <h2>Vos</h2>
+      <div class="fila-2">
+        <label class="campo">
+          <span>Semestre</span>
+          <input id="inputSemestre" type="text" value="2" title="id del semestre en la URL de horarios de la facultad">
+        </label>
+        <label class="campo campo-grande">
+          <span>Carnet <em>(detecta pénsum y restricciones)</em></span>
+          <input id="inputCarnet" type="text" inputmode="numeric" placeholder="202100123" autocomplete="off">
+        </label>
+      </div>
+      <label class="campo campo-grande campo-carrera">
+        <span>Carrera <em id="pensumMeta"></em></span>
+        <select id="selCarrera"></select>
+      </label>
+      <div id="pensumResumen" class="pensum-resumen"></div>
+      <div class="pensum-botones">
+        <button id="btnAbrirPensum" class="btn" disabled>Abrir mi pénsum</button>
+        <button id="btnAgregarElegibles" class="btn" hidden></button>
+      </div>
+      <label class="check-linea" title="Al marcar cursos aprobados en el pénsum, tu lista se actualiza sola: entran los que ya podés llevar, salen los que no.">
+        <input type="checkbox" id="chkSync">
+        <span>Mantener mi lista sincronizada con el pénsum</span>
+      </label>
+      <button id="btnActualizar" class="btn-enlace" title="Vuelve a descargar el catálogo del sitio de la facultad">↻ actualizar catálogo</button>
+    </section>
+
+    <section class="panel" id="panelCursos">
+      <h2>Cursos <span id="contadorCursos" class="h2-cont"></span></h2>
+      <div class="buscador">
+        <input id="inputBuscar" type="search" placeholder="Código o nombre… ej. 0768" autocomplete="off" disabled>
+        <ul id="listaResultados" class="resultados-busqueda" hidden></ul>
+      </div>
+      <ul id="listaSeleccionados" class="cursos-seleccionados"></ul>
+      <p id="hintVacio" class="hint">Buscá y agregá lo que querés llevar. Los laboratorios entran solos con su clase.</p>
+    </section>
+
+    <section class="panel" id="panelTiempo">
+      <h2>Tu tiempo <span class="h2-sub">opcional</span></h2>
+      <div class="pinceles" id="pinceles">
+        <button class="pincel imposible activa" data-nivel="imposible" title="Tiempo intocable (trabajo, etc.): ninguna propuesta lo usará jamás.">Imposible</button>
+        <button class="pincel evitar" data-nivel="evitar" title="Preferís no usarlo, pero si es necesario se puede. Se minimiza al rankear.">Mejor no</button>
+        <button class="pincel borrar" data-nivel="borrar" title="Borrar lo pintado">Borrar</button>
+      </div>
+      <div id="gridBloqueos" class="grid-bloqueos"></div>
+      <div class="bloqueos-pie">
+        <span id="resumenBloqueos" class="hint sin-margen"></span>
+        <button id="btnLimpiarBloqueos" class="btn-enlace" hidden>limpiar</button>
+      </div>
+    </section>
+
+    <section class="panel panel-generar">
+      <button id="btnGenerar" class="btn btn-primary" disabled>Generar horarios</button>
+      <p id="estadoGenerar" class="estado-generar" hidden></p>
+    </section>
+  </aside>
+
+  <!-- ===== Contenido principal: el horario en grande ===== -->
+  <section class="contenido">
+
+    <div id="vacioHero" class="hero">
+      <div class="hero-icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" width="56" height="56" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+          <rect x="6" y="9" width="36" height="33" rx="5"/>
+          <path d="M6 18h36M15 6v6M33 6v6"/>
+          <path d="m15 29 5 5 12-11" stroke-width="3"/>
+        </svg>
+      </div>
+      <h2>Tu horario ideal, sin traslapes</h2>
+      <p class="hero-sub">Elegí tus cursos, contale a la app qué horas no querés usar,<br>y compará todas las combinaciones posibles del catálogo real.</p>
+      <div class="hero-acciones">
+        <button id="btnTourHero" class="btn btn-primary btn-ancho-auto">Mostrame cómo funciona</button>
+      </div>
+    </div>
+
+    <div id="resultados" hidden>
+      <div id="advertencias" class="advertencias no-print" hidden></div>
+      <div id="sacrificios" class="sacrificios no-print" hidden></div>
+
+      <nav id="tabsEstrategias" class="tabs no-print"></nav>
+
+      <div class="resultado-header no-print">
+        <div class="resultado-izq">
+          <div id="pagerOpciones" class="pager"></div>
+          <button id="btnVerMas" class="btn-enlace" hidden>ver más opciones</button>
+        </div>
+        <div class="acciones">
+          <span id="resumenTotal" class="resumen-total"></span>
+          <button id="btnEditar" class="btn">✎ Ajustar</button>
+          <div class="menu-export">
+            <button id="btnExportar" class="btn">Exportar ▾</button>
+            <div id="menuExportar" class="menu-export-lista" hidden>
+              <button id="btnPng">Imagen PNG</button>
+              <button id="btnIcs">Google Calendar (.ics)</button>
+              <button id="btnPrompt" title="Copia un prompt con tus cursos, secciones y bloqueos para pedirle a una IA que analice tu horario">Prompt para IA</button>
+              <button id="btnImprimir">Imprimir / PDF</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="barraEditor" class="barra-editor no-print" hidden>
+        <span id="msgEditor">Modo edición — clic en un curso del calendario para ver a dónde se puede mover sin romper el resto.</span>
+        <span class="barra-editor-btns">
+          <button id="btnDeshacer" class="btn btn-mini" disabled>↩ Deshacer</button>
+          <button id="btnSalirEditor" class="btn btn-mini">✓ Listo</button>
+        </span>
+      </div>
+
+      <div id="chipsMetricas" class="metricas"></div>
+
+      <div id="calendario" class="calendario"></div>
+
+      <div id="alternativas" class="alternativas no-print" hidden></div>
+
+      <section id="planB" class="planb">
+        <h2>Si una sección se llena <span class="planb-sub">alternativas que no rompen el resto</span></h2>
+        <div id="planBCards" class="planb-cards"></div>
+      </section>
+    </div>
+
+  </section>
+</main>
+
+<!-- ===== Modal del pénsum ===== -->
+<div id="modalPensum" class="modal-fondo no-print" hidden>
+  <div class="modal-caja">
+    <header class="modal-header">
+      <div>
+        <h2 id="modalTitulo">Mi pénsum</h2>
+        <p id="modalSub" class="modal-sub"></p>
+      </div>
+      <div class="modal-header-der">
+        <div id="modalStats" class="modal-stats"></div>
+        <button id="btnCerrarPensum" class="btn btn-icono" title="Cerrar">✕</button>
+      </div>
+    </header>
+    <div class="modal-leyenda">
+      <span class="leyenda-item aprobado">✓ aprobado</span>
+      <span class="leyenda-item elegible">podés llevarlo</span>
+      <span class="leyenda-item bloqueado">prerrequisitos pendientes</span>
+      <span class="leyenda-item sinoferta">⊘ sin oferta este semestre</span>
+    </div>
+    <div id="pensumGrid" class="pensum-grid"></div>
+  </div>
+</div>
+
+<!-- ===== Acerca de (botón ?) ===== -->
+<div id="modalAcerca" class="modal-fondo no-print" hidden>
+  <div class="acerca-caja">
+    <button id="btnCerrarAcerca" class="btn btn-icono acerca-cerrar" title="Cerrar">✕</button>
+    <div class="acerca-head">
+      <div class="brand-mark grande">N</div>
+      <h2>NoHayCupo</h2>
+      <p class="acerca-desc">Arma <strong>todas</strong> las combinaciones de horario posibles de FIUSAC, respeta las horas que no querés usar y te deja ajustar el resultado a mano. Sin cuentas, sin guardar nada fuera de tu navegador.</p>
+      <button id="btnTourAcerca" class="btn-enlace">▶ ver el tour de la página</button>
+    </div>
+    <div class="acerca-autor">
+      <span class="acerca-eyebrow">Autor</span>
+      <div class="acerca-autor-fila">
+        <div class="acerca-avatar">R</div>
+        <div>
+          <div class="acerca-nombre">Rolando Osorio · <span class="acerca-alias">ragosorio</span></div>
+          <p class="acerca-bio">Estudiante de Ingeniería en Ciencias y Sistemas, USAC. Si querés escribirme algo del proyecto, que sea por Instagram.</p>
+        </div>
+      </div>
+      <div class="acerca-links">
+        <a class="btn acerca-link" href="https://www.instagram.com/ragosorio" target="_blank" rel="noopener">📸 Instagram</a>
+        <a class="btn acerca-link" href="https://www.tiktok.com/@ragosorio" target="_blank" rel="noopener">🎬 TikTok</a>
+        <a class="btn acerca-link" href="https://github.com/ragosorio" target="_blank" rel="noopener">🐙 GitHub</a>
+        <a class="btn acerca-link" href="https://ragosorio.com/" target="_blank" rel="noopener">🌐 ragosorio.com</a>
+      </div>
+      <a class="acerca-repo" href="https://github.com/Ragosorio/NoHayCupo" target="_blank" rel="noopener">
+        <span>Proyecto open source — estrellitas bienvenidas</span>
+        <strong>github.com/Ragosorio/NoHayCupo →</strong>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast" hidden></div>
+
+<!-- ===== Bienvenida (primera visita) ===== -->
+<div id="modalBienvenida" class="modal-fondo no-print" hidden>
+  <div class="bienvenida-caja">
+    <div class="brand-mark grande">N</div>
+    <h2>¿Primera vez por acá?</h2>
+    <p>NoHayCupo arma <strong>todas</strong> las combinaciones de horario posibles con los cursos que elijás, respeta las horas que no querés usar, y te deja ajustar el resultado a mano.</p>
+    <div class="bienvenida-botones">
+      <button id="btnTourSi" class="btn btn-primary">Sí, dame el tour</button>
+      <button id="btnTourNo" class="btn">Ya la conozco</button>
+    </div>
+  </div>
+</div>
+
+<script src="vendor/driver.iife.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
