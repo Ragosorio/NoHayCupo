@@ -24,7 +24,7 @@
   <div class="topbar-controls no-print">
     <span id="estadoCatalogo" class="estado-catalogo"></span>
     <button id="btnAyuda" class="btn btn-icono" title="Acerca de NoHayCupo">?</button>
-    <button id="btnTema" class="btn btn-icono" title="Cambiar tema claro/oscuro">◐</button>
+    <button id="btnTema" class="btn btn-icono" title="Cambiar tema claro/oscuro"></button>
   </div>
 </header>
 
@@ -35,16 +35,19 @@
 
     <section class="panel" id="panelPerfil">
       <h2>Vos</h2>
-      <div class="fila-2">
-        <label class="campo">
-          <span>Semestre</span>
-          <input id="inputSemestre" type="text" value="2" title="id del semestre en la URL de horarios de la facultad">
-        </label>
-        <label class="campo campo-grande">
-          <span>Carnet <em>(detecta pénsum y restricciones)</em></span>
-          <input id="inputCarnet" type="text" inputmode="numeric" placeholder="202100123" autocomplete="off">
-        </label>
-      </div>
+      <label class="campo campo-grande campo-linea">
+        <span>Carnet <em>(detecta pénsum y restricciones)</em></span>
+        <input id="inputCarnet" type="text" inputmode="numeric" placeholder="202100123" autocomplete="off">
+      </label>
+      <label class="campo campo-grande campo-linea">
+        <span>Periodo</span>
+        <select id="inputSemestre" title="Periodo del catálogo de horarios de la facultad">
+          <option value="1">Primer semestre</option>
+          <option value="2" selected>Segundo semestre</option>
+          <option value="v1">Vacaciones junio</option>
+          <option value="v2">Vacaciones diciembre</option>
+        </select>
+      </label>
       <label class="campo campo-grande campo-carrera">
         <span>Carrera <em id="pensumMeta"></em></span>
         <select id="selCarrera"></select>
@@ -122,7 +125,7 @@
         </div>
         <div class="acciones">
           <span id="resumenTotal" class="resumen-total"></span>
-          <button id="btnEditar" class="btn">✎ Ajustar</button>
+          <button id="btnEditar" class="btn"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.8 2.8 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg> Ajustar</button>
           <div class="menu-export">
             <button id="btnExportar" class="btn">Exportar ▾</button>
             <div id="menuExportar" class="menu-export-lista" hidden>
@@ -189,22 +192,22 @@
       <div class="brand-mark grande">N</div>
       <h2>NoHayCupo</h2>
       <p class="acerca-desc">Arma <strong>todas</strong> las combinaciones de horario posibles de FIUSAC, respeta las horas que no querés usar y te deja ajustar el resultado a mano. Sin cuentas, sin guardar nada fuera de tu navegador.</p>
-      <button id="btnTourAcerca" class="btn-enlace">▶ ver el tour de la página</button>
+      <button id="btnTourAcerca" class="btn-enlace"><svg class="ico" width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5Z"/></svg> ver el tour de la página</button>
     </div>
     <div class="acerca-autor">
       <span class="acerca-eyebrow">Autor</span>
       <div class="acerca-autor-fila">
-        <div class="acerca-avatar">R</div>
+        <img class="acerca-avatar" src="rago.jpg" alt="Foto de Rolando Osorio">
         <div>
           <div class="acerca-nombre">Rolando Osorio · <span class="acerca-alias">ragosorio</span></div>
           <p class="acerca-bio">Estudiante de Ingeniería en Ciencias y Sistemas, USAC. Si querés escribirme algo del proyecto, que sea por Instagram.</p>
         </div>
       </div>
       <div class="acerca-links">
-        <a class="btn acerca-link" href="https://www.instagram.com/ragosorio" target="_blank" rel="noopener">📸 Instagram</a>
-        <a class="btn acerca-link" href="https://www.tiktok.com/@ragosorio" target="_blank" rel="noopener">🎬 TikTok</a>
-        <a class="btn acerca-link" href="https://github.com/ragosorio" target="_blank" rel="noopener">🐙 GitHub</a>
-        <a class="btn acerca-link" href="https://ragosorio.com/" target="_blank" rel="noopener">🌐 ragosorio.com</a>
+        <a class="btn acerca-link" href="https://www.instagram.com/ragosorio" target="_blank" rel="noopener"><img class="icono-red" src="icons/instagram.svg" alt=""> Instagram</a>
+        <a class="btn acerca-link" href="https://www.tiktok.com/@ragosorio" target="_blank" rel="noopener"><img class="icono-red icono-tiktok" src="icons/tiktok.svg" alt=""> TikTok</a>
+        <a class="btn acerca-link" href="https://github.com/ragosorio" target="_blank" rel="noopener"><img class="icono-red icono-github" src="icons/github.svg" alt=""> GitHub</a>
+        <a class="btn acerca-link" href="https://ragosorio.com/" target="_blank" rel="noopener"><img class="icono-red" src="icons/ragosorio.svg" alt=""> ragosorio.com</a>
       </div>
       <a class="acerca-repo" href="https://github.com/Ragosorio/NoHayCupo" target="_blank" rel="noopener">
         <span>Proyecto open source — estrellitas bienvenidas</span>

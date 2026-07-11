@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "nohaycupo",
+      "runtimeExecutable": "/opt/homebrew/bin/python3.11",
+      "runtimeArgs": ["ui/app.py", "--port", "8765"],
+      "port": 8765
+    },
+    {
+      "name": "web",
+      "runtimeExecutable": "web/node_modules/.bin/astro",
+      "runtimeArgs": ["dev", "--root", "web", "--port", "4321"],
+      "port": 4321
+    }
+  ]
+}

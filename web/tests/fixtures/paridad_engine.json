@@ -1,0 +1,2200 @@
+{
+ "opciones_por_curso": {
+  "0768": {
+   "incluir_restringidas": [],
+   "advertencias": [],
+   "opciones": [
+    {
+     "etiqueta": "Clase A · MA JU 07:10–08:50  +  Laboratorio A · SA 10:30–12:10",
+     "sesiones": [
+      {
+       "inicio": "07:10",
+       "fin": "08:50",
+       "dias": [
+        "MA",
+        "JU"
+       ]
+      },
+      {
+       "inicio": "10:30",
+       "fin": "12:10",
+       "dias": [
+        "SA"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "A",
+       "catedratico": "EDGAR FRANCISCO RODAS ROBLEDO",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "A",
+       "catedratico": "EMILIANO JOSÉ ALEXANDER VELÁSQUEZ NAJERA",
+       "equivalentes": [
+        {
+         "seccion": "B",
+         "catedratico": "JOSUE DANIEL CHAVEZ PORTILLO"
+        },
+        {
+         "seccion": "C",
+         "catedratico": "JORGE ANDRÉS MEJIA SUCHITE"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase B · LU MI 07:10–08:50  +  Laboratorio A · SA 10:30–12:10",
+     "sesiones": [
+      {
+       "inicio": "07:10",
+       "fin": "08:50",
+       "dias": [
+        "LU",
+        "MI"
+       ]
+      },
+      {
+       "inicio": "10:30",
+       "fin": "12:10",
+       "dias": [
+        "SA"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "B",
+       "catedratico": "HERMAN IGOR VELIZ LINARES",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "A",
+       "catedratico": "EMILIANO JOSÉ ALEXANDER VELÁSQUEZ NAJERA",
+       "equivalentes": [
+        {
+         "seccion": "B",
+         "catedratico": "JOSUE DANIEL CHAVEZ PORTILLO"
+        },
+        {
+         "seccion": "C",
+         "catedratico": "JORGE ANDRÉS MEJIA SUCHITE"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase C · VI 07:10–10:40  +  Laboratorio A · SA 10:30–12:10",
+     "sesiones": [
+      {
+       "inicio": "07:10",
+       "fin": "10:40",
+       "dias": [
+        "VI"
+       ]
+      },
+      {
+       "inicio": "10:30",
+       "fin": "12:10",
+       "dias": [
+        "SA"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "C",
+       "catedratico": "HERMAN IGOR VELIZ LINARES",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "A",
+       "catedratico": "EMILIANO JOSÉ ALEXANDER VELÁSQUEZ NAJERA",
+       "equivalentes": [
+        {
+         "seccion": "B",
+         "catedratico": "JOSUE DANIEL CHAVEZ PORTILLO"
+        },
+        {
+         "seccion": "C",
+         "catedratico": "JORGE ANDRÉS MEJIA SUCHITE"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  "0147": {
+   "incluir_restringidas": [],
+   "advertencias": [],
+   "opciones": [
+    {
+     "etiqueta": "Clase A · LU MA JU VI 07:10–08:00  +  Laboratorio A1 · MI 07:10–08:50",
+     "sesiones": [
+      {
+       "inicio": "07:10",
+       "fin": "08:00",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "07:10",
+       "fin": "08:50",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "A",
+       "catedratico": "OSWALDO ROMEO ESCOBAR ALVAREZ",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "A1",
+       "catedratico": "LUIS ARTURO SABAN LOPEZ",
+       "equivalentes": [
+        {
+         "seccion": "A2",
+         "catedratico": "HAROL JOSE CARIAS DIEGUEZ"
+        },
+        {
+         "seccion": "A3",
+         "catedratico": "OSCAR GIOVANNI HERNÁNDEZ CARIAS"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase A · LU MA JU VI 07:10–08:00  +  Laboratorio B1 · MI 09:00–10:40",
+     "sesiones": [
+      {
+       "inicio": "07:10",
+       "fin": "08:00",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "09:00",
+       "fin": "10:40",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "A",
+       "catedratico": "OSWALDO ROMEO ESCOBAR ALVAREZ",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "B1",
+       "catedratico": "OSCAR GIOVANNI HERNÁNDEZ CARIAS",
+       "equivalentes": [
+        {
+         "seccion": "B2",
+         "catedratico": "PAOLA MISHELLE. HENGSTENBERG PRERA"
+        },
+        {
+         "seccion": "B3",
+         "catedratico": "DIEGO JOSE PORRES ALMEDA"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase A · LU MA JU VI 07:10–08:00  +  Laboratorio D1 · MI 12:20–14:00",
+     "sesiones": [
+      {
+       "inicio": "07:10",
+       "fin": "08:00",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "12:20",
+       "fin": "14:00",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "A",
+       "catedratico": "OSWALDO ROMEO ESCOBAR ALVAREZ",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "D1",
+       "catedratico": "MICHELLE CAROLINA RIZZO LÓPEZ",
+       "equivalentes": [
+        {
+         "seccion": "D2",
+         "catedratico": "MAYNOR GEOVANI CUMEZ GONZÁLEZ"
+        },
+        {
+         "seccion": "D3",
+         "catedratico": "JOSE DANIEL ELÍAS TEJAXUN SAY"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase A · LU MA JU VI 07:10–08:00  +  Laboratorio G1 · MI 18:10–19:50",
+     "sesiones": [
+      {
+       "inicio": "07:10",
+       "fin": "08:00",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "18:10",
+       "fin": "19:50",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "A",
+       "catedratico": "OSWALDO ROMEO ESCOBAR ALVAREZ",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "G1",
+       "catedratico": "LUIS ENRIQUE IZQUIERDO OCHOA",
+       "equivalentes": []
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase A · LU MA JU VI 07:10–08:00  +  Laboratorio H1 · MI 10:40–12:20",
+     "sesiones": [
+      {
+       "inicio": "07:10",
+       "fin": "08:00",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "10:40",
+       "fin": "12:20",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "A",
+       "catedratico": "OSWALDO ROMEO ESCOBAR ALVAREZ",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "H1",
+       "catedratico": "JOHAN ESTIVEN SABÁN LÓPEZ",
+       "equivalentes": [
+        {
+         "seccion": "H2",
+         "catedratico": "DIEGO JOSE PORRES ALMEDA"
+        },
+        {
+         "seccion": "H3",
+         "catedratico": "LUIS ANGEL AGUILAR CHAMALE"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase A · LU MA JU VI 07:10–08:00  +  Laboratorio J1 · MI 16:30–18:10",
+     "sesiones": [
+      {
+       "inicio": "07:10",
+       "fin": "08:00",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "16:30",
+       "fin": "18:10",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "A",
+       "catedratico": "OSWALDO ROMEO ESCOBAR ALVAREZ",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "J1",
+       "catedratico": "PEDRO PABLO MOLINA MARTÍNEZ",
+       "equivalentes": []
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase A · LU MA JU VI 07:10–08:00  +  Laboratorio K1 · MI 14:00–15:40",
+     "sesiones": [
+      {
+       "inicio": "07:10",
+       "fin": "08:00",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "14:00",
+       "fin": "15:40",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "A",
+       "catedratico": "OSWALDO ROMEO ESCOBAR ALVAREZ",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "K1",
+       "catedratico": "KARINA NOHEMI RAMIREZ ORELLANA",
+       "equivalentes": [
+        {
+         "seccion": "K2",
+         "catedratico": "JOSE ALFREDO AGUILAR CHAMALE"
+        },
+        {
+         "seccion": "K3",
+         "catedratico": "MARIO AUGUSTO LÓPEZ ORDOÑEZ"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase P · LU MA JU VI 14:00–14:50  +  Laboratorio A1 · MI 07:10–08:50",
+     "sesiones": [
+      {
+       "inicio": "14:00",
+       "fin": "14:50",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "07:10",
+       "fin": "08:50",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "P",
+       "catedratico": "RONAL NOE GALVEZ GARCIA",
+       "equivalentes": [
+        {
+         "seccion": "Q",
+         "catedratico": "EDDY JOSUE SOLARES ESPINOZA"
+        }
+       ]
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "A1",
+       "catedratico": "LUIS ARTURO SABAN LOPEZ",
+       "equivalentes": [
+        {
+         "seccion": "A2",
+         "catedratico": "HAROL JOSE CARIAS DIEGUEZ"
+        },
+        {
+         "seccion": "A3",
+         "catedratico": "OSCAR GIOVANNI HERNÁNDEZ CARIAS"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase P · LU MA JU VI 14:00–14:50  +  Laboratorio B1 · MI 09:00–10:40",
+     "sesiones": [
+      {
+       "inicio": "14:00",
+       "fin": "14:50",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "09:00",
+       "fin": "10:40",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "P",
+       "catedratico": "RONAL NOE GALVEZ GARCIA",
+       "equivalentes": [
+        {
+         "seccion": "Q",
+         "catedratico": "EDDY JOSUE SOLARES ESPINOZA"
+        }
+       ]
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "B1",
+       "catedratico": "OSCAR GIOVANNI HERNÁNDEZ CARIAS",
+       "equivalentes": [
+        {
+         "seccion": "B2",
+         "catedratico": "PAOLA MISHELLE. HENGSTENBERG PRERA"
+        },
+        {
+         "seccion": "B3",
+         "catedratico": "DIEGO JOSE PORRES ALMEDA"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase P · LU MA JU VI 14:00–14:50  +  Laboratorio D1 · MI 12:20–14:00",
+     "sesiones": [
+      {
+       "inicio": "14:00",
+       "fin": "14:50",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "12:20",
+       "fin": "14:00",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "P",
+       "catedratico": "RONAL NOE GALVEZ GARCIA",
+       "equivalentes": [
+        {
+         "seccion": "Q",
+         "catedratico": "EDDY JOSUE SOLARES ESPINOZA"
+        }
+       ]
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "D1",
+       "catedratico": "MICHELLE CAROLINA RIZZO LÓPEZ",
+       "equivalentes": [
+        {
+         "seccion": "D2",
+         "catedratico": "MAYNOR GEOVANI CUMEZ GONZÁLEZ"
+        },
+        {
+         "seccion": "D3",
+         "catedratico": "JOSE DANIEL ELÍAS TEJAXUN SAY"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase P · LU MA JU VI 14:00–14:50  +  Laboratorio G1 · MI 18:10–19:50",
+     "sesiones": [
+      {
+       "inicio": "14:00",
+       "fin": "14:50",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "18:10",
+       "fin": "19:50",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "P",
+       "catedratico": "RONAL NOE GALVEZ GARCIA",
+       "equivalentes": [
+        {
+         "seccion": "Q",
+         "catedratico": "EDDY JOSUE SOLARES ESPINOZA"
+        }
+       ]
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "G1",
+       "catedratico": "LUIS ENRIQUE IZQUIERDO OCHOA",
+       "equivalentes": []
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase P · LU MA JU VI 14:00–14:50  +  Laboratorio H1 · MI 10:40–12:20",
+     "sesiones": [
+      {
+       "inicio": "14:00",
+       "fin": "14:50",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "10:40",
+       "fin": "12:20",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "P",
+       "catedratico": "RONAL NOE GALVEZ GARCIA",
+       "equivalentes": [
+        {
+         "seccion": "Q",
+         "catedratico": "EDDY JOSUE SOLARES ESPINOZA"
+        }
+       ]
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "H1",
+       "catedratico": "JOHAN ESTIVEN SABÁN LÓPEZ",
+       "equivalentes": [
+        {
+         "seccion": "H2",
+         "catedratico": "DIEGO JOSE PORRES ALMEDA"
+        },
+        {
+         "seccion": "H3",
+         "catedratico": "LUIS ANGEL AGUILAR CHAMALE"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase P · LU MA JU VI 14:00–14:50  +  Laboratorio J1 · MI 16:30–18:10",
+     "sesiones": [
+      {
+       "inicio": "14:00",
+       "fin": "14:50",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "16:30",
+       "fin": "18:10",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "P",
+       "catedratico": "RONAL NOE GALVEZ GARCIA",
+       "equivalentes": [
+        {
+         "seccion": "Q",
+         "catedratico": "EDDY JOSUE SOLARES ESPINOZA"
+        }
+       ]
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "J1",
+       "catedratico": "PEDRO PABLO MOLINA MARTÍNEZ",
+       "equivalentes": []
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase P · LU MA JU VI 14:00–14:50  +  Laboratorio K1 · MI 14:00–15:40",
+     "sesiones": [
+      {
+       "inicio": "14:00",
+       "fin": "14:50",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "14:00",
+       "fin": "15:40",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "P",
+       "catedratico": "RONAL NOE GALVEZ GARCIA",
+       "equivalentes": [
+        {
+         "seccion": "Q",
+         "catedratico": "EDDY JOSUE SOLARES ESPINOZA"
+        }
+       ]
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "K1",
+       "catedratico": "KARINA NOHEMI RAMIREZ ORELLANA",
+       "equivalentes": [
+        {
+         "seccion": "K2",
+         "catedratico": "JOSE ALFREDO AGUILAR CHAMALE"
+        },
+        {
+         "seccion": "K3",
+         "catedratico": "MARIO AUGUSTO LÓPEZ ORDOÑEZ"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase S · LU MA JU VI 16:30–17:20  +  Laboratorio A1 · MI 07:10–08:50",
+     "sesiones": [
+      {
+       "inicio": "16:30",
+       "fin": "17:20",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "07:10",
+       "fin": "08:50",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "S",
+       "catedratico": "JORGE GILBERTO GONZALEZ PADILLA",
+       "equivalentes": [
+        {
+         "seccion": "U",
+         "catedratico": "CARLOS RODOLFO MARTINEZ GIRON"
+        }
+       ]
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "A1",
+       "catedratico": "LUIS ARTURO SABAN LOPEZ",
+       "equivalentes": [
+        {
+         "seccion": "A2",
+         "catedratico": "HAROL JOSE CARIAS DIEGUEZ"
+        },
+        {
+         "seccion": "A3",
+         "catedratico": "OSCAR GIOVANNI HERNÁNDEZ CARIAS"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase S · LU MA JU VI 16:30–17:20  +  Laboratorio B1 · MI 09:00–10:40",
+     "sesiones": [
+      {
+       "inicio": "16:30",
+       "fin": "17:20",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "09:00",
+       "fin": "10:40",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "S",
+       "catedratico": "JORGE GILBERTO GONZALEZ PADILLA",
+       "equivalentes": [
+        {
+         "seccion": "U",
+         "catedratico": "CARLOS RODOLFO MARTINEZ GIRON"
+        }
+       ]
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "B1",
+       "catedratico": "OSCAR GIOVANNI HERNÁNDEZ CARIAS",
+       "equivalentes": [
+        {
+         "seccion": "B2",
+         "catedratico": "PAOLA MISHELLE. HENGSTENBERG PRERA"
+        },
+        {
+         "seccion": "B3",
+         "catedratico": "DIEGO JOSE PORRES ALMEDA"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase S · LU MA JU VI 16:30–17:20  +  Laboratorio D1 · MI 12:20–14:00",
+     "sesiones": [
+      {
+       "inicio": "16:30",
+       "fin": "17:20",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "12:20",
+       "fin": "14:00",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "S",
+       "catedratico": "JORGE GILBERTO GONZALEZ PADILLA",
+       "equivalentes": [
+        {
+         "seccion": "U",
+         "catedratico": "CARLOS RODOLFO MARTINEZ GIRON"
+        }
+       ]
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "D1",
+       "catedratico": "MICHELLE CAROLINA RIZZO LÓPEZ",
+       "equivalentes": [
+        {
+         "seccion": "D2",
+         "catedratico": "MAYNOR GEOVANI CUMEZ GONZÁLEZ"
+        },
+        {
+         "seccion": "D3",
+         "catedratico": "JOSE DANIEL ELÍAS TEJAXUN SAY"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase S · LU MA JU VI 16:30–17:20  +  Laboratorio G1 · MI 18:10–19:50",
+     "sesiones": [
+      {
+       "inicio": "16:30",
+       "fin": "17:20",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "18:10",
+       "fin": "19:50",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "S",
+       "catedratico": "JORGE GILBERTO GONZALEZ PADILLA",
+       "equivalentes": [
+        {
+         "seccion": "U",
+         "catedratico": "CARLOS RODOLFO MARTINEZ GIRON"
+        }
+       ]
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "G1",
+       "catedratico": "LUIS ENRIQUE IZQUIERDO OCHOA",
+       "equivalentes": []
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase S · LU MA JU VI 16:30–17:20  +  Laboratorio H1 · MI 10:40–12:20",
+     "sesiones": [
+      {
+       "inicio": "16:30",
+       "fin": "17:20",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "10:40",
+       "fin": "12:20",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "S",
+       "catedratico": "JORGE GILBERTO GONZALEZ PADILLA",
+       "equivalentes": [
+        {
+         "seccion": "U",
+         "catedratico": "CARLOS RODOLFO MARTINEZ GIRON"
+        }
+       ]
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "H1",
+       "catedratico": "JOHAN ESTIVEN SABÁN LÓPEZ",
+       "equivalentes": [
+        {
+         "seccion": "H2",
+         "catedratico": "DIEGO JOSE PORRES ALMEDA"
+        },
+        {
+         "seccion": "H3",
+         "catedratico": "LUIS ANGEL AGUILAR CHAMALE"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase S · LU MA JU VI 16:30–17:20  +  Laboratorio J1 · MI 16:30–18:10",
+     "sesiones": [
+      {
+       "inicio": "16:30",
+       "fin": "17:20",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "16:30",
+       "fin": "18:10",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "S",
+       "catedratico": "JORGE GILBERTO GONZALEZ PADILLA",
+       "equivalentes": [
+        {
+         "seccion": "U",
+         "catedratico": "CARLOS RODOLFO MARTINEZ GIRON"
+        }
+       ]
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "J1",
+       "catedratico": "PEDRO PABLO MOLINA MARTÍNEZ",
+       "equivalentes": []
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase S · LU MA JU VI 16:30–17:20  +  Laboratorio K1 · MI 14:00–15:40",
+     "sesiones": [
+      {
+       "inicio": "16:30",
+       "fin": "17:20",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "14:00",
+       "fin": "15:40",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "S",
+       "catedratico": "JORGE GILBERTO GONZALEZ PADILLA",
+       "equivalentes": [
+        {
+         "seccion": "U",
+         "catedratico": "CARLOS RODOLFO MARTINEZ GIRON"
+        }
+       ]
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "K1",
+       "catedratico": "KARINA NOHEMI RAMIREZ ORELLANA",
+       "equivalentes": [
+        {
+         "seccion": "K2",
+         "catedratico": "JOSE ALFREDO AGUILAR CHAMALE"
+        },
+        {
+         "seccion": "K3",
+         "catedratico": "MARIO AUGUSTO LÓPEZ ORDOÑEZ"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase T · LU MA JU VI 17:20–18:10  +  Laboratorio A1 · MI 07:10–08:50",
+     "sesiones": [
+      {
+       "inicio": "17:20",
+       "fin": "18:10",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "07:10",
+       "fin": "08:50",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "T",
+       "catedratico": "ERIK LEONEL GARCIA SANTANA",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "A1",
+       "catedratico": "LUIS ARTURO SABAN LOPEZ",
+       "equivalentes": [
+        {
+         "seccion": "A2",
+         "catedratico": "HAROL JOSE CARIAS DIEGUEZ"
+        },
+        {
+         "seccion": "A3",
+         "catedratico": "OSCAR GIOVANNI HERNÁNDEZ CARIAS"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase T · LU MA JU VI 17:20–18:10  +  Laboratorio B1 · MI 09:00–10:40",
+     "sesiones": [
+      {
+       "inicio": "17:20",
+       "fin": "18:10",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "09:00",
+       "fin": "10:40",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "T",
+       "catedratico": "ERIK LEONEL GARCIA SANTANA",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "B1",
+       "catedratico": "OSCAR GIOVANNI HERNÁNDEZ CARIAS",
+       "equivalentes": [
+        {
+         "seccion": "B2",
+         "catedratico": "PAOLA MISHELLE. HENGSTENBERG PRERA"
+        },
+        {
+         "seccion": "B3",
+         "catedratico": "DIEGO JOSE PORRES ALMEDA"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase T · LU MA JU VI 17:20–18:10  +  Laboratorio D1 · MI 12:20–14:00",
+     "sesiones": [
+      {
+       "inicio": "17:20",
+       "fin": "18:10",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "12:20",
+       "fin": "14:00",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "T",
+       "catedratico": "ERIK LEONEL GARCIA SANTANA",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "D1",
+       "catedratico": "MICHELLE CAROLINA RIZZO LÓPEZ",
+       "equivalentes": [
+        {
+         "seccion": "D2",
+         "catedratico": "MAYNOR GEOVANI CUMEZ GONZÁLEZ"
+        },
+        {
+         "seccion": "D3",
+         "catedratico": "JOSE DANIEL ELÍAS TEJAXUN SAY"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase T · LU MA JU VI 17:20–18:10  +  Laboratorio G1 · MI 18:10–19:50",
+     "sesiones": [
+      {
+       "inicio": "17:20",
+       "fin": "18:10",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "18:10",
+       "fin": "19:50",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "T",
+       "catedratico": "ERIK LEONEL GARCIA SANTANA",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "G1",
+       "catedratico": "LUIS ENRIQUE IZQUIERDO OCHOA",
+       "equivalentes": []
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase T · LU MA JU VI 17:20–18:10  +  Laboratorio H1 · MI 10:40–12:20",
+     "sesiones": [
+      {
+       "inicio": "17:20",
+       "fin": "18:10",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "10:40",
+       "fin": "12:20",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "T",
+       "catedratico": "ERIK LEONEL GARCIA SANTANA",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "H1",
+       "catedratico": "JOHAN ESTIVEN SABÁN LÓPEZ",
+       "equivalentes": [
+        {
+         "seccion": "H2",
+         "catedratico": "DIEGO JOSE PORRES ALMEDA"
+        },
+        {
+         "seccion": "H3",
+         "catedratico": "LUIS ANGEL AGUILAR CHAMALE"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase T · LU MA JU VI 17:20–18:10  +  Laboratorio J1 · MI 16:30–18:10",
+     "sesiones": [
+      {
+       "inicio": "17:20",
+       "fin": "18:10",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "16:30",
+       "fin": "18:10",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "T",
+       "catedratico": "ERIK LEONEL GARCIA SANTANA",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "J1",
+       "catedratico": "PEDRO PABLO MOLINA MARTÍNEZ",
+       "equivalentes": []
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase T · LU MA JU VI 17:20–18:10  +  Laboratorio K1 · MI 14:00–15:40",
+     "sesiones": [
+      {
+       "inicio": "17:20",
+       "fin": "18:10",
+       "dias": [
+        "LU",
+        "MA",
+        "JU",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "14:00",
+       "fin": "15:40",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "T",
+       "catedratico": "ERIK LEONEL GARCIA SANTANA",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "K1",
+       "catedratico": "KARINA NOHEMI RAMIREZ ORELLANA",
+       "equivalentes": [
+        {
+         "seccion": "K2",
+         "catedratico": "JOSE ALFREDO AGUILAR CHAMALE"
+        },
+        {
+         "seccion": "K3",
+         "catedratico": "MARIO AUGUSTO LÓPEZ ORDOÑEZ"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase Z · SA 07:10–10:30  +  Laboratorio A1 · MI 07:10–08:50",
+     "sesiones": [
+      {
+       "inicio": "07:10",
+       "fin": "10:30",
+       "dias": [
+        "SA"
+       ]
+      },
+      {
+       "inicio": "07:10",
+       "fin": "08:50",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "Z",
+       "catedratico": "BAYRON ARMANDO CUYAN CULAJAY",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "A1",
+       "catedratico": "LUIS ARTURO SABAN LOPEZ",
+       "equivalentes": [
+        {
+         "seccion": "A2",
+         "catedratico": "HAROL JOSE CARIAS DIEGUEZ"
+        },
+        {
+         "seccion": "A3",
+         "catedratico": "OSCAR GIOVANNI HERNÁNDEZ CARIAS"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase Z · SA 07:10–10:30  +  Laboratorio B1 · MI 09:00–10:40",
+     "sesiones": [
+      {
+       "inicio": "07:10",
+       "fin": "10:30",
+       "dias": [
+        "SA"
+       ]
+      },
+      {
+       "inicio": "09:00",
+       "fin": "10:40",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "Z",
+       "catedratico": "BAYRON ARMANDO CUYAN CULAJAY",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "B1",
+       "catedratico": "OSCAR GIOVANNI HERNÁNDEZ CARIAS",
+       "equivalentes": [
+        {
+         "seccion": "B2",
+         "catedratico": "PAOLA MISHELLE. HENGSTENBERG PRERA"
+        },
+        {
+         "seccion": "B3",
+         "catedratico": "DIEGO JOSE PORRES ALMEDA"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase Z · SA 07:10–10:30  +  Laboratorio D1 · MI 12:20–14:00",
+     "sesiones": [
+      {
+       "inicio": "07:10",
+       "fin": "10:30",
+       "dias": [
+        "SA"
+       ]
+      },
+      {
+       "inicio": "12:20",
+       "fin": "14:00",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "Z",
+       "catedratico": "BAYRON ARMANDO CUYAN CULAJAY",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "D1",
+       "catedratico": "MICHELLE CAROLINA RIZZO LÓPEZ",
+       "equivalentes": [
+        {
+         "seccion": "D2",
+         "catedratico": "MAYNOR GEOVANI CUMEZ GONZÁLEZ"
+        },
+        {
+         "seccion": "D3",
+         "catedratico": "JOSE DANIEL ELÍAS TEJAXUN SAY"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase Z · SA 07:10–10:30  +  Laboratorio G1 · MI 18:10–19:50",
+     "sesiones": [
+      {
+       "inicio": "07:10",
+       "fin": "10:30",
+       "dias": [
+        "SA"
+       ]
+      },
+      {
+       "inicio": "18:10",
+       "fin": "19:50",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "Z",
+       "catedratico": "BAYRON ARMANDO CUYAN CULAJAY",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "G1",
+       "catedratico": "LUIS ENRIQUE IZQUIERDO OCHOA",
+       "equivalentes": []
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase Z · SA 07:10–10:30  +  Laboratorio H1 · MI 10:40–12:20",
+     "sesiones": [
+      {
+       "inicio": "07:10",
+       "fin": "10:30",
+       "dias": [
+        "SA"
+       ]
+      },
+      {
+       "inicio": "10:40",
+       "fin": "12:20",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "Z",
+       "catedratico": "BAYRON ARMANDO CUYAN CULAJAY",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "H1",
+       "catedratico": "JOHAN ESTIVEN SABÁN LÓPEZ",
+       "equivalentes": [
+        {
+         "seccion": "H2",
+         "catedratico": "DIEGO JOSE PORRES ALMEDA"
+        },
+        {
+         "seccion": "H3",
+         "catedratico": "LUIS ANGEL AGUILAR CHAMALE"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase Z · SA 07:10–10:30  +  Laboratorio J1 · MI 16:30–18:10",
+     "sesiones": [
+      {
+       "inicio": "07:10",
+       "fin": "10:30",
+       "dias": [
+        "SA"
+       ]
+      },
+      {
+       "inicio": "16:30",
+       "fin": "18:10",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "Z",
+       "catedratico": "BAYRON ARMANDO CUYAN CULAJAY",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "J1",
+       "catedratico": "PEDRO PABLO MOLINA MARTÍNEZ",
+       "equivalentes": []
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase Z · SA 07:10–10:30  +  Laboratorio K1 · MI 14:00–15:40",
+     "sesiones": [
+      {
+       "inicio": "07:10",
+       "fin": "10:30",
+       "dias": [
+        "SA"
+       ]
+      },
+      {
+       "inicio": "14:00",
+       "fin": "15:40",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "Z",
+       "catedratico": "BAYRON ARMANDO CUYAN CULAJAY",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "K1",
+       "catedratico": "KARINA NOHEMI RAMIREZ ORELLANA",
+       "equivalentes": [
+        {
+         "seccion": "K2",
+         "catedratico": "JOSE ALFREDO AGUILAR CHAMALE"
+        },
+        {
+         "seccion": "K3",
+         "catedratico": "MARIO AUGUSTO LÓPEZ ORDOÑEZ"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  "0550": {
+   "incluir_restringidas": [
+    "1+",
+    "N+"
+   ],
+   "advertencias": [],
+   "opciones": [
+    {
+     "etiqueta": "Clase N+ · LU MI VI 16:30–17:20  +  Práctica 1+ · SA 07:10–10:30  +  Laboratorio _A · MI 09:50–11:30",
+     "sesiones": [
+      {
+       "inicio": "16:30",
+       "fin": "17:20",
+       "dias": [
+        "LU",
+        "MI",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "07:10",
+       "fin": "10:30",
+       "dias": [
+        "SA"
+       ]
+      },
+      {
+       "inicio": "09:50",
+       "fin": "11:30",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "N+",
+       "catedratico": "MARIO ESTUARDO ARRIOLA AVILA",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Práctica",
+       "seccion": "1+",
+       "catedratico": "ALEJANDRO CASTAÑON LOPEZ",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "_A",
+       "catedratico": "ANTHONY ANDREÉ POLANCO SCHODER",
+       "equivalentes": []
+      }
+     ]
+    },
+    {
+     "etiqueta": "Clase P · LU MI VI 19:00–19:50  +  Práctica 1+ · SA 07:10–10:30  +  Laboratorio _A · MI 09:50–11:30",
+     "sesiones": [
+      {
+       "inicio": "19:00",
+       "fin": "19:50",
+       "dias": [
+        "LU",
+        "MI",
+        "VI"
+       ]
+      },
+      {
+       "inicio": "07:10",
+       "fin": "10:30",
+       "dias": [
+        "SA"
+       ]
+      },
+      {
+       "inicio": "09:50",
+       "fin": "11:30",
+       "dias": [
+        "MI"
+       ]
+      }
+     ],
+     "componentes": [
+      {
+       "categoria": "Clase",
+       "seccion": "P",
+       "catedratico": "MARIO ESTUARDO ARRIOLA AVILA",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Práctica",
+       "seccion": "1+",
+       "catedratico": "ALEJANDRO CASTAÑON LOPEZ",
+       "equivalentes": []
+      },
+      {
+       "categoria": "Laboratorio",
+       "seccion": "_A",
+       "catedratico": "ANTHONY ANDREÉ POLANCO SCHODER",
+       "equivalentes": []
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "solver": {
+  "cursos": [
+   "0768",
+   "0147",
+   "0550"
+  ],
+  "total_combos": 55,
+  "combos": [
+   [
+    0,
+    7,
+    0
+   ],
+   [
+    0,
+    9,
+    0
+   ],
+   [
+    0,
+    10,
+    0
+   ],
+   [
+    0,
+    13,
+    0
+   ],
+   [
+    0,
+    21,
+    0
+   ],
+   [
+    0,
+    23,
+    0
+   ],
+   [
+    0,
+    24,
+    0
+   ],
+   [
+    0,
+    27,
+    0
+   ],
+   [
+    1,
+    9,
+    0
+   ],
+   [
+    1,
+    10,
+    0
+   ],
+   [
+    1,
+    13,
+    0
+   ],
+   [
+    1,
+    23,
+    0
+   ],
+   [
+    1,
+    24,
+    0
+   ],
+   [
+    1,
+    27,
+    0
+   ],
+   [
+    2,
+    7,
+    0
+   ],
+   [
+    2,
+    9,
+    0
+   ],
+   [
+    2,
+    10,
+    0
+   ],
+   [
+    2,
+    13,
+    0
+   ],
+   [
+    2,
+    21,
+    0
+   ],
+   [
+    2,
+    23,
+    0
+   ],
+   [
+    2,
+    24,
+    0
+   ],
+   [
+    2,
+    27,
+    0
+   ],
+   [
+    0,
+    7,
+    1
+   ],
+   [
+    0,
+    9,
+    1
+   ],
+   [
+    0,
+    12,
+    1
+   ],
+   [
+    0,
+    13,
+    1
+   ],
+   [
+    0,
+    14,
+    1
+   ],
+   [
+    0,
+    16,
+    1
+   ],
+   [
+    0,
+    19,
+    1
+   ],
+   [
+    0,
+    20,
+    1
+   ],
+   [
+    0,
+    21,
+    1
+   ],
+   [
+    0,
+    23,
+    1
+   ],
+   [
+    0,
+    26,
+    1
+   ],
+   [
+    0,
+    27,
+    1
+   ],
+   [
+    1,
+    9,
+    1
+   ],
+   [
+    1,
+    12,
+    1
+   ],
+   [
+    1,
+    13,
+    1
+   ],
+   [
+    1,
+    16,
+    1
+   ],
+   [
+    1,
+    19,
+    1
+   ],
+   [
+    1,
+    20,
+    1
+   ],
+   [
+    1,
+    23,
+    1
+   ],
+   [
+    1,
+    26,
+    1
+   ],
+   [
+    1,
+    27,
+    1
+   ],
+   [
+    2,
+    7,
+    1
+   ],
+   [
+    2,
+    9,
+    1
+   ],
+   [
+    2,
+    12,
+    1
+   ],
+   [
+    2,
+    13,
+    1
+   ],
+   [
+    2,
+    14,
+    1
+   ],
+   [
+    2,
+    16,
+    1
+   ],
+   [
+    2,
+    19,
+    1
+   ],
+   [
+    2,
+    20,
+    1
+   ],
+   [
+    2,
+    21,
+    1
+   ],
+   [
+    2,
+    23,
+    1
+   ],
+   [
+    2,
+    26,
+    1
+   ],
+   [
+    2,
+    27,
+    1
+   ]
+  ]
+ },
+ "metricas_primeros_10": [
+  {
+   "minutos_en_evitar": 690,
+   "dias_libres": [],
+   "num_dias_con_clase": 5,
+   "usa_sabado": true,
+   "min_bloque_libre": 300,
+   "suma_fin_ultima_clase": 4900,
+   "suma_inicio_primera_clase": 2970
+  },
+  {
+   "minutos_en_evitar": 690,
+   "dias_libres": [],
+   "num_dias_con_clase": 5,
+   "usa_sabado": true,
+   "min_bloque_libre": 170,
+   "suma_fin_ultima_clase": 4900,
+   "suma_inicio_primera_clase": 3130
+  },
+  {
+   "minutos_en_evitar": 590,
+   "dias_libres": [],
+   "num_dias_con_clase": 5,
+   "usa_sabado": true,
+   "min_bloque_libre": 300,
+   "suma_fin_ultima_clase": 5050,
+   "suma_inicio_primera_clase": 3130
+  },
+  {
+   "minutos_en_evitar": 690,
+   "dias_libres": [],
+   "num_dias_con_clase": 5,
+   "usa_sabado": true,
+   "min_bloque_libre": 170,
+   "suma_fin_ultima_clase": 4900,
+   "suma_inicio_primera_clase": 3130
+  },
+  {
+   "minutos_en_evitar": 490,
+   "dias_libres": [],
+   "num_dias_con_clase": 5,
+   "usa_sabado": true,
+   "min_bloque_libre": 300,
+   "suma_fin_ultima_clase": 5400,
+   "suma_inicio_primera_clase": 3270
+  },
+  {
+   "minutos_en_evitar": 490,
+   "dias_libres": [],
+   "num_dias_con_clase": 5,
+   "usa_sabado": true,
+   "min_bloque_libre": 170,
+   "suma_fin_ultima_clase": 5400,
+   "suma_inicio_primera_clase": 3430
+  },
+  {
+   "minutos_en_evitar": 390,
+   "dias_libres": [],
+   "num_dias_con_clase": 5,
+   "usa_sabado": true,
+   "min_bloque_libre": 300,
+   "suma_fin_ultima_clase": 5550,
+   "suma_inicio_primera_clase": 3430
+  },
+  {
+   "minutos_en_evitar": 490,
+   "dias_libres": [],
+   "num_dias_con_clase": 5,
+   "usa_sabado": true,
+   "min_bloque_libre": 170,
+   "suma_fin_ultima_clase": 5400,
+   "suma_inicio_primera_clase": 3430
+  },
+  {
+   "minutos_en_evitar": 690,
+   "dias_libres": [],
+   "num_dias_con_clase": 5,
+   "usa_sabado": true,
+   "min_bloque_libre": 150,
+   "suma_fin_ultima_clase": 4900,
+   "suma_inicio_primera_clase": 3380
+  },
+  {
+   "minutos_en_evitar": 590,
+   "dias_libres": [],
+   "num_dias_con_clase": 5,
+   "usa_sabado": true,
+   "min_bloque_libre": 300,
+   "suma_fin_ultima_clase": 5050,
+   "suma_inicio_primera_clase": 3380
+  }
+ ],
+ "bloqueos_evitar": "LU-VI 07:00-17:00",
+ "rankings_top3": {
+  "manana_compacta": [
+   32,
+   41,
+   53
+  ],
+  "empezar_tarde": [
+   41,
+   32,
+   53
+  ],
+  "maximo_dia_libre": [
+   41,
+   32,
+   53
+  ],
+  "bloques_mixtos": [
+   41,
+   32,
+   53
+  ]
+ },
+ "emergencia_combo_0": {
+  "0768": [
+   2
+  ],
+  "0147": [
+   9,
+   10,
+   13,
+   21,
+   23,
+   24,
+   27
+  ],
+  "0550": [
+   1
+  ]
+ }
+}

@@ -10,7 +10,10 @@ import time
 import urllib.request
 from pathlib import Path
 
+# Periodos conocidos del sitio de horarios. El id "v1"/"v2" mapea a la ruta
+# /vacaciones/{n}; los numéricos a /semestre/{n}.
 BASE_URL = "https://usuarios.ingenieria.usac.edu.gt/horarios/semestre/{id}"
+VACACIONES_URL = "https://usuarios.ingenieria.usac.edu.gt/horarios/vacaciones/{id}"
 
 # Red de estudios (pénsum) — pública, renderizada del servidor, sin login.
 # El {id} numérico decide carrera+plan+vigencia (el slug de la URL es
@@ -66,8 +69,16 @@ def fetch_url(url: str, nombre_cache: str, ttl_horas: float,
 
 
 def fetch_html(semestre_id, force_refresh: bool = False, timeout: int = 60):
-    """Catálogo de horarios del semestre. Devuelve (html, desde_cache, timestamp)."""
-    return fetch_url(BASE_URL.format(id=semestre_id), f"semestre_{semestre_id}.html",
+    """Catálogo de horarios del periodo. Devuelve (html, desde_cache, timestamp).
+
+    semestre_id: "1"/"2" (semestre) o "v1"/"v2" (vacaciones junio/diciembre).
+    """
+    sid = str(semestre_id)
+    if sid.startswith("v"):
+        url = VACACIONES_URL.format(id=sid[1:])
+    else:
+        url = BASE_URL.format(id=sid)
+    return fetch_url(url, f"semestre_{sid}.html",
                      CACHE_TTL_HORAS, force_refresh, timeout)
 
 

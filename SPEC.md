@@ -151,6 +151,18 @@ Z (SA 07:10–10:30) → si llevás 0550, la sección Z de Física es imposible.
 **A5. Tocarse no es traslaparse:** 0147 Z termina 10:30 y los labs de 0768
 empiezan 10:30 el mismo sábado — combinación válida (comparación estricta).
 
+**A7. Periodos de vacaciones (2026-07-11).** Además de `/horarios/semestre/{1,2}`
+existen `/horarios/vacaciones/{1,2}` (junio/diciembre). La tabla de vacaciones
+tiene OTRO layout: columnas `Edificio | Salón` en lugar de `Modalidad` — por
+eso el parser resuelve columnas por nombre del `<th>`, nunca por posición.
+Un periodo sin catálogo publicado devuelve la tabla vacía (no es error).
+
+**A8. Catálogo de pénsums (2026-07-11).** En redesestudio el `{id}` numérico
+decide el contenido y el slug de la URL es cosmético (…/ingenieriaEnCienciasY
+Sistemas/27/clar devuelve Ambiental CLAR 2025). `scraper/escanear_pensums.py`
+barre los ids y genera `data/pensums.json`: 22 pénsums, 10 carreras, planes
+CLAR 2022 y CLAR 2025 (ids 27–28). El año del carnet decide qué plan aplica.
+
 **A6. Red de estudios (pénsum) — segunda fuente pública (2026-07-10).**
 `https://redesestudio.ingenieria.usac.edu.gt/redesDeEstudio/ingenieriaEnCienciasYSistemas/28/clar`
 — también server-rendered y sin login. Estructura: tarjetas `card-red-curricular`

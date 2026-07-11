@@ -56,6 +56,7 @@ const estado = {
   estrategia: null,
   opcion: 0,                // índice de combo, o "mia" para el horario editado
   miHorario: null,          // {codigos: [...], ids: {codigo: opcionId}} — combo editado por el usuario
+  vista: null,              // {generado, estrategia, opcion} — última vista, para restaurarla al volver
   pensum: null,
   pensumPorCodigo: new Map(),
   aprobados: new Set(),     // aprobados del pénsum ACTIVO
@@ -109,6 +110,11 @@ function guardarLocal() {
     sidebarOculta: estado.sidebarOculta,
     topN: estado.topN,
     miHorario: estado.miHorario,
+    // qué estaba viendo: si ya generó una vez, al volver se regenera y
+    // se le muestra lo mismo sin que tenga que apretar nada
+    vista: estado.resultado
+      ? { generado: true, estrategia: estado.estrategia, opcion: estado.opcion }
+      : estado.vista,
   }));
 }
 
@@ -133,6 +139,7 @@ function cargarLocal() {
     estado.sidebarOculta = !!d.sidebarOculta;
     estado.topN = d.topN || 3;
     estado.miHorario = d.miHorario || null;
+    estado.vista = d.vista || null;
   } catch { /* localStorage corrupto: empezar de cero */ }
   $("#chkSync").checked = estado.sync;
   $("#inputCarnet").value = estado.carnet;
@@ -157,7 +164,9 @@ function aplicarTema() {
     estado.tema = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
   }
   document.documentElement.dataset.theme = estado.tema;
-  $("#btnTema").textContent = estado.tema === "dark" ? "☀" : "◐";
+  $("#btnTema").innerHTML = estado.tema === "dark"
+    ? `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5.3 5.3l1.7 1.7M17 17l1.7 1.7M18.7 5.3 17 7M7 17l-1.7 1.7"/></svg>`
+    : `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"/></svg>`;
   $("#btnTema").title = estado.tema === "dark" ? "Cambiar a tema claro" : "Cambiar a tema oscuro";
 }
 
@@ -182,16 +191,40 @@ async function cargarCatalogo(refresh = false) {
     estado.catalogo = data;
     estado.porCodigo = new Map(data.cursos.map((c) => [c.codigo, c]));
     estado.seleccion = estado.seleccion.filter((c) => estado.porCodigo.has(c));
-    $("#estadoCatalogo").textContent =
-      `${data.total_cursos} cursos · ${data.desde_cache ? "caché " : ""}${data.actualizado}`;
-    $("#inputBuscar").disabled = false;
+    $("#estadoCatalogo").textContent = data.total_cursos === 0
+      ? "Este periodo aún no tiene catálogo publicado"
+      : `${data.total_cursos} cursos · ${data.desde_cache ? "caché " : ""}${data.actualizado}`;
+    $("#inputBuscar").disabled = data.total_cursos === 0;
     sincronizarConPensum();
     renderSeleccion();
     renderPensumPanel();
     pedirRestricciones();
+    autoMostrarUltimoHorario();
   } catch (e) {
-    $("#estadoCatalogo").textContent = `⚠ ${e.message}`;
+    $("#estadoCatalogo").textContent = `Error: ${e.message}`;
   }
+}
+
+/* Si en una visita anterior ya generó horario, se regenera solo al entrar
+   (con el catálogo fresco) y se restaura la estrategia/opción que veía. */
+let _autoMostrado = false;
+async function autoMostrarUltimoHorario() {
+  if (_autoMostrado || estado.resultado) return;
+  if (!estado.vista?.generado || !estado.seleccion.length) return;
+  _autoMostrado = true;
+  const vista = estado.vista;
+  await generar();
+  if (!estado.resultado) return;
+  if (estado.resultado.estrategias.some((e) => e.id === vista.estrategia)) {
+    estado.estrategia = vista.estrategia;
+  }
+  const combos = estrategiaActiva()?.combos || [];
+  if (vista.opcion === "mia" && estado.miHorario) {
+    estado.opcion = "mia";
+  } else if (typeof vista.opcion === "number" && vista.opcion < combos.length) {
+    estado.opcion = vista.opcion;
+  }
+  renderResultado();
 }
 
 /* ---------- pénsum (red de estudios, multi-carrera) ---------- */
@@ -264,7 +297,7 @@ async function cargarPensum(pensumId) {
     renderSeleccion();
     renderPensumPanel();
   } catch (e) {
-    $("#pensumResumen").innerHTML = `<p class="hint">⚠ No se pudo cargar el pénsum: ${escapar(e.message)}</p>`;
+    $("#pensumResumen").innerHTML = `<p class="hint">No se pudo cargar el pénsum: ${escapar(e.message)}</p>`;
   }
 }
 
@@ -325,7 +358,7 @@ function renderPensumPanel() {
   const btn = $("#btnAgregarElegibles");
   btn.hidden = estado.sync || porAgregar.length === 0;
   btn.className = "btn btn-elegibles";
-  btn.textContent = `＋ Agregar los ${porAgregar.length} que podés llevar`;
+  btn.textContent = `+ Agregar los ${porAgregar.length} que podés llevar`;
 
   if (!$("#modalPensum").hidden) renderPensumModal();
 }
@@ -534,7 +567,7 @@ function renderSeleccion() {
     if (enPensum) {
       const faltan = enPensum.prerrequisitos.filter((p) => !estado.aprobados.has(p));
       if (faltan.length) {
-        badges.push(`<span class="mini-badge warn" title="Según la red de estudios te falta aprobar: ${faltan.join(", ")}">⚠ falta prerreq. ${faltan.join(", ")}</span>`);
+        badges.push(`<span class="mini-badge warn" title="Según la red de estudios te falta aprobar: ${faltan.join(", ")}">falta prerreq. ${faltan.join(", ")}</span>`);
       }
     }
 
@@ -830,7 +863,7 @@ async function generar(topN = estado.topN) {
     guardarLocal();
     renderResultado();
   } catch (e) {
-    $("#estadoGenerar").textContent = `⚠ ${e.message}`;
+    $("#estadoGenerar").textContent = `Error: ${e.message}`;
   } finally {
     btn.disabled = estado.seleccion.length === 0;
   }
@@ -875,7 +908,7 @@ function renderResultado() {
   const adv = $("#advertencias");
   if (res.advertencias.length) {
     adv.hidden = false;
-    adv.innerHTML = `<div class="titulo">⚠ Cosas que debés saber</div>
+    adv.innerHTML = `<div class="titulo"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></svg> Cosas que debés saber</div>
       <ul>${res.advertencias.map((a) => `<li>${escapar(a)}</li>`).join("")}</ul>`;
   } else {
     adv.hidden = true;
@@ -914,7 +947,7 @@ function renderResultado() {
   });
   if (estado.miHorario) {
     const b = document.createElement("button");
-    b.textContent = "✎ Mi horario";
+    b.innerHTML = `<svg class="ico" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.8 2.8 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg> Mi horario`;
     b.className = "mia" + (estado.opcion === "mia" ? " activa" : "");
     b.title = "El horario que ajustaste a mano";
     b.onclick = () => { salirEditor(false); estado.opcion = "mia"; renderResultado(); };
@@ -950,6 +983,7 @@ function renderResultado() {
     $("#planB").hidden = estado.opcion === "mia";
     if (estado.opcion !== "mia") renderPlanB(combos[estado.opcion]);
   }
+  guardarLocal();   // recuerda estrategia/opción para restaurarlas al volver
 }
 
 function renderSacrificios(sacrificios) {
@@ -1333,7 +1367,8 @@ function exportarPng() {
   ctx.fillText("Mi horario · NoHayCupo", pad, 34);
   ctx.fillStyle = C.suave;
   ctx.font = `12px ${F}`;
-  ctx.fillText(`FIUSAC · semestre ${$("#inputSemestre").value.trim() || "?"} · ${mostrado.length} cursos`, pad, 52);
+  const periodo = $("#inputSemestre").selectedOptions?.[0]?.text || $("#inputSemestre").value;
+  ctx.fillText(`FIUSAC · ${periodo} · ${mostrado.length} cursos`, pad, 52);
 
   dias.forEach((d, i) => {
     ctx.fillStyle = C.suave;

@@ -1,0 +1,156 @@
+[
+ {
+  "id": 1,
+  "slug": "civil",
+  "carrera": "Ingeniería Civil",
+  "plan": "CLAR",
+  "vigencia_desde": 2022
+ },
+ {
+  "id": 2,
+  "slug": "quimica",
+  "carrera": "Ingeniería Química",
+  "plan": "CLAR",
+  "vigencia_desde": 2022
+ },
+ {
+  "id": 3,
+  "slug": "mecanica",
+  "carrera": "Ingeniería Mecánica",
+  "plan": "CLAR",
+  "vigencia_desde": 2022
+ },
+ {
+  "id": 5,
+  "slug": "industrial",
+  "carrera": "Ingeniería Industrial",
+  "plan": "CLAR",
+  "vigencia_desde": 2022
+ },
+ {
+  "id": 7,
+  "slug": "mecanica-industrial",
+  "carrera": "Ingeniería Mecánica Industrial",
+  "plan": "CLAR",
+  "vigencia_desde": 2022
+ },
+ {
+  "id": 8,
+  "slug": "sistemas",
+  "carrera": "Ingeniería en Ciencias y Sistemas",
+  "plan": "CLAR",
+  "vigencia_desde": 2022
+ },
+ {
+  "id": 12,
+  "slug": "electrica",
+  "carrera": "Ingeniería Eléctrica",
+  "plan": "CLAR",
+  "vigencia_desde": 2022
+ },
+ {
+  "id": 13,
+  "slug": "mecanica-electrica",
+  "carrera": "Ingeniería Mecánica Eléctrica",
+  "plan": "CLAR",
+  "vigencia_desde": 2022
+ },
+ {
+  "id": 14,
+  "slug": "electronica",
+  "carrera": "Ingeniería Electrónica",
+  "plan": "CLAR",
+  "vigencia_desde": 2022
+ },
+ {
+  "id": 16,
+  "slug": "ambiental",
+  "carrera": "Ingeniería Ambiental",
+  "plan": "CLAR",
+  "vigencia_desde": 2022
+ },
+ {
+  "id": 17,
+  "slug": "civil",
+  "carrera": "Ingeniería Civil",
+  "plan": "CLAR",
+  "vigencia_desde": 2022
+ },
+ {
+  "id": 18,
+  "slug": "civil",
+  "carrera": "Ingeniería Civil",
+  "plan": "CLAR",
+  "vigencia_desde": 2022
+ },
+ {
+  "id": 19,
+  "slug": "quimica",
+  "carrera": "Ingeniería Química",
+  "plan": "CLAR",
+  "vigencia_desde": 2022
+ },
+ {
+  "id": 20,
+  "slug": "mecanica",
+  "carrera": "Ingeniería Mecánica",
+  "plan": "CLAR",
+  "vigencia_desde": 2022
+ },
+ {
+  "id": 21,
+  "slug": "electrica",
+  "carrera": "Ingeniería Eléctrica",
+  "plan": "CLAR",
+  "vigencia_desde": 2022
+ },
+ {
+  "id": 22,
+  "slug": "industrial",
+  "carrera": "Ingeniería Industrial",
+  "plan": "CLAR",
+  "vigencia_desde": 2022
+ },
+ {
+  "id": 23,
+  "slug": "mecanica-electrica",
+  "carrera": "Ingeniería Mecánica Eléctrica",
+  "plan": "CLAR",
+  "vigencia_desde": 2022
+ },
+ {
+  "id": 24,
+  "slug": "mecanica-industrial",
+  "carrera": "Ingeniería Mecánica Industrial",
+  "plan": "CLAR",
+  "vigencia_desde": 2022
+ },
+ {
+  "id": 25,
+  "slug": "sistemas",
+  "carrera": "Ingeniería en Ciencias y Sistemas",
+  "plan": "CLAR",
+  "vigencia_desde": 2022
+ },
+ {
+  "id": 26,
+  "slug": "electronica",
+  "carrera": "Ingeniería Electrónica",
+  "plan": "CLAR",
+  "vigencia_desde": 2022
+ },
+ {
+  "id": 27,
+  "slug": "ambiental",
+  "carrera": "Ingeniería Ambiental",
+  "plan": "CLAR",
+  "vigencia_desde": 2025
+ },
+ {
+  "id": 28,
+  "slug": "sistemas",
+  "carrera": "Ingeniería en Ciencias y Sistemas",
+  "plan": "CLAR",
+  "vigencia_desde": 2025
+ }
+]

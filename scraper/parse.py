@@ -2,8 +2,11 @@
 
 Estructura verificada contra el HTML real (semestre 2, 2026):
   - Tabla con id="tblHorarios"; cada <tr> del tbody es una sección.
-  - Columnas: Nombre de Curso | Sección | Modalidad | Inicio | Final | Días
-              | Catedrático | Auxiliar | Detalle
+  - Columnas de SEMESTRE: Nombre de Curso | Sección | Modalidad | Inicio
+              | Final | Días | Catedrático | Auxiliar | Detalle
+  - Columnas de VACACIONES: igual pero con Edificio | Salón en lugar de
+    Modalidad — por eso las columnas se resuelven por NOMBRE del <th>,
+    nunca por posición fija.
   - Los días vienen como texto en UNA celda ("MA  JU") — se hace .split().
   - Una estrella <span class="badge badge-X"> junto al nombre marca el
     componente práctico. Mapeo confirmado con la leyenda de la página:
@@ -14,9 +17,10 @@ Estructura verificada contra el HTML real (semestre 2, 2026):
 """
 from __future__ import annotations
 
+import unicodedata
 from html.parser import HTMLParser
 
-from engine.models import Curso, Seccion, hhmm_to_min
+from engine.models import Curso, DIAS_SEMANA, Seccion, hhmm_to_min
 
 BADGE_CATEGORIA = {
     "badge-blue": "Laboratorio",
@@ -25,7 +29,12 @@ BADGE_CATEGORIA = {
     "badge-success": "Dibujo",
 }
 
-COLUMNAS_ESPERADAS = 9
+
+def _norm(texto: str) -> str:
+    """minúsculas y sin tildes, para comparar nombres de columna."""
+    sin = "".join(c for c in unicodedata.normalize("NFD", texto)
+                  if not unicodedata.combining(c))
+    return " ".join(sin.lower().split())
 
 
 class _TablaHorariosParser(HTMLParser):
@@ -34,9 +43,10 @@ class _TablaHorariosParser(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.filas = []
+        self.encabezados = []   # textos de los <th>, en orden
         self._en_tabla = False
         self._tablas_anidadas = 0
-        self._en_td = False
+        self._en_celda = None   # "td" | "th" | None
         self._celdas = []
         self._texto = []
         self._badge = None
@@ -54,10 +64,10 @@ class _TablaHorariosParser(HTMLParser):
         if tag == "tr":
             self._celdas = []
             self._badge = None
-        elif tag == "td":
-            self._en_td = True
+        elif tag in ("td", "th"):
+            self._en_celda = tag
             self._texto = []
-        elif tag == "span" and self._en_td:
+        elif tag == "span" and self._en_celda == "td":
             clases = attrs.get("class", "")
             for clase_css, _ in BADGE_CATEGORIA.items():
                 if clase_css in clases:
@@ -74,13 +84,16 @@ class _TablaHorariosParser(HTMLParser):
         elif self._tablas_anidadas:
             return
         elif tag == "td":
-            self._en_td = False
+            self._en_celda = None
             self._celdas.append(" ".join("".join(self._texto).split()))
+        elif tag == "th":
+            self._en_celda = None
+            self.encabezados.append(" ".join("".join(self._texto).split()))
         elif tag == "tr" and self._celdas:
             self.filas.append((self._celdas, self._badge))
 
     def handle_data(self, data):
-        if self._en_td:
+        if self._en_celda:
             self._texto.append(data)
 
 
@@ -91,38 +104,72 @@ def _hora_o_none(texto: str):
         return None
 
 
+def _mapa_columnas(encabezados: list) -> dict:
+    """Resuelve el índice de cada campo por el NOMBRE de la columna, para
+    soportar los dos layouts del sitio (semestre y vacaciones)."""
+    idx = {_norm(t): i for i, t in enumerate(encabezados)}
+    return {
+        "nombre": idx.get("nombre de curso", 0),
+        "seccion": idx.get("seccion", 1),
+        "modalidad": idx.get("modalidad"),          # no existe en vacaciones
+        "edificio": idx.get("edificio"),            # solo vacaciones
+        "salon": idx.get("salon"),                  # solo vacaciones
+        "inicio": idx.get("inicio", 3),
+        "fin": idx.get("final", 4),
+        "dias": idx.get("dias", 5),
+        "catedratico": idx.get("catedratico", 6),
+        "auxiliar": idx.get("auxiliar", 7),
+        "detalle": idx.get("detalle", 8),
+    }
+
+
 def parse_secciones(html: str) -> list:
     """Parsea el HTML completo del catálogo -> list[Seccion]."""
     parser = _TablaHorariosParser()
     parser.feed(html)
+    col = _mapa_columnas(parser.encabezados)
+    minimo = max(col["detalle"], col["dias"], col["auxiliar"]) + 1
+
+    def celda(celdas, clave):
+        i = col[clave]
+        return celdas[i] if i is not None and i < len(celdas) else ""
 
     secciones = []
     for celdas, badge in parser.filas:
-        if len(celdas) < COLUMNAS_ESPERADAS:
+        if len(celdas) < minimo:
             continue  # fila rara/incompleta: mejor omitir que inventar datos
-        nombre_completo = celdas[0]
-        partes = nombre_completo.split(None, 1)
+        partes = celda(celdas, "nombre").split(None, 1)
         if not partes or not partes[0].isdigit():
             continue  # toda fila real inicia con el código numérico del curso
         codigo = partes[0]
         nombre = partes[1] if len(partes) > 1 else ""
 
-        auxiliar = celdas[7] or None
+        auxiliar = celda(celdas, "auxiliar") or None
         if auxiliar and auxiliar.upper() == "SIN AUXILIAR":
             auxiliar = None
+
+        # En vacaciones no hay Modalidad: se usa "Edificio · Salón" como
+        # descriptor equivalente (ej. "MEET · VIRTUAL").
+        modalidad = celda(celdas, "modalidad")
+        if not modalidad:
+            lugar = [celda(celdas, "edificio"), celda(celdas, "salon")]
+            modalidad = " · ".join(p for p in lugar if p)
 
         secciones.append(Seccion(
             curso_codigo=codigo,
             curso_nombre=nombre,
-            seccion=celdas[1],
+            seccion=celda(celdas, "seccion"),
             categoria=BADGE_CATEGORIA.get(badge),
-            modalidad=celdas[2],
-            inicio_min=_hora_o_none(celdas[3]),
-            fin_min=_hora_o_none(celdas[4]),
-            dias=frozenset(celdas[5].split()),
-            catedratico=celdas[6],
+            modalidad=modalidad,
+            inicio_min=_hora_o_none(celda(celdas, "inicio")),
+            fin_min=_hora_o_none(celda(celdas, "fin")),
+            # solo abreviaturas conocidas: si el sitio metiera otra cosa en la
+            # celda, mejor un set vacío (sección "sin horario") que un crash
+            dias=frozenset(d for d in celda(celdas, "dias").split()
+                           if d in DIAS_SEMANA),
+            catedratico=celda(celdas, "catedratico"),
             auxiliar=auxiliar,
-            restringida="Ver Restricciones" in celdas[8],
+            restringida="Ver Restricciones" in celda(celdas, "detalle"),
         ))
     return secciones
 

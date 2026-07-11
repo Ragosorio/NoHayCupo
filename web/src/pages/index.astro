@@ -1,0 +1,91 @@
+---
+import Header from "@/components/Header";
+import App from "@/components/App";
+import "@/styles/global.css";
+
+export const prerender = true;
+
+// Cambiar acá (y en astro.config.mjs) si algún día hay dominio propio.
+const SITE = Astro.site?.href ?? "https://nohaycupo.vercel.app/";
+const TITULO = "NoHayCupo · Horarios USAC (FIUSAC) — armá tu horario sin traslapes";
+const DESCRIPCION =
+  "Generador de horarios para la Facultad de Ingeniería de la USAC (Universidad de "
+  + "San Carlos de Guatemala). Arma todas las combinaciones sin traslapes del catálogo "
+  + "real de FIUSAC, respeta tus horas ocupadas, verifica secciones restringidas con tu "
+  + "carnet y exporta a Google Calendar, Excel, PNG o PDF. Gratis, sin cuentas.";
+const jsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "NoHayCupo",
+  alternateName: "No Hay Cupo — Horarios USAC",
+  url: SITE,
+  description: DESCRIPCION,
+  applicationCategory: "EducationApplication",
+  operatingSystem: "Web",
+  inLanguage: "es",
+  isAccessibleForFree: true,
+  offers: { "@type": "Offer", price: "0", priceCurrency: "GTQ" },
+  creator: { "@type": "Person", name: "Rolando Osorio", url: "https://ragosorio.com/" },
+  about: {
+    "@type": "CollegeOrUniversity",
+    name: "Universidad de San Carlos de Guatemala",
+    department: { "@type": "EducationalOrganization", name: "Facultad de Ingeniería (FIUSAC)" },
+  },
+});
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{TITULO}</title>
+    <meta name="description" content={DESCRIPCION} />
+    <meta
+      name="keywords"
+      content="horarios USAC, horarios FIUSAC, horarios Facultad de Ingeniería USAC, horario segundo semestre USAC, horario primer semestre USAC, armar horario USAC, cursos USAC, secciones USAC, NoHayCupo"
+    />
+    <link rel="canonical" href={SITE} />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#161b2b" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="NoHayCupo" />
+    <meta property="og:title" content={TITULO} />
+    <meta property="og:description" content={DESCRIPCION} />
+    <meta property="og:url" content={SITE} />
+    <meta property="og:locale" content="es_GT" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={TITULO} />
+    <meta name="twitter:description" content={DESCRIPCION} />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%234f46e5'/><text x='50' y='62' font-size='34' text-anchor='middle' fill='white' font-family='system-ui' font-weight='900' letter-spacing='-2.5'>NHC</text></svg>"
+    />
+    <script type="application/ld+json" set:html={jsonLd} />
+    <script is:inline>
+      // Aplicar el tema ANTES de pintar para evitar el destello claro/oscuro.
+      try {
+        const d = JSON.parse(localStorage.getItem("nhc") || "{}");
+        const tema = d.tema ||
+          (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.dataset.theme = tema;
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <Header client:load />
+    <App client:load />
+    <footer class="pie-seo">
+      <p>
+        <strong>NoHayCupo</strong> — el generador de horarios de la Facultad de
+        Ingeniería de la USAC (Universidad de San Carlos de Guatemala). Compará todas
+        las combinaciones posibles de tus cursos del primer semestre, segundo semestre
+        o vacaciones sin traslapes, y quedate con el horario que sí te conviene.
+        <a href="https://github.com/Ragosorio/NoHayCupo" rel="noopener">Código abierto en GitHub</a>.
+      </p>
+    </footer>
+  </body>
+</html>

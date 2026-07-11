@@ -5,6 +5,11 @@ catálogo público de horarios, genera **todas** las combinaciones sin traslapes
 para tus cursos (clase + laboratorio/práctica como unidad obligatoria) y las
 rankea con 4 estrategias, con plan B por si una sección se llena.
 
+> **La versión web (deployable en Vercel) vive en [`web/`](web/README.md)** —
+> Astro + islas de React + Tailwind, con el solver corriendo en el navegador.
+> Lo de abajo es la versión Python original: sigue funcionando, es la
+> referencia del motor y el oráculo de los tests de paridad.
+
 Además integra la **red de estudios de Ingeniería en Ciencias y Sistemas**
 (pénsum 28): marcás qué cursos ya aprobaste y la app calcula qué podés llevar
 (prerrequisitos cumplidos), te avisa si un curso elegible no tiene oferta este
@@ -61,3 +66,10 @@ tests/     casos reales como fixtures
 
 Ver [SPEC.md](SPEC.md) para el diseño completo y las trampas conocidas de la
 fuente de datos.
+
+## Documentación
+
+- [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md) — dónde está cada cosa y cómo fluye una generación.
+- [docs/CONTRIBUIR.md](docs/CONTRIBUIR.md) — cómo correr, probar y las reglas de la casa.
+- [docs/PLAN-MIGRACION.md](docs/PLAN-MIGRACION.md) — plan (pendiente de visto bueno) para migrar a Astro y deployar en Vercel sin romper nada.
+- `.claude/skills/` — skills para trabajar el repo con Claude Code: verificar la app, actualizar fixtures desde datos reales, agregar estrategias.

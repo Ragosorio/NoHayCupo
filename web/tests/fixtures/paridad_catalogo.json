@@ -1,0 +1,817 @@
+[
+ {
+  "curso_codigo": "0550",
+  "curso_nombre": "VIAS TERRESTRES 1",
+  "seccion": "1+",
+  "categoria": "Práctica",
+  "modalidad": "PRESENCIAL",
+  "inicio": "07:10",
+  "fin": "10:30",
+  "dias": [
+   "SA"
+  ],
+  "catedratico": "ALEJANDRO CASTAÑON LOPEZ",
+  "auxiliar": null,
+  "restringida": true
+ },
+ {
+  "curso_codigo": "0550",
+  "curso_nombre": "VIAS TERRESTRES 1",
+  "seccion": "1-",
+  "categoria": "Práctica",
+  "modalidad": "PRESENCIAL",
+  "inicio": "07:10",
+  "fin": "10:30",
+  "dias": [
+   "SA"
+  ],
+  "catedratico": "CARLOS ENRIQUE PINTO ALONZO",
+  "auxiliar": null,
+  "restringida": true
+ },
+ {
+  "curso_codigo": "0550",
+  "curso_nombre": "VIAS TERRESTRES 1",
+  "seccion": "_A",
+  "categoria": "Laboratorio",
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "09:50",
+  "fin": "11:30",
+  "dias": [
+   "MI"
+  ],
+  "catedratico": "ANTHONY ANDREÉ POLANCO SCHODER",
+  "auxiliar": null,
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "A",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "07:10",
+  "fin": "08:00",
+  "dias": [
+   "LU",
+   "MA",
+   "JU",
+   "VI"
+  ],
+  "catedratico": "OSWALDO ROMEO ESCOBAR ALVAREZ",
+  "auxiliar": "XIMENA ALEJANDRA BARRERA GONZÁLES",
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0768",
+  "curso_nombre": "INTRODUCCION A LOS ALGORITMOS Y FLUJO DE DATOS",
+  "seccion": "A",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "07:10",
+  "fin": "08:50",
+  "dias": [
+   "MA",
+   "JU"
+  ],
+  "catedratico": "EDGAR FRANCISCO RODAS ROBLEDO",
+  "auxiliar": "EMILIANO JOSÉ ALEXANDER VELÁSQUEZ NAJERA",
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0768",
+  "curso_nombre": "INTRODUCCION A LOS ALGORITMOS Y FLUJO DE DATOS",
+  "seccion": "A",
+  "categoria": "Laboratorio",
+  "modalidad": "PRESENCIAL",
+  "inicio": "10:30",
+  "fin": "12:10",
+  "dias": [
+   "SA"
+  ],
+  "catedratico": "EMILIANO JOSÉ ALEXANDER VELÁSQUEZ NAJERA",
+  "auxiliar": null,
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "A1",
+  "categoria": "Laboratorio",
+  "modalidad": "PRESENCIAL",
+  "inicio": "07:10",
+  "fin": "08:50",
+  "dias": [
+   "MI"
+  ],
+  "catedratico": "LUIS ARTURO SABAN LOPEZ",
+  "auxiliar": null,
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "A2",
+  "categoria": "Laboratorio",
+  "modalidad": "PRESENCIAL",
+  "inicio": "07:10",
+  "fin": "08:50",
+  "dias": [
+   "MI"
+  ],
+  "catedratico": "HAROL JOSE CARIAS DIEGUEZ",
+  "auxiliar": null,
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "A3",
+  "categoria": "Laboratorio",
+  "modalidad": "PRESENCIAL",
+  "inicio": "07:10",
+  "fin": "08:50",
+  "dias": [
+   "MI"
+  ],
+  "catedratico": "OSCAR GIOVANNI HERNÁNDEZ CARIAS",
+  "auxiliar": null,
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0550",
+  "curso_nombre": "VIAS TERRESTRES 1",
+  "seccion": "_B",
+  "categoria": "Laboratorio",
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "08:00",
+  "fin": "09:40",
+  "dias": [
+   "SA"
+  ],
+  "catedratico": "JORGE MIGUEL MALDONADO ACEVEDO",
+  "auxiliar": null,
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0768",
+  "curso_nombre": "INTRODUCCION A LOS ALGORITMOS Y FLUJO DE DATOS",
+  "seccion": "B",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "07:10",
+  "fin": "08:50",
+  "dias": [
+   "LU",
+   "MI"
+  ],
+  "catedratico": "HERMAN IGOR VELIZ LINARES",
+  "auxiliar": "JOSUE DANIEL CHAVEZ PORTILLO",
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0768",
+  "curso_nombre": "INTRODUCCION A LOS ALGORITMOS Y FLUJO DE DATOS",
+  "seccion": "B",
+  "categoria": "Laboratorio",
+  "modalidad": "PRESENCIAL",
+  "inicio": "10:30",
+  "fin": "12:10",
+  "dias": [
+   "SA"
+  ],
+  "catedratico": "JOSUE DANIEL CHAVEZ PORTILLO",
+  "auxiliar": null,
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "B1",
+  "categoria": "Laboratorio",
+  "modalidad": "PRESENCIAL",
+  "inicio": "09:00",
+  "fin": "10:40",
+  "dias": [
+   "MI"
+  ],
+  "catedratico": "OSCAR GIOVANNI HERNÁNDEZ CARIAS",
+  "auxiliar": null,
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "B2",
+  "categoria": "Laboratorio",
+  "modalidad": "PRESENCIAL",
+  "inicio": "09:00",
+  "fin": "10:40",
+  "dias": [
+   "MI"
+  ],
+  "catedratico": "PAOLA MISHELLE. HENGSTENBERG PRERA",
+  "auxiliar": null,
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "B3",
+  "categoria": "Laboratorio",
+  "modalidad": "PRESENCIAL",
+  "inicio": "09:00",
+  "fin": "10:40",
+  "dias": [
+   "MI"
+  ],
+  "catedratico": "DIEGO JOSE PORRES ALMEDA",
+  "auxiliar": null,
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0768",
+  "curso_nombre": "INTRODUCCION A LOS ALGORITMOS Y FLUJO DE DATOS",
+  "seccion": "C",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "07:10",
+  "fin": "10:40",
+  "dias": [
+   "VI"
+  ],
+  "catedratico": "HERMAN IGOR VELIZ LINARES",
+  "auxiliar": "JORGE ANDRÉS MEJIA SUCHITE",
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0768",
+  "curso_nombre": "INTRODUCCION A LOS ALGORITMOS Y FLUJO DE DATOS",
+  "seccion": "C",
+  "categoria": "Laboratorio",
+  "modalidad": "PRESENCIAL",
+  "inicio": "10:30",
+  "fin": "12:10",
+  "dias": [
+   "SA"
+  ],
+  "catedratico": "JORGE ANDRÉS MEJIA SUCHITE",
+  "auxiliar": null,
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "C+",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "08:00",
+  "fin": "08:50",
+  "dias": [
+   "LU",
+   "MA",
+   "JU",
+   "VI"
+  ],
+  "catedratico": "RODOLFO ESTUARDO QUIROA MELENDRES",
+  "auxiliar": "RODRIGO ALFREDO GÓMEZ VELASCO",
+  "restringida": true
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "C-",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "08:00",
+  "fin": "08:50",
+  "dias": [
+   "LU",
+   "MA",
+   "JU",
+   "VI"
+  ],
+  "catedratico": "JOSE ADOLFO TUNA AGUILAR",
+  "auxiliar": "XIMENA ALEJANDRA BARRERA GONZÁLES",
+  "restringida": true
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "D+",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "09:00",
+  "fin": "09:50",
+  "dias": [
+   "LU",
+   "MA",
+   "JU",
+   "VI"
+  ],
+  "catedratico": "RODOLFO ESTUARDO QUIROA MELENDRES",
+  "auxiliar": "RODRIGO ALFREDO GÓMEZ VELASCO",
+  "restringida": true
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "D-",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "09:00",
+  "fin": "09:50",
+  "dias": [
+   "LU",
+   "MA",
+   "JU",
+   "VI"
+  ],
+  "catedratico": "EDDY JOSUE SOLARES ESPINOZA",
+  "auxiliar": "RODRIGO ALFREDO GÓMEZ VELASCO",
+  "restringida": true
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "D1",
+  "categoria": "Laboratorio",
+  "modalidad": "PRESENCIAL",
+  "inicio": "12:20",
+  "fin": "14:00",
+  "dias": [
+   "MI"
+  ],
+  "catedratico": "MICHELLE CAROLINA RIZZO LÓPEZ",
+  "auxiliar": null,
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "D2",
+  "categoria": "Laboratorio",
+  "modalidad": "PRESENCIAL",
+  "inicio": "12:20",
+  "fin": "14:00",
+  "dias": [
+   "MI"
+  ],
+  "catedratico": "MAYNOR GEOVANI CUMEZ GONZÁLEZ",
+  "auxiliar": null,
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "D3",
+  "categoria": "Laboratorio",
+  "modalidad": "PRESENCIAL",
+  "inicio": "12:20",
+  "fin": "14:00",
+  "dias": [
+   "MI"
+  ],
+  "catedratico": "JOSE DANIEL ELÍAS TEJAXUN SAY",
+  "auxiliar": null,
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "E1",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "11:30",
+  "fin": "12:20",
+  "dias": [
+   "LU",
+   "MA",
+   "JU",
+   "VI"
+  ],
+  "catedratico": "RONAL NOE GALVEZ GARCIA",
+  "auxiliar": "LUIS ARTURO SABAN LOPEZ",
+  "restringida": true
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "E2",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "11:30",
+  "fin": "12:20",
+  "dias": [
+   "LU",
+   "MA",
+   "JU",
+   "VI"
+  ],
+  "catedratico": "LUIS ALBERTO BAUTISTA",
+  "auxiliar": "JOSE CARLOS QUINONEZ ARBIZU",
+  "restringida": true
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "E3",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "11:30",
+  "fin": "12:20",
+  "dias": [
+   "LU",
+   "MA",
+   "JU",
+   "VI"
+  ],
+  "catedratico": "JOSE ADOLFO TUNA AGUILAR",
+  "auxiliar": "LUIS ARTURO SABAN LOPEZ",
+  "restringida": true
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "F+",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "12:20",
+  "fin": "13:10",
+  "dias": [
+   "LU",
+   "MA",
+   "JU",
+   "VI"
+  ],
+  "catedratico": "ANGELICA BECILIA PACHECO MAZARIEGOS",
+  "auxiliar": null,
+  "restringida": true
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "F-",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "12:20",
+  "fin": "13:10",
+  "dias": [
+   "LU",
+   "MA",
+   "JU",
+   "VI"
+  ],
+  "catedratico": "PAMELA CRISTINA SIKAHALL URIZAR",
+  "auxiliar": null,
+  "restringida": true
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "G1",
+  "categoria": "Laboratorio",
+  "modalidad": "PRESENCIAL",
+  "inicio": "18:10",
+  "fin": "19:50",
+  "dias": [
+   "MI"
+  ],
+  "catedratico": "LUIS ENRIQUE IZQUIERDO OCHOA",
+  "auxiliar": null,
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "H1",
+  "categoria": "Laboratorio",
+  "modalidad": "PRESENCIAL",
+  "inicio": "10:40",
+  "fin": "12:20",
+  "dias": [
+   "MI"
+  ],
+  "catedratico": "JOHAN ESTIVEN SABÁN LÓPEZ",
+  "auxiliar": null,
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "H2",
+  "categoria": "Laboratorio",
+  "modalidad": "PRESENCIAL",
+  "inicio": "10:40",
+  "fin": "12:20",
+  "dias": [
+   "MI"
+  ],
+  "catedratico": "DIEGO JOSE PORRES ALMEDA",
+  "auxiliar": null,
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "H3",
+  "categoria": "Laboratorio",
+  "modalidad": "PRESENCIAL",
+  "inicio": "10:40",
+  "fin": "12:20",
+  "dias": [
+   "MI"
+  ],
+  "catedratico": "LUIS ANGEL AGUILAR CHAMALE",
+  "auxiliar": null,
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "J1",
+  "categoria": "Laboratorio",
+  "modalidad": "PRESENCIAL",
+  "inicio": "16:30",
+  "fin": "18:10",
+  "dias": [
+   "MI"
+  ],
+  "catedratico": "PEDRO PABLO MOLINA MARTÍNEZ",
+  "auxiliar": null,
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "K1",
+  "categoria": "Laboratorio",
+  "modalidad": "PRESENCIAL",
+  "inicio": "14:00",
+  "fin": "15:40",
+  "dias": [
+   "MI"
+  ],
+  "catedratico": "KARINA NOHEMI RAMIREZ ORELLANA",
+  "auxiliar": null,
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "K2",
+  "categoria": "Laboratorio",
+  "modalidad": "PRESENCIAL",
+  "inicio": "14:00",
+  "fin": "15:40",
+  "dias": [
+   "MI"
+  ],
+  "catedratico": "JOSE ALFREDO AGUILAR CHAMALE",
+  "auxiliar": null,
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "K3",
+  "categoria": "Laboratorio",
+  "modalidad": "PRESENCIAL",
+  "inicio": "14:00",
+  "fin": "15:40",
+  "dias": [
+   "MI"
+  ],
+  "catedratico": "MARIO AUGUSTO LÓPEZ ORDOÑEZ",
+  "auxiliar": null,
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "N+",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "13:10",
+  "fin": "14:00",
+  "dias": [
+   "LU",
+   "MA",
+   "JU",
+   "VI"
+  ],
+  "catedratico": "BAYRON ARMANDO CUYAN CULAJAY",
+  "auxiliar": "MICHELLE CAROLINA RIZZO LÓPEZ",
+  "restringida": true
+ },
+ {
+  "curso_codigo": "0550",
+  "curso_nombre": "VIAS TERRESTRES 1",
+  "seccion": "N+",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "16:30",
+  "fin": "17:20",
+  "dias": [
+   "LU",
+   "MI",
+   "VI"
+  ],
+  "catedratico": "MARIO ESTUARDO ARRIOLA AVILA",
+  "auxiliar": null,
+  "restringida": true
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "N-",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "13:10",
+  "fin": "14:00",
+  "dias": [
+   "LU",
+   "MA",
+   "JU",
+   "VI"
+  ],
+  "catedratico": "LUIS ALBERTO BAUTISTA",
+  "auxiliar": "MARÍA ALEJANDRA ESTRADA GONZÁLEZ",
+  "restringida": true
+ },
+ {
+  "curso_codigo": "0550",
+  "curso_nombre": "VIAS TERRESTRES 1",
+  "seccion": "N-",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "16:30",
+  "fin": "17:20",
+  "dias": [
+   "LU",
+   "MI",
+   "VI"
+  ],
+  "catedratico": "JORGE ALEJANDRO AREVALO VALDEZ",
+  "auxiliar": null,
+  "restringida": true
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "P",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "14:00",
+  "fin": "14:50",
+  "dias": [
+   "LU",
+   "MA",
+   "JU",
+   "VI"
+  ],
+  "catedratico": "RONAL NOE GALVEZ GARCIA",
+  "auxiliar": "MIGUEL ALEJANDRO CARDONA URIZAR",
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0550",
+  "curso_nombre": "VIAS TERRESTRES 1",
+  "seccion": "P",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "19:00",
+  "fin": "19:50",
+  "dias": [
+   "LU",
+   "MI",
+   "VI"
+  ],
+  "catedratico": "MARIO ESTUARDO ARRIOLA AVILA",
+  "auxiliar": null,
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "Q",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "14:00",
+  "fin": "14:50",
+  "dias": [
+   "LU",
+   "MA",
+   "JU",
+   "VI"
+  ],
+  "catedratico": "EDDY JOSUE SOLARES ESPINOZA",
+  "auxiliar": "KARINA NOHEMI RAMIREZ ORELLANA",
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "R+",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "15:40",
+  "fin": "16:30",
+  "dias": [
+   "LU",
+   "MA",
+   "JU",
+   "VI"
+  ],
+  "catedratico": "LUIS ADOLFO DE LEON GOMEZ",
+  "auxiliar": "WERNNER STEV VÁSQUEZ BRAN",
+  "restringida": true
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "R-",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "15:40",
+  "fin": "16:30",
+  "dias": [
+   "LU",
+   "MA",
+   "JU",
+   "VI"
+  ],
+  "catedratico": "ERIK LEONEL GARCIA SANTANA",
+  "auxiliar": "DANIEL IVAN VASQUEZ PEREZ",
+  "restringida": true
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "S",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "16:30",
+  "fin": "17:20",
+  "dias": [
+   "LU",
+   "MA",
+   "JU",
+   "VI"
+  ],
+  "catedratico": "JORGE GILBERTO GONZALEZ PADILLA",
+  "auxiliar": "ANGEL FERNANDO NAJERA CON",
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "T",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "17:20",
+  "fin": "18:10",
+  "dias": [
+   "LU",
+   "MA",
+   "JU",
+   "VI"
+  ],
+  "catedratico": "ERIK LEONEL GARCIA SANTANA",
+  "auxiliar": null,
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "U",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "16:30",
+  "fin": "17:20",
+  "dias": [
+   "LU",
+   "MA",
+   "JU",
+   "VI"
+  ],
+  "catedratico": "CARLOS RODOLFO MARTINEZ GIRON",
+  "auxiliar": null,
+  "restringida": false
+ },
+ {
+  "curso_codigo": "0147",
+  "curso_nombre": "FISICA BASICA",
+  "seccion": "Z",
+  "categoria": null,
+  "modalidad": "SEMIPRESENCIAL",
+  "inicio": "07:10",
+  "fin": "10:30",
+  "dias": [
+   "SA"
+  ],
+  "catedratico": "BAYRON ARMANDO CUYAN CULAJAY",
+  "auxiliar": null,
+  "restringida": false
+ }
+]
