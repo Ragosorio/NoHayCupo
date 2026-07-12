@@ -3,8 +3,10 @@ import { useStore } from "@nanostores/react";
 import { useEffect } from "react";
 import { abrirMenuMovil, cerrarMenuMovil, generar, iniciarApp, setModal } from "@/lib/cliente/acciones";
 import { quitarAmigo } from "@/lib/cliente/compartir";
+import { cerrarChat, precargarIA } from "@/lib/cliente/ia/chat";
 import { $v, E } from "@/lib/cliente/estado";
 import { iniciarTour } from "@/lib/cliente/tour";
+import ChatIA from "./ChatIA";
 import { IconoCalendarioHero } from "./Iconos";
 import { AnimacionTema, ModalAcerca, ModalBienvenida, ModalCompartir, ModalPensum, Toast } from "./Modales";
 import PanelCursos from "./PanelCursos";
@@ -17,6 +19,7 @@ export default function App() {
 
   useEffect(() => {
     iniciarApp();
+    void precargarIA();   // si Cupito ya fue activado antes, cargarlo ya
     const alTeclear = (ev: KeyboardEvent) => {
       if (ev.key === "Escape") {
         setModal("pensum", false);
@@ -24,6 +27,7 @@ export default function App() {
         setModal("export", false);
         setModal("temas", false);
         setModal("compartir", false);
+        cerrarChat();
       }
     };
     const alClic = (ev: MouseEvent) => {
@@ -91,6 +95,7 @@ export default function App() {
         </section>
       </main>
 
+      <ChatIA />
       <ModalPensum />
       <ModalAcerca />
       <ModalBienvenida />

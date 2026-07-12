@@ -1,0 +1,193 @@
+/** Orquestación del chat: acciones que mutan E.chat y hablan con el motor.
+ * Sigue el patrón de la app (mutar E + touch()); la isla solo llama esto. */
+import { E, touch, type MensajeChat } from "../estado";
+import { ejecutarAcciones, parsearRespuesta, type AccionIA } from "./herramientas";
+import { construirMensajes, MENSAJE_FUERA_DE_TEMA, SCHEMA_RESPUESTA } from "./prompt";
+import { crearMotor, detectarTier, type MotorIA } from "./motor";
+
+/** El motor NO vive en E: es un objeto pesado con el modelo cargado, no
+ * estado serializable. Muere con la pestaña; el modelo queda cacheado. */
+let motor: MotorIA | null = null;
+
+const LS_ACTIVADA = "nhc_ia";   // "1" = el usuario ya activó la IA antes
+
+const SALUDO = "¡Hola! Soy Cupito. Contame tu semestre y lo armamos: qué "
+  + "cursos llevás, en qué horas trabajás o no podés, y qué preferís (salir "
+  + "temprano, un día libre…). También podés preguntarme cómo funciona la app "
+  + "o sobre Ragosorio.";
+
+function pushIA(m: Partial<MensajeChat> & { texto: string }) {
+  E.chat.mensajes.push({ rol: "ia", ...m });
+}
+
+/* ---------- acompañamiento visual ---------- */
+
+/** A qué parte de la app llevar la vista según lo que Cupito tocó. */
+function focoDe(acciones: AccionIA[]): string | null {
+  const tipos = new Set(acciones.map((a) => a.accion));
+  const alguno = (...ts: string[]) => ts.some((t) => tipos.has(t as AccionIA["accion"]));
+  if (alguno("generar", "opcion", "estrategia", "mover_curso", "alternativas")) return ".calendario";
+  if (alguno("bloquear", "borrar_bloqueo", "limpiar_bloqueos")) return "#panelTiempo";
+  if (alguno("agregar_curso", "quitar_curso")) return "#panelCursos";
+  return null;
+}
+
+/** Scrollea a la sección que Cupito editó y le da un destello, para que se
+ * VEA qué cambió. Si el elemento está oculto (drawer móvil cerrado), no. */
+function resaltarSeccion(selector: string | null) {
+  if (!selector || typeof document === "undefined") return;
+  const el = document.querySelector<HTMLElement>(selector);
+  if (!el || !el.offsetParent) return;
+  el.scrollIntoView({ behavior: "smooth", block: "center" });
+  el.classList.remove("destello-ia");
+  void el.offsetWidth;   // reinicia la animación si ya estaba corriendo
+  el.classList.add("destello-ia");
+  setTimeout(() => el.classList.remove("destello-ia"), 2200);
+}
+
+/* ---------- streaming del mensaje ---------- */
+
+/** Saca el campo "mensaje" del JSON a medio generar, para mostrarlo mientras
+ * Cupito escribe. Si el turno viene fuera_de_tema no se muestra nada (ese
+ * texto igual se descarta al final). */
+function mensajeParcial(acumulado: string): string {
+  if (acumulado.includes('"fuera_de_tema"')) return "";
+  const m = acumulado.match(/"mensaje"\s*:\s*"((?:[^"\\]|\\.)*)/);
+  if (!m) return "";
+  try { return JSON.parse(`"${m[1]}"`); } catch { return ""; }
+}
+
+export function alternarChat() {
+  E.chat.abierto = !E.chat.abierto;
+  touch();
+  if (E.chat.abierto && E.chat.fase === "cerrado") void prepararChat();
+}
+
+export function cerrarChat() {
+  if (!E.chat.abierto) return;
+  E.chat.abierto = false;
+  touch();
+}
+
+/** Al arrancar la app: si el usuario ya había activado a Cupito, cargar el
+ * modelo de una vez EN SEGUNDO PLANO (como subvid) — el botón de la topbar
+ * muestra el progreso y, al abrir el chat, ya está listo o cargando. */
+export async function precargarIA() {
+  if (E.chat.fase !== "cerrado") return;
+  if (localStorage.getItem(LS_ACTIVADA) !== "1") return;
+  E.chat.fase = "detectando";
+  E.chat.tier = await detectarTier();
+  if (!E.chat.tier) { E.chat.fase = "no-disponible"; touch(); return; }
+  await activarIA();
+}
+
+async function prepararChat() {
+  E.chat.fase = "detectando";
+  touch();
+  const tier = await detectarTier();
+  E.chat.tier = tier;
+  if (!tier) {
+    E.chat.fase = "no-disponible";
+  } else if (localStorage.getItem(LS_ACTIVADA) === "1") {
+    // Ya la activó antes: el modelo está en caché, cargar directo.
+    return activarIA();
+  } else {
+    E.chat.fase = "intro";
+  }
+  touch();
+}
+
+export async function activarIA() {
+  if (!E.chat.tier) return;
+  E.chat.fase = "cargando";
+  E.chat.progreso = { texto: "Preparando el motor…", pct: null };
+  touch();
+  try {
+    motor = await crearMotor(E.chat.tier, (p) => { E.chat.progreso = p; touch(); });
+    // La descarga pesada pasa ACÁ, con la barra de progreso a la vista —
+    // nunca escondida detrás del primer «Pensando…».
+    await motor.preparar?.();
+    localStorage.setItem(LS_ACTIVADA, "1");
+    E.chat.fase = "listo";
+    E.chat.progreso = { texto: "", pct: null };
+    if (!E.chat.mensajes.length) pushIA({ texto: SALUDO });
+  } catch (e) {
+    localStorage.removeItem(LS_ACTIVADA);
+    E.chat.fase = "error";
+    E.chat.error = (e as Error).message || "No se pudo cargar el modelo";
+  }
+  touch();
+}
+
+export async function enviarMensaje(texto: string) {
+  const limpio = texto.trim();
+  if (!limpio || !motor || E.chat.pensando) return;
+  /* El historial que ve el modelo incluye qué se APLICÓ y qué falló de sus
+   * turnos anteriores: sin eso no puede corregir («no, eso era "evitar"»)
+   * ni retomar un listado de alternativas que él mismo dio. */
+  const historial = E.chat.mensajes
+    .filter((m) => m.texto || m.hechos?.length || m.errores?.length)
+    .map((m) => ({
+      rol: m.rol,
+      texto: m.rol === "ia"
+        ? [m.texto,
+            ...(m.hechos ?? []).map((h) => `[hecho] ${h}`),
+            ...(m.errores ?? []).map((e) => `[falló] ${e}`),
+          ].filter(Boolean).join("\n")
+        : m.texto,
+    }));
+  E.chat.mensajes.push({ rol: "usuario", texto: limpio });
+  E.chat.pensando = true;
+  E.chat.parcial = "";
+  E.chat.progreso = { texto: "", pct: null };
+  touch();
+  try {
+    const crudo = await motor.generarJSON(
+      construirMensajes(historial, limpio), SCHEMA_RESPUESTA,
+      (acumulado) => {
+        const p = mensajeParcial(acumulado);
+        if (p !== E.chat.parcial) { E.chat.parcial = p; touch(); }
+      },
+    );
+    const r = parsearRespuesta(crudo);
+    if (!r) {
+      pushIA({ texto: "No logré entender eso. ¿Me lo decís de otra forma?" });
+    } else if (r.tipo === "fuera_de_tema") {
+      // Plantilla fija: lo que el modelo haya escrito acá no se muestra.
+      pushIA({ texto: MENSAJE_FUERA_DE_TEMA });
+    } else if (r.tipo === "respuesta" || !r.acciones.length) {
+      pushIA({ texto: r.mensaje || "Listo." });
+    } else {
+      const { hechos, errores, pendientes } = await ejecutarAcciones(r.acciones);
+      pushIA({ texto: r.mensaje || "Listo.", hechos, errores, pendientes });
+      if (hechos.length) resaltarSeccion(focoDe(r.acciones));
+    }
+  } catch (e) {
+    pushIA({ texto: `Algo falló generando la respuesta (${(e as Error).message}). Probá de nuevo.` });
+  }
+  E.chat.pensando = false;
+  E.chat.parcial = "";
+  touch();
+}
+
+/** Confirmación de acciones destructivas: se reejecuta la cola pausada. */
+export async function confirmarPendientes(mensaje: MensajeChat) {
+  const cola = mensaje.pendientes as AccionIA[] | null;
+  if (!cola) return;
+  mensaje.pendientes = null;
+  E.chat.pensando = true;
+  touch();
+  const { hechos, errores } = await ejecutarAcciones(cola, true);
+  mensaje.hechos = [...(mensaje.hechos ?? []), ...hechos];
+  mensaje.errores = [...(mensaje.errores ?? []), ...errores];
+  E.chat.pensando = false;
+  touch();
+  if (hechos.length) resaltarSeccion(focoDe(cola));
+}
+
+export function descartarPendientes(mensaje: MensajeChat) {
+  if (!mensaje.pendientes) return;
+  mensaje.pendientes = null;
+  mensaje.hechos = [...(mensaje.hechos ?? []), "Dejé eso como estaba"];
+  touch();
+}

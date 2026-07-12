@@ -2,9 +2,10 @@
 import { useStore } from "@nanostores/react";
 import React from "react";
 import { alternarSidebar, cambiarTema, setModal } from "@/lib/cliente/acciones";
+import { alternarChat } from "@/lib/cliente/ia/chat";
 import { $v, E } from "@/lib/cliente/estado";
 import { TEMAS } from "@/lib/cliente/temas";
-import { IconoMenu, IconoPaleta, IconoX, LogoNHC } from "./Iconos";
+import { IconoChispa, IconoMenu, IconoPaleta, IconoX, LogoNHC } from "./Iconos";
 import MiniaturaTema from "./MiniaturasTemas";
 
 export default function Header() {
@@ -25,6 +26,18 @@ export default function Header() {
       </div>
       <div className="topbar-controls no-print">
         <span className="estado-catalogo">{E.estadoCatalogo}</span>
+        <button id="btnIA" className={`btn btn-icono${E.chat.abierto ? " activo-ia" : ""}`}
+          title="Cupito — asistente IA local" aria-label="Abrir a Cupito, el asistente IA"
+          aria-expanded={E.chat.abierto} onClick={alternarChat}>
+          <IconoChispa />
+          {/* El modelo se precarga en segundo plano: el avance vive acá,
+              visible aunque el panel esté cerrado. */}
+          {E.chat.fase === "cargando" && (
+            <span className="ia-badge">
+              {E.chat.progreso.pct != null ? `${Math.round(E.chat.progreso.pct * 100)}` : "…"}
+            </span>
+          )}
+        </button>
         <button className="btn btn-icono" title="Acerca de NoHayCupo"
           onClick={() => setModal("acerca", true)}>?</button>
         <div className="menu-temas">

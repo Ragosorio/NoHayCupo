@@ -67,6 +67,31 @@ export interface Editor {
   undo: Array<Map<string, number>>;
 }
 
+/* El chat vive en E como el resto del estado, pero NO se persiste: cada
+ * visita arranca con la conversación limpia (el modelo sí queda cacheado). */
+import type { AccionIA } from "./ia/herramientas";
+export interface MensajeChat {
+  rol: "usuario" | "ia";
+  texto: string;
+  hechos?: string[];
+  errores?: string[];
+  pendientes?: AccionIA[] | null;
+}
+export type FaseChat =
+  | "cerrado" | "detectando" | "intro" | "cargando" | "listo"
+  | "no-disponible" | "error";
+export interface ChatIA {
+  abierto: boolean;
+  fase: FaseChat;
+  tier: "chrome" | "webllm" | null;
+  progreso: { texto: string; pct: number | null };
+  mensajes: MensajeChat[];
+  pensando: boolean;
+  /** Texto del "mensaje" que Cupito lleva escrito (streaming en vivo). */
+  parcial: string;
+  error: string;
+}
+
 export const E = {
   semestre: "2",
   catalogo: null as Catalogo | null,
@@ -107,6 +132,11 @@ export const E = {
   carrera: "Ingeniería en Ciencias y Sistemas",
   pensumId: null as number | null,
   editor: null as Editor | null,
+  chat: {
+    abierto: false, fase: "cerrado", tier: null,
+    progreso: { texto: "", pct: null }, mensajes: [], pensando: false,
+    parcial: "", error: "",
+  } as ChatIA,
   toast: "",
   modalPensum: false,
   modalAcerca: false,
