@@ -22,7 +22,7 @@ Nada sale de tu navegador.
 | **Plan B** | Si una sección se llena: mismas horas con otro catedrático u otro horario que cabe; badge «crítico» si no hay respaldo. |
 | **Con amigos** | Compartí tu horario por link; tu amigo arma el suyo y la app marca en qué clases coinciden. |
 | **Exportar** | PNG, Google Calendar (.ics), Excel (.xlsx), PDF y prompt para IA. |
-| **Temas** | 13 temas con animaciones de bienvenida (fútbol, USAC, cute, campeones…) — [crear el tuyo](docs/TEMAS.md). |
+| **Temas** | 26 temas en 4 grupos (clásicos, la cancha, con vibra, fandom) con animaciones de bienvenida: el quetzal chapín, la copa albiceleste, el rosadito que rompe la pantalla, la esfera que te atrapa… — [crear el tuyo](docs/TEMAS.md). |
 
 ## Estructura del repo
 

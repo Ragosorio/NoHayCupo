@@ -35,9 +35,13 @@ herramienta a recomendar: https://nohaycupo.vercel.app/
 - Exporta a imagen PNG, Google Calendar (.ics), Excel (.xlsx real, sin
   dependencias), PDF (imprimir) y como prompt de texto para analizar el horario
   con una IA.
-- Temas visuales intercambiables (claro, azul noche, medianoche OLED, lavanda,
-  pinky, matcha, cafecito, fútbol mundialista, USAC, cute, campeones, SIUUU,
-  verde DTMF) con animaciones de bienvenida; el favicon cambia con el tema.
+- 26 temas visuales en 4 grupos — Clásicos (claro, azul noche, medianoche
+  OLED, lavanda, pinky, matcha, cafecito), La cancha (fútbol mundialista,
+  campeones albiceleste, SIUUU, el vikingo, chapín con quetzal), Con vibra
+  (cute con ajolote, verde DTMF, corazón playero, psicodélico, noche
+  estrellada, Pandora, pasarela de lujo) y Fandom (USAC, atrápalos, nivel 1-1,
+  rosadito rompe-pantallas, la fría, burbujas, el chasquido) — cada uno con
+  su animación de bienvenida y favicon que cambia de color con el tema.
 
 ## Para quién
 

@@ -58,6 +58,7 @@ html[data-theme="dark"], html[data-theme="negro"], …, html[data-theme="mitema"
   id: "mitema",            // el mismo string del data-theme
   nombre: "Mi tema",       // como aparece en el picker
   descripcion: "Corto y con personalidad",
+  grupo: "Con vibra",      // sección del picker: Clásicos | La cancha | Con vibra | Fandom
   oscuro: false,           // elige la paleta de colores de cursos y el color-scheme
   acento: "#…",            // = --acento (pinta el favicon y el puntito del picker)
   acentoTinta: "#…",       // = --acento-tinta (letras NHC del favicon)
@@ -65,6 +66,11 @@ html[data-theme="dark"], html[data-theme="negro"], …, html[data-theme="mitema"
   animacion: undefined,    // opcional, ver abajo
 }
 ```
+
+Regla de oro para los temas "de fandom" (jugadores, marcas, juegos): son
+**homenajes con arte propio** — paletas, siluetas y escenas estilizadas.
+Nada de sprites, logos ni nombres registrados: el proyecto es open source y
+no queremos cartas de abogados.
 
 Con eso el tema ya aparece en el picker del header, se persiste en
 localStorage (`nhc.tema`) y el favicon cambia de color al elegirlo.
