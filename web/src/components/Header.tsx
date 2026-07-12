@@ -1,5 +1,6 @@
 /** Barra superior — isla propia que comparte estado con la app vía nanostores. */
 import { useStore } from "@nanostores/react";
+import React from "react";
 import { alternarSidebar, cambiarTema, setModal } from "@/lib/cliente/acciones";
 import { $v, E } from "@/lib/cliente/estado";
 import { TEMAS } from "@/lib/cliente/temas";
@@ -33,16 +34,21 @@ export default function Header() {
             <IconoPaleta />
           </button>
           <div className="menu-temas-lista" hidden={!E.menuTemas}>
-            {TEMAS.map((t) => (
-              <button key={t.id} className={t.id === E.tema ? "activo" : ""}
-                onClick={() => cambiarTema(t.id)}>
-                <MiniaturaTema tema={t} />
-                <span className="tema-info">
-                  <strong>{t.nombre}</strong>
-                  <small>{t.descripcion}</small>
-                </span>
-                {t.id === E.tema && <span className="tema-check">✓</span>}
-              </button>
+            {TEMAS.map((t, i) => (
+              <React.Fragment key={t.id}>
+                {(i === 0 || TEMAS[i - 1].grupo !== t.grupo) && (
+                  <div className="tema-grupo">{t.grupo}</div>
+                )}
+                <button className={t.id === E.tema ? "activo" : ""}
+                  onClick={() => cambiarTema(t.id)}>
+                  <MiniaturaTema tema={t} />
+                  <span className="tema-info">
+                    <strong>{t.nombre}</strong>
+                    <small>{t.descripcion}</small>
+                  </span>
+                  {t.id === E.tema && <span className="tema-check">✓</span>}
+                </button>
+              </React.Fragment>
             ))}
           </div>
         </div>

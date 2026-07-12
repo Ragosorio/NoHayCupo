@@ -321,6 +321,197 @@ export function AnimacionTema() {
           <div className="anim-grito anim-grito-dtmf">DEBÍ TIRAR MÁS FOTOS</div>
         </div>
       );
+    case "vikingo":
+      return (
+        <div className="anim-tema" aria-hidden="true">
+          <div className="anim-siete anim-nueve">9</div>
+          {/* La silueta meditando: la celebración zen. */}
+          <svg className="anim-zen" viewBox="0 0 120 100" width="130" height="108">
+            <g fill="#08121a">
+              <circle cx="60" cy="22" r="12" />
+              <path d="M60 36c14 0 22 10 22 24l-4 14H42l-4-14c0-14 8-24 22-24Z" />
+              <path d="M38 48 18 66l6 8 20-14M82 48l20 18-6 8-20-14" />
+              <path d="M34 74q26 14 52 0l6 10q-32 16-64 0Z" />
+            </g>
+          </svg>
+          <div className="anim-grito anim-grito-vikingo">ZEN NÓRDICO</div>
+        </div>
+      );
+    case "chapin":
+      return (
+        <div className="anim-tema" aria-hidden="true">
+          {/* El quetzal cruza volando con su cola larga. */}
+          <svg className="anim-quetzal" viewBox="0 0 220 90" width="240" height="98">
+            <path d="M10 78Q60 84 96 62" stroke="#1f7a3d" strokeWidth="4" fill="none" strokeLinecap="round" />
+            <path d="M4 66Q58 74 96 56" stroke="#2f9e5f" strokeWidth="4" fill="none" strokeLinecap="round" />
+            <ellipse cx="118" cy="46" rx="26" ry="16" fill="#1f7a3d" />
+            <path d="M112 34q14-18 34-14-8 12-18 16" fill="#2f9e5f" />
+            <circle cx="140" cy="38" r="10" fill="#1f7a3d" />
+            <circle cx="143.5" cy="36" r="1.8" fill="#0c0b09" />
+            <path d="M149 38.5 158 41l-9 2.5Z" fill="#e8b422" />
+            <path d="M112 52q10 8 22 4" fill="none" stroke="#c8102e" strokeWidth="5" strokeLinecap="round" />
+          </svg>
+          <div className="anim-grito anim-grito-chapin">¡PURO CHAPÍN!</div>
+        </div>
+      );
+    case "playero":
+      return (
+        <div className="anim-tema" aria-hidden="true">
+          <div className="anim-mar" />
+          <svg className="anim-sol" viewBox="0 0 100 100" width="110" height="110">
+            <circle cx="50" cy="50" r="46" fill="#f0a24c" />
+            <circle cx="50" cy="50" r="34" fill="#f5b96e" />
+          </svg>
+          <svg className="anim-corazon-vuela" viewBox="0 0 100 100" width="72" height="72">
+            <path d="M50 86 15 51a20 20 0 0 1 28-28l7 7 7-7a20 20 0 0 1 28 28Z" fill="#e5484d" />
+            <path d="m50 30-8 14 13 10-9 16" fill="none" stroke="#fdf4e7" strokeWidth="4" strokeLinejoin="round" />
+          </svg>
+          <div className="anim-grito anim-grito-playero">UN VERANO SIN CUPO</div>
+        </div>
+      );
+    case "psicodelico":
+      return (
+        <div className="anim-tema" aria-hidden="true">
+          {["#7c3aed", "#0284c7", "#4caf50", "#f0b429", "#e5484d"].map((c, i) => (
+            <span key={c} className="anim-anillo"
+              style={{ "--c": c, "--d": `${i * 0.16}s` } as React.CSSProperties} />
+          ))}
+        </div>
+      );
+    case "estrellada":
+      return (
+        <div className="anim-tema" aria-hidden="true">
+          {[["14%", "18%", 1.1], ["46%", "8%", 1.5], ["74%", "22%", 0.9]].map(([x, y, s], i) => (
+            <svg key={i} className="anim-remolino" viewBox="0 0 60 60" width={64 * (s as number)} height={64 * (s as number)}
+              style={{ left: x as string, top: y as string, "--d": `${i * 0.3}s` } as React.CSSProperties}>
+              <path d="M8 32c4-12 18-14 25-6 5 6 2 13-4 14-5 1-8-3-6-7"
+                stroke="#f0c53f" strokeWidth="3.5" fill="none" strokeLinecap="round" />
+            </svg>
+          ))}
+          {Array.from({ length: 7 }, (_, i) => (
+            <span key={i} className="anim-estrella"
+              style={{ left: `${10 + i * 12}%`, top: `${18 + (i % 3) * 16}%`, "--d": `${i * 0.2}s` } as React.CSSProperties} />
+          ))}
+        </div>
+      );
+    case "pandora":
+      return (
+        <div className="anim-tema" aria-hidden="true">
+          {Array.from({ length: 10 }, (_, i) => (
+            <svg key={i} className="anim-espora" viewBox="0 0 20 20" width="18" height="18"
+              style={{ "--x": `${5 + i * 9.5}%`, "--d": `${(i % 5) * 0.3}s` } as React.CSSProperties}>
+              <circle cx="10" cy="10" r="4" fill="#35d0e0" opacity=".9" />
+              <path d="M10 2v4M10 14v4M2 10h4M14 10h4" stroke="#35d0e0" strokeWidth="1.2" opacity=".6" />
+            </svg>
+          ))}
+        </div>
+      );
+    case "pasarela":
+      return (
+        <div className="anim-tema" aria-hidden="true">
+          <div className="anim-brillo" />
+          <div className="anim-grito anim-grito-pasarela">LUJO SILENCIOSO</div>
+        </div>
+      );
+    case "atrapalos":
+      return (
+        <div className="anim-tema" aria-hidden="true">
+          <svg className="anim-esfera" viewBox="0 0 100 100" width="90" height="90">
+            <circle cx="50" cy="50" r="46" fill="#fff" stroke="#241c1c" strokeWidth="6" />
+            <path d="M4 50a46 46 0 0 1 92 0Z" fill="#cc2b2b" />
+            <path d="M4 50h92" stroke="#241c1c" strokeWidth="6" />
+            <circle cx="50" cy="50" r="13" fill="#fff" stroke="#241c1c" strokeWidth="6" />
+          </svg>
+          <span className="anim-destello" />
+          <div className="anim-grito anim-grito-atrapalos">¡HORARIO ATRAPADO!</div>
+        </div>
+      );
+    case "nivel11":
+      return (
+        <div className="anim-tema" aria-hidden="true">
+          <svg className="anim-bloque" viewBox="0 0 60 60" width="76" height="76">
+            <rect x="2" y="2" width="56" height="56" fill="#f0b429" stroke="#8a5a00" strokeWidth="4" />
+            <text x="30" y="42" textAnchor="middle" fontSize="34" fontWeight="900"
+              fill="#8a5a00" fontFamily="system-ui, sans-serif">?</text>
+          </svg>
+          <svg className="anim-moneda" viewBox="0 0 40 40" width="44" height="44">
+            <ellipse cx="20" cy="20" rx="14" ry="18" fill="#f7d354" stroke="#8a5a00" strokeWidth="3" />
+            <ellipse cx="20" cy="20" rx="5" ry="10" fill="none" stroke="#8a5a00" strokeWidth="3" />
+          </svg>
+          <div className="anim-grito anim-grito-nivel">¡NIVEL 1-1!</div>
+        </div>
+      );
+    case "rosadito":
+      return (
+        <div className="anim-tema" aria-hidden="true">
+          {/* Las grietas: la pantalla "se rompe" para entrar al mundo rosa. */}
+          <svg className="anim-grietas" viewBox="0 0 200 200" width="min(70vw, 460px)" height="min(70vw, 460px)">
+            <g stroke="#d13472" strokeWidth="3" fill="none" strokeLinecap="round">
+              <path d="M100 100 62 55M100 100l52-38M100 100l-58 30M100 100l44 52M100 100 88 36M100 100l24 -8M100 100l-30 -6" />
+              <path d="M62 55l-14-8M152 62l16-4M42 130l-16 10M144 152l10 14" strokeWidth="2" />
+            </g>
+          </svg>
+          <svg className="anim-bolita" viewBox="0 0 120 120" width="130" height="130">
+            <g className="bolita-mazo">
+              <rect x="86" y="8" width="14" height="34" rx="4" fill="#8a5a3b" transform="rotate(28 93 25)" />
+              <rect x="74" y="0" width="38" height="20" rx="7" fill="#c8102e" transform="rotate(28 93 10)" />
+            </g>
+            <circle cx="52" cy="66" r="38" fill="#f7a8c4" />
+            <circle cx="40" cy="58" r="5.5" fill="#3d2030" />
+            <circle cx="64" cy="58" r="5.5" fill="#3d2030" />
+            <circle cx="41.8" cy="56" r="1.8" fill="#fff" />
+            <circle cx="65.8" cy="56" r="1.8" fill="#fff" />
+            <circle cx="31" cy="72" r="6" fill="#ef7fa8" />
+            <circle cx="73" cy="72" r="6" fill="#ef7fa8" />
+            <path d="M44 76q8 7 16 0" stroke="#3d2030" strokeWidth="3" fill="none" strokeLinecap="round" />
+          </svg>
+        </div>
+      );
+    case "gallo":
+      return (
+        <div className="anim-tema" aria-hidden="true">
+          <svg className="anim-tarro" viewBox="0 0 100 120" width="100" height="120">
+            <path d="M22 34h48v72a8 8 0 0 1-8 8H30a8 8 0 0 1-8-8Z" fill="#e8b422" />
+            <path d="M70 44h10a12 12 0 0 1 0 24H70" fill="none" stroke="#e8b422" strokeWidth="7" />
+            <path d="M30 44v56M44 44v56M58 44v56" stroke="#c9971a" strokeWidth="4" />
+            <g className="tarro-espuma">
+              <ellipse cx="46" cy="34" rx="26" ry="10" fill="#f7f0dc" />
+              <circle cx="30" cy="26" r="7" fill="#f7f0dc" />
+              <circle cx="47" cy="22" r="9" fill="#f7f0dc" />
+              <circle cx="63" cy="27" r="6.5" fill="#f7f0dc" />
+            </g>
+          </svg>
+          <div className="anim-grito anim-grito-gallo">¡SALUD, COMPA!</div>
+        </div>
+      );
+    case "burbujas":
+      return (
+        <div className="anim-tema" aria-hidden="true">
+          {Array.from({ length: 12 }, (_, i) => (
+            <svg key={i} className="anim-gas" viewBox="0 0 20 20" width={10 + (i % 4) * 5} height={10 + (i % 4) * 5}
+              style={{ "--x": `${4 + i * 8}%`, "--d": `${(i % 6) * 0.22}s` } as React.CSSProperties}>
+              <circle cx="10" cy="10" r="8" fill="none" stroke="#c8102e" strokeWidth="2.4" opacity=".75" />
+              <circle cx="7" cy="7" r="2" fill="#c8102e" opacity=".5" />
+            </svg>
+          ))}
+          <div className="anim-grito anim-grito-burbujas">QUÉ REFRESCANTE</div>
+        </div>
+      );
+    case "chasquido":
+      return (
+        <div className="anim-tema" aria-hidden="true">
+          {[["#7c3aed", "26%"], ["#0284c7", "35%"], ["#4caf50", "44%"], ["#f0b429", "53%"], ["#e5484d", "62%"], ["#f97316", "71%"]].map(([c, x], i) => (
+            <span key={i} className="anim-gema"
+              style={{ "--c": c, left: x, "--d": `${i * 0.14}s` } as React.CSSProperties} />
+          ))}
+          <span className="anim-destello anim-destello-tarde" />
+          {Array.from({ length: 10 }, (_, i) => (
+            <span key={`p${i}`} className="anim-polvo"
+              style={{ left: `${8 + i * 9}%`, top: `${30 + (i % 4) * 12}%`, "--d": `${1.2 + (i % 5) * 0.15}s` } as React.CSSProperties} />
+          ))}
+          <div className="anim-grito anim-grito-chasquido">CHASQUIDO.</div>
+        </div>
+      );
     default:
       return null;
   }

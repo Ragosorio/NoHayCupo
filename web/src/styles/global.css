@@ -31,7 +31,7 @@
   --borde: #262e42;
   --linea: #1e2537;
   --acento: #7a76f0;
-  --acento-tinta: #ffffff;
+  --acento-tinta: #10132b;
   --acento-suave: #23264a;
   --ok-bg: #14291e;  --ok-fg: #7fd6a4;  --ok-borde: #2f9e5f;
   --warn-bg: #2c2312; --warn-fg: #ecc87e; --warn-borde: #a8842f;
@@ -54,7 +54,7 @@
   --borde: #1f1f2a;
   --linea: #15151d;
   --acento: #8b5cf6;
-  --acento-tinta: #ffffff;
+  --acento-tinta: #0a0512;
   --acento-suave: #1d1533;
   --ok-bg: #0e2417;  --ok-fg: #7fd6a4;  --ok-borde: #2f9e5f;
   --warn-bg: #261e0c; --warn-fg: #ecc87e; --warn-borde: #a8842f;
@@ -233,6 +233,253 @@
   --sombra: 0 1px 2px rgba(20, 80, 30, .06), 0 6px 20px rgba(20, 80, 30, .08);
 }
 
+/* El vikingo — celeste nórdico sobre azul profundo, modo zen del 9. */
+[data-theme="vikingo"] {
+  --fondo: #0b1620;
+  --tarjeta: #12222e;
+  --tarjeta-2: #182c3b;
+  --tinta: #e9f2f8;
+  --tinta-suave: #9fb8c8;
+  --tinta-tenue: #5f7d90;
+  --borde: #21394a;
+  --linea: #162834;
+  --acento: #6cabdd;
+  --acento-tinta: #0b1620;
+  --acento-suave: #16323f;
+  --ok-bg: #12301f;  --ok-fg: #7fd6a4;  --ok-borde: #2f9e5f;
+  --warn-bg: #2c2312; --warn-fg: #ecc87e; --warn-borde: #a8842f;
+  --mal-bg: #331519;  --mal-fg: #f1a0a3;  --mal-borde: #c24045;
+  --sombra: 0 1px 2px rgba(0, 10, 20, .45), 0 6px 24px rgba(0, 10, 20, .35);
+}
+
+/* Chapín — azul y blanco de la monja blanca, con quetzal de bienvenida. */
+[data-theme="chapin"] {
+  --fondo: #f2f9fd;
+  --tarjeta: #ffffff;
+  --tarjeta-2: #ddeef8;
+  --tinta: #12283a;
+  --tinta-suave: #4a6579;
+  --tinta-tenue: #8aa4b5;
+  --borde: #cfe6f3;
+  --linea: #e4f1f9;
+  --acento: #2374a8;
+  --acento-tinta: #ffffff;
+  --acento-suave: #e2f0f9;
+  --ok-bg: #e3f4e6;  --ok-fg: #14603a;  --ok-borde: #2f9e5f;
+  --warn-bg: #fdf3dd; --warn-fg: #7a5410; --warn-borde: #e2b75c;
+  --mal-bg: #fdecec;  --mal-fg: #8c1d21;  --mal-borde: #e5484d;
+  --sombra: 0 1px 2px rgba(20, 70, 110, .05), 0 6px 20px rgba(20, 70, 110, .07);
+}
+
+/* Corazón playero — arena, mar y un corazón que ya vio mejores veranos. */
+[data-theme="playero"] {
+  --fondo: #fdf4e7;
+  --tarjeta: #fffdf8;
+  --tarjeta-2: #fae8d0;
+  --tinta: #43241c;
+  --tinta-suave: #86584a;
+  --tinta-tenue: #bb9384;
+  --borde: #f2ddc4;
+  --linea: #f9ecda;
+  --acento: #0b7a6f;
+  --acento-tinta: #ffffff;
+  --acento-suave: #dff4f1;
+  --ok-bg: #e2f4ea;  --ok-fg: #15613b;  --ok-borde: #2f9e5f;
+  --warn-bg: #fdf0d5; --warn-fg: #7a5410; --warn-borde: #e2ae4c;
+  --mal-bg: #fdeae6;  --mal-fg: #93241c;  --mal-borde: #e56a4d;
+  --sombra: 0 1px 2px rgba(120, 70, 30, .06), 0 6px 20px rgba(120, 70, 30, .08);
+}
+
+/* Psicodélico — base cálida, acentos que dan vueltas. */
+[data-theme="psicodelico"] {
+  --fondo: #fff7ed;
+  --tarjeta: #fffdf9;
+  --tarjeta-2: #ffedd5;
+  --tinta: #35204a;
+  --tinta-suave: #705a86;
+  --tinta-tenue: #a894ba;
+  --borde: #f3ddc0;
+  --linea: #faeedd;
+  --acento: #7c3aed;
+  --acento-tinta: #ffffff;
+  --acento-suave: #f1e8ff;
+  --ok-bg: #e5f4e2;  --ok-fg: #256029;  --ok-borde: #4caf50;
+  --warn-bg: #fdeed7; --warn-fg: #8a4b10; --warn-borde: #f08c1e;
+  --mal-bg: #fde7ef;  --mal-fg: #a11552;  --mal-borde: #ec4899;
+  --sombra: 0 1px 2px rgba(120, 60, 200, .06), 0 6px 20px rgba(120, 60, 200, .08);
+}
+
+/* Noche estrellada — azul profundo con remolinos dorados (Van Gogh manda). */
+[data-theme="estrellada"] {
+  --fondo: #0a1430;
+  --tarjeta: #131f42;
+  --tarjeta-2: #1a2a55;
+  --tinta: #eef1fa;
+  --tinta-suave: #a9b4d4;
+  --tinta-tenue: #66719a;
+  --borde: #263766;
+  --linea: #182448;
+  --acento: #f0c53f;
+  --acento-tinta: #241c04;
+  --acento-suave: #2e2c1c;
+  --ok-bg: #14301f;  --ok-fg: #7fd6a4;  --ok-borde: #2f9e5f;
+  --warn-bg: #2e2712; --warn-fg: #ecc87e; --warn-borde: #a8842f;
+  --mal-bg: #331722;  --mal-fg: #f1a0a3;  --mal-borde: #c24045;
+  --sombra: 0 1px 2px rgba(0, 5, 25, .5), 0 6px 24px rgba(0, 5, 25, .4);
+}
+
+/* Pandora — selva nocturna que brilla en cian. */
+[data-theme="pandora"] {
+  --fondo: #06131a;
+  --tarjeta: #0c1f29;
+  --tarjeta-2: #122a36;
+  --tinta: #e6f6fb;
+  --tinta-suave: #93bcc9;
+  --tinta-tenue: #547886;
+  --borde: #1b3644;
+  --linea: #102430;
+  --acento: #35d0e0;
+  --acento-tinta: #062226;
+  --acento-suave: #0f333c;
+  --ok-bg: #0e2e21;  --ok-fg: #7fd6a4;  --ok-borde: #2f9e5f;
+  --warn-bg: #2c2312; --warn-fg: #ecc87e; --warn-borde: #a8842f;
+  --mal-bg: #2e161d;  --mal-fg: #f1a0a3;  --mal-borde: #c24045;
+  --sombra: 0 1px 2px rgba(0, 15, 25, .5), 0 6px 24px rgba(0, 15, 25, .4);
+}
+
+/* Pasarela — crema, negro y dorado: lujo silencioso. */
+[data-theme="pasarela"] {
+  --fondo: #f6f2ea;
+  --tarjeta: #fffdf8;
+  --tarjeta-2: #eee7d9;
+  --tinta: #1f1b14;
+  --tinta-suave: #6a6252;
+  --tinta-tenue: #a29a87;
+  --borde: #e3dac7;
+  --linea: #efe9dc;
+  --acento: #171310;
+  --acento-tinta: #f6f2ea;
+  --acento-suave: #eae2d0;
+  --ok-bg: #e8f2e4;  --ok-fg: #2c5a2e;  --ok-borde: #4e7a50;
+  --warn-bg: #f7ecd2; --warn-fg: #705408; --warn-borde: #b8860b;
+  --mal-bg: #f7e3de;  --mal-fg: #7e2a1c;  --mal-borde: #b0492f;
+  --sombra: 0 1px 2px rgba(40, 30, 10, .07), 0 6px 20px rgba(40, 30, 10, .08);
+}
+
+/* Atrápalos — rojo y blanco de esfera legendaria. */
+[data-theme="atrapalos"] {
+  --fondo: #f7f4f4;
+  --tarjeta: #ffffff;
+  --tarjeta-2: #f6e4e4;
+  --tinta: #241c1c;
+  --tinta-suave: #6d5a5a;
+  --tinta-tenue: #a39090;
+  --borde: #ecd9d9;
+  --linea: #f4e7e7;
+  --acento: #cc2b2b;
+  --acento-tinta: #ffffff;
+  --acento-suave: #fbe7e7;
+  --ok-bg: #e5f4eb;  --ok-fg: #15613b;  --ok-borde: #2f9e5f;
+  --warn-bg: #fdf3dd; --warn-fg: #7a5410; --warn-borde: #e2b75c;
+  --mal-bg: #fdecec;  --mal-fg: #8c1d21;  --mal-borde: #e5484d;
+  --sombra: 0 1px 2px rgba(150, 30, 30, .05), 0 6px 20px rgba(150, 30, 30, .07);
+}
+
+/* Nivel 1-1 — cielo de plataformas, ladrillo y moneda. */
+[data-theme="nivel11"] {
+  --fondo: #e0f1fb;
+  --tarjeta: #ffffff;
+  --tarjeta-2: #cfe9f8;
+  --tinta: #1d3742;
+  --tinta-suave: #4f6b7a;
+  --tinta-tenue: #8fa9b5;
+  --borde: #bcdff2;
+  --linea: #d5ecf9;
+  --acento: #d2401e;
+  --acento-tinta: #ffffff;
+  --acento-suave: #fbe3da;
+  --ok-bg: #e2f3e0;  --ok-fg: #1f5e26;  --ok-borde: #43a047;
+  --warn-bg: #fdf0cd; --warn-fg: #7a5205; --warn-borde: #e0a410;
+  --mal-bg: #fdecec;  --mal-fg: #8c1d21;  --mal-borde: #e5484d;
+  --sombra: 0 1px 2px rgba(30, 90, 140, .06), 0 6px 20px rgba(30, 90, 140, .08);
+}
+
+/* Rosadito — cielo rosa del que rompe pantallas con su mazo. */
+[data-theme="rosadito"] {
+  --fondo: #ffeef5;
+  --tarjeta: #ffffff;
+  --tarjeta-2: #ffdfec;
+  --tinta: #4a1f36;
+  --tinta-suave: #8a5570;
+  --tinta-tenue: #bd8fa5;
+  --borde: #f9cfe1;
+  --linea: #fce4ee;
+  --acento: #d13472;
+  --acento-tinta: #ffffff;
+  --acento-suave: #fde3ee;
+  --ok-bg: #e5f4eb;  --ok-fg: #15613b;  --ok-borde: #2f9e5f;
+  --warn-bg: #fdf3dd; --warn-fg: #7a5410; --warn-borde: #e2b75c;
+  --mal-bg: #fdecec;  --mal-fg: #8c1d21;  --mal-borde: #e5484d;
+  --sombra: 0 1px 2px rgba(180, 60, 120, .06), 0 6px 20px rgba(180, 60, 120, .08);
+}
+
+/* La fría — negro y dorado, bien helada. */
+[data-theme="gallo"] {
+  --fondo: #0c0b09;
+  --tarjeta: #171512;
+  --tarjeta-2: #201d18;
+  --tinta: #f2ecdf;
+  --tinta-suave: #b3aa96;
+  --tinta-tenue: #6e6757;
+  --borde: #2a261f;
+  --linea: #1d1a15;
+  --acento: #e8b422;
+  --acento-tinta: #241a02;
+  --acento-suave: #2b230d;
+  --ok-bg: #14291b;  --ok-fg: #7fd6a4;  --ok-borde: #2f9e5f;
+  --warn-bg: #2c2312; --warn-fg: #ecc87e; --warn-borde: #a8842f;
+  --mal-bg: #2e1815;  --mal-fg: #f1a0a3;  --mal-borde: #c24045;
+  --sombra: 0 1px 2px rgba(0, 0, 0, .5), 0 6px 24px rgba(0, 0, 0, .4);
+}
+
+/* Burbujas — rojo clásico con hielo y gas. */
+[data-theme="burbujas"] {
+  --fondo: #fdf1f1;
+  --tarjeta: #ffffff;
+  --tarjeta-2: #fbe1e1;
+  --tinta: #3a1215;
+  --tinta-suave: #7d4a4e;
+  --tinta-tenue: #b18a8d;
+  --borde: #f5cfcf;
+  --linea: #fae3e3;
+  --acento: #c8102e;
+  --acento-tinta: #ffffff;
+  --acento-suave: #fde4e7;
+  --ok-bg: #e5f4eb;  --ok-fg: #15613b;  --ok-borde: #2f9e5f;
+  --warn-bg: #fdf3dd; --warn-fg: #7a5410; --warn-borde: #e2b75c;
+  --mal-bg: #fdecec;  --mal-fg: #8c1d21;  --mal-borde: #e5484d;
+  --sombra: 0 1px 2px rgba(180, 20, 40, .05), 0 6px 20px rgba(180, 20, 40, .07);
+}
+
+/* El chasquido — púrpura cósmico con seis gemas. */
+[data-theme="chasquido"] {
+  --fondo: #120b1d;
+  --tarjeta: #1b1229;
+  --tarjeta-2: #241936;
+  --tinta: #f0eaf9;
+  --tinta-suave: #b3a6c9;
+  --tinta-tenue: #6f6389;
+  --borde: #322449;
+  --linea: #221833;
+  --acento: #c9a227;
+  --acento-tinta: #241a04;
+  --acento-suave: #2e2712;
+  --ok-bg: #14301f;  --ok-fg: #7fd6a4;  --ok-borde: #2f9e5f;
+  --warn-bg: #2e2712; --warn-fg: #ecc87e; --warn-borde: #a8842f;
+  --mal-bg: #311620;  --mal-fg: #f1a0a3;  --mal-borde: #c24045;
+  --sombra: 0 1px 2px rgba(10, 0, 25, .5), 0 6px 24px rgba(10, 0, 25, .4);
+}
+
 /* Modo USAC — azul y blanco de la tricentenaria. */
 [data-theme="usac"] {
   --fondo: #f1f6fb;
@@ -256,7 +503,9 @@
 
 html { color-scheme: light; }
 html[data-theme="dark"], html[data-theme="negro"], html[data-theme="morado"],
-html[data-theme="futbol"], html[data-theme="siu"] { color-scheme: dark; }
+html[data-theme="futbol"], html[data-theme="siu"], html[data-theme="vikingo"],
+html[data-theme="gallo"], html[data-theme="pandora"], html[data-theme="chasquido"],
+html[data-theme="estrellada"] { color-scheme: dark; }
 
 body {
   margin: 0;
@@ -317,6 +566,11 @@ input { font: inherit; color: inherit; }
 .tema-mini { flex: none; border-radius: 7px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .12); }
 .menu-temas-lista button:hover .tema-mini { transform: scale(1.12) rotate(-3deg); }
 .tema-mini { transition: transform .15s; }
+.tema-grupo {
+  font-size: 10px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--tinta-tenue); padding: 8px 10px 3px;
+}
+.tema-grupo:not(:first-child) { border-top: 1px solid var(--linea); margin-top: 4px; }
 .tema-info { flex: 1; min-width: 0; line-height: 1.25; }
 .tema-info strong { display: block; font-size: 12.5px; }
 .tema-info small { display: block; font-size: 10.5px; color: var(--tinta-suave); }
@@ -1002,6 +1256,253 @@ body.sidebar-oculta .sidebar { display: none; }
   100% { transform: translateX(22px) rotate(13deg) translateY(30px); opacity: 0; }
 }
 .anim-grito-dtmf { color: #1a7f37; top: 58%; font-size: clamp(20px, 4.6vw, 36px); }
+
+/* El vikingo: la silueta zen sube y flota; el 9 de fondo. */
+.anim-nueve { color: rgba(108, 171, 221, .16); right: auto; left: 6vw; }
+.anim-zen {
+  position: absolute; left: 50%; margin-left: -65px; bottom: 12vh;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, .5));
+  animation: zen-sube 3s ease-out forwards;
+}
+@keyframes zen-sube {
+  0%   { transform: translateY(70vh); }
+  30%  { transform: translateY(0); }
+  50%  { transform: translateY(-8px); }
+  70%  { transform: translateY(0); }
+  88%  { opacity: 1; }
+  100% { transform: translateY(0); opacity: 0; }
+}
+.anim-grito-vikingo { color: #6cabdd; top: 24%; }
+
+/* Chapín: el quetzal cruza ondulando. */
+.anim-quetzal {
+  position: absolute; top: 30%; left: -260px;
+  animation: quetzal-vuelo 2.9s cubic-bezier(.3, .1, .6, .9) forwards;
+  filter: drop-shadow(0 6px 12px rgba(20, 80, 40, .3));
+}
+@keyframes quetzal-vuelo {
+  0%   { transform: translate(0, 0) rotate(2deg); }
+  30%  { transform: translate(38vw, -6vh) rotate(-3deg); }
+  60%  { transform: translate(70vw, 2vh) rotate(2deg); }
+  100% { transform: translate(calc(100vw + 300px), -4vh) rotate(-2deg); }
+}
+.anim-grito-chapin { color: #2374a8; top: 60%; }
+
+/* Corazón playero: el sol baja al mar y el corazón se va volando. */
+.anim-mar {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 22vh;
+  background: rgba(15, 155, 142, .3);
+  animation: aparecer .5s ease-out both, cinta-entra 3.1s ease forwards;
+}
+.anim-sol {
+  position: absolute; left: 50%; margin-left: -55px; bottom: 16vh;
+  animation: sol-baja 3s ease-in forwards;
+}
+@keyframes sol-baja {
+  0%   { transform: translateY(-16vh); opacity: 1; }
+  70%  { transform: translateY(6vh); opacity: 1; }
+  100% { transform: translateY(16vh); opacity: 0; }
+}
+.anim-corazon-vuela {
+  position: absolute; left: 62%; bottom: 30vh;
+  animation: corazon-sube 3s ease-out forwards;
+}
+@keyframes corazon-sube {
+  0%   { transform: translateY(20vh) rotate(-6deg); opacity: 0; }
+  20%  { opacity: 1; }
+  100% { transform: translateY(-42vh) rotate(10deg); opacity: 0; }
+}
+.anim-grito-playero { color: #0b7a6f; top: 26%; }
+
+/* Psicodélico: anillos concéntricos que se expanden. */
+.anim-anillo {
+  position: absolute; left: 50%; top: 50%; width: 60px; height: 60px;
+  margin: -30px 0 0 -30px; border-radius: 50%;
+  border: 10px solid var(--c, #7c3aed);
+  animation: anillo 2.4s ease-out var(--d, 0s) forwards; opacity: 0;
+}
+@keyframes anillo {
+  0%   { transform: scale(.2); opacity: 0; }
+  15%  { opacity: .85; }
+  100% { transform: scale(14); opacity: 0; }
+}
+
+/* Noche estrellada: remolinos que giran despacio y estrellas que titilan. */
+.anim-remolino {
+  position: absolute; opacity: 0;
+  animation: remolino 3s ease-in-out var(--d, 0s) forwards;
+}
+@keyframes remolino {
+  0%   { transform: rotate(0turn) scale(.6); opacity: 0; }
+  25%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: rotate(.6turn) scale(1.05); opacity: 0; }
+}
+.anim-estrella {
+  position: absolute; width: 5px; height: 5px; border-radius: 50%;
+  background: #f0c53f; box-shadow: 0 0 10px 3px rgba(240, 197, 63, .55);
+  animation: titilar 2.8s ease-in-out var(--d, 0s) forwards; opacity: 0;
+}
+@keyframes titilar {
+  0% { opacity: 0; } 30% { opacity: 1; } 55% { opacity: .35; }
+  75% { opacity: 1; } 100% { opacity: 0; }
+}
+
+/* Pandora: esporas que bajan flotando con brillo. */
+.anim-espora {
+  position: absolute; top: -24px; left: var(--x, 50%);
+  filter: drop-shadow(0 0 8px rgba(53, 208, 224, .8));
+  animation: caer 3s ease-in var(--d, 0s) forwards; opacity: 0;
+}
+@keyframes caer {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  12%  { opacity: 1; }
+  50%  { transform: translateY(46vh) translateX(16px); }
+  88%  { opacity: 1; }
+  100% { transform: translateY(96vh) translateX(-10px); opacity: 0; }
+}
+
+/* Pasarela: barrido dorado en diagonal. */
+.anim-brillo {
+  position: absolute; top: -20%; bottom: -20%; width: 26vw; left: -30vw;
+  transform: rotate(14deg);
+  background: linear-gradient(90deg, transparent, rgba(184, 134, 11, .35), rgba(255, 240, 200, .5), rgba(184, 134, 11, .35), transparent);
+  animation: brillo 2.2s ease-in-out .2s forwards;
+}
+@keyframes brillo { to { left: 130vw; } }
+.anim-grito-pasarela { color: #171310; top: 44%; letter-spacing: .3em; font-size: clamp(18px, 4vw, 34px); }
+[data-theme="pasarela"] .anim-grito-pasarela { text-shadow: none; }
+
+/* Atrápalos: la esfera rueda al centro y destella. */
+.anim-esfera {
+  position: absolute; left: 50%; top: 52%; margin: -45px 0 0 -45px;
+  animation: rodar-esfera 2.9s cubic-bezier(.25, .1, .3, 1) forwards;
+}
+@keyframes rodar-esfera {
+  0%   { transform: translateX(-60vw) rotate(-2turn); }
+  40%  { transform: translateX(0) rotate(0turn); }
+  50%  { transform: translateX(0) rotate(-14deg); }
+  58%  { transform: translateX(0) rotate(10deg); }
+  66%  { transform: translateX(0) rotate(0deg); }
+  88%  { opacity: 1; }
+  100% { transform: translateX(0); opacity: 0; }
+}
+.anim-destello {
+  position: absolute; left: 50%; top: 52%; width: 30px; height: 30px;
+  margin: -15px 0 0 -15px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, .95), transparent 70%);
+  animation: destello 1s ease-out 1.9s forwards; opacity: 0;
+}
+@keyframes destello {
+  0% { transform: scale(.3); opacity: 0; }
+  25% { opacity: 1; }
+  100% { transform: scale(16); opacity: 0; }
+}
+.anim-grito-atrapalos { color: #cc2b2b; top: 24%; }
+
+/* Nivel 1-1: el bloque recibe el golpe y suelta la moneda. */
+.anim-bloque {
+  position: absolute; left: 50%; top: 48%; margin-left: -38px;
+  animation: bloque-golpe 3s ease forwards;
+}
+@keyframes bloque-golpe {
+  0%   { transform: translateY(60vh); }
+  25%  { transform: translateY(0); }
+  35%  { transform: translateY(-14px); }
+  42%  { transform: translateY(0); }
+  88%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+.anim-moneda {
+  position: absolute; left: 50%; top: 48%; margin-left: -22px;
+  animation: moneda-salta 1.4s ease-out 1s forwards; opacity: 0;
+}
+@keyframes moneda-salta {
+  0%   { transform: translateY(0) rotateY(0turn); opacity: 0; }
+  10%  { opacity: 1; }
+  55%  { transform: translateY(-24vh) rotateY(2turn); opacity: 1; }
+  100% { transform: translateY(-10vh) rotateY(3turn); opacity: 0; }
+}
+.anim-grito-nivel { color: #d2401e; top: 22%; }
+
+/* Rosadito: cae con su mazo y "rompe" la pantalla (las grietas crecen). */
+.anim-bolita {
+  position: absolute; left: 50%; top: 34%; margin-left: -65px;
+  animation: bolita-cae 3s cubic-bezier(.3, .1, .35, 1) forwards;
+}
+@keyframes bolita-cae {
+  0%   { transform: translateY(-60vh) rotate(-8deg); }
+  28%  { transform: translateY(0) rotate(0deg); }
+  36%  { transform: translateY(-3vh) rotate(-10deg); }
+  44%  { transform: translateY(0) rotate(4deg); }
+  52%  { transform: translateY(0) rotate(0deg); }
+  88%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+.anim-grietas {
+  position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%);
+  animation: grietas 2.4s ease-out .95s forwards; opacity: 0;
+}
+@keyframes grietas {
+  0%   { transform: translate(-50%, -50%) scale(.15); opacity: 0; }
+  12%  { opacity: 1; transform: translate(-50%, -50%) scale(.7); }
+  30%  { transform: translate(-50%, -50%) scale(1); }
+  80%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* La fría: el tarro sube, brinda y la espuma respira. */
+.anim-tarro {
+  position: absolute; left: 50%; top: 40%; margin-left: -50px;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, .5));
+  animation: tarro-brinda 3s ease forwards;
+}
+@keyframes tarro-brinda {
+  0%   { transform: translateY(70vh); }
+  28%  { transform: translateY(0) rotate(0deg); }
+  40%  { transform: translateY(-6px) rotate(-7deg); }
+  52%  { transform: translateY(0) rotate(4deg); }
+  62%  { transform: translateY(0) rotate(0deg); }
+  88%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+.tarro-espuma { animation: espuma 1.2s ease-out .9s both; transform-origin: 46px 34px; }
+@keyframes espuma { from { transform: scale(.6); } to { transform: scale(1); } }
+.anim-grito-gallo { color: #e8b422; top: 20%; }
+
+/* Burbujas: gas subiendo por toda la pantalla (reusa la física de flotar). */
+.anim-gas {
+  position: absolute; bottom: -24px; left: var(--x, 50%);
+  animation: flotar 2.6s ease-in var(--d, 0s) forwards;
+}
+.anim-grito-burbujas { color: #c8102e; top: 40%; }
+
+/* El chasquido: las gemas se encienden, destello y polvo que se va. */
+.anim-gema {
+  position: absolute; top: 46%; width: 14px; height: 14px; border-radius: 4px;
+  background: var(--c, #c9a227); transform: rotate(45deg);
+  box-shadow: 0 0 14px 4px color-mix(in srgb, var(--c, #c9a227) 65%, transparent);
+  animation: gema 2.8s ease var(--d, 0s) forwards; opacity: 0;
+}
+@keyframes gema {
+  0% { opacity: 0; transform: rotate(45deg) scale(.3); }
+  15% { opacity: 1; transform: rotate(45deg) scale(1.15); }
+  25% { transform: rotate(45deg) scale(1); }
+  70% { opacity: 1; }
+  100% { opacity: 0; }
+}
+.anim-destello-tarde { animation-delay: 1.15s; top: 47%; }
+.anim-polvo {
+  position: absolute; width: 6px; height: 6px; border-radius: 2px;
+  background: rgba(240, 234, 249, .8);
+  animation: polvo 1.6s ease-out var(--d, 1.2s) forwards; opacity: 0;
+}
+@keyframes polvo {
+  0% { opacity: 0; transform: translate(0, 0) rotate(0deg); }
+  20% { opacity: .9; }
+  100% { opacity: 0; transform: translate(30px, -60px) rotate(120deg); }
+}
+.anim-grito-chasquido { color: #c9a227; top: 64%; }
 
 @media (prefers-reduced-motion: reduce) { .anim-tema { display: none; } }
 
