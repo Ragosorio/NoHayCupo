@@ -5,13 +5,14 @@ import {
   estrategiaActiva, ghostsPara, metricasMostradas, planBDelMostrado,
   quitarYRegenerar, salirEditor, setModal, toast, verMasOpciones, aplicarSwap,
 } from "@/lib/cliente/acciones";
+import { coincidenciasConAmigo } from "@/lib/cliente/compartir";
 import { $v, colorDe, E, type ComboJson, type OpcionJson } from "@/lib/cliente/estado";
 import { exportarExcel, exportarIcs, exportarPng, exportarPrompt } from "@/lib/cliente/exportar";
 import { DIAS_NOMBRE, nombreBonito } from "@/lib/cliente/util";
 import Calendario from "./Calendario";
 import {
-  IconoAlerta, IconoCalendario, IconoChispa, IconoImagen, IconoImpresora,
-  IconoLapiz, IconoTabla,
+  IconoAlerta, IconoCalendario, IconoChispa, IconoCompartir, IconoImagen,
+  IconoImpresora, IconoLapiz, IconoTabla,
 } from "./Iconos";
 
 const etiquetaOpcion = (op: { componentes: OpcionJson["componentes"] }) =>
@@ -35,6 +36,14 @@ function Metricas({ m }: { m: NonNullable<ReturnType<typeof metricasMostradas>> 
   chips.push({ valor: String(m.num_dias_con_clase), texto: "días de semana con clase" });
   chips.push({ valor: m.usa_sabado ? "Sí" : "No", texto: "usa sábado" });
   chips.push({ valor: `${m.min_bloque_libre_h} h`, texto: "bloque libre mínimo por día" });
+  const coin = coincidenciasConAmigo();
+  if (coin && coin.comunes > 0) {
+    chips.push({
+      clase: coin.iguales > 0 ? "metrica-ok" : "",
+      valor: `${coin.iguales}/${coin.comunes}`,
+      texto: `cursos en la misma sección que ${coin.de}`,
+    });
+  }
   return (
     <div className="metricas">
       {chips.map((c, i) => (
@@ -230,6 +239,9 @@ export default function Resultados() {
               Exportar ▾
             </button>
             <div className="menu-export-lista" hidden={!E.menuExportar}>
+              <button onClick={() => { setModal("export", false); setModal("compartir", true); }}>
+                <IconoCompartir /> Compartir con un amigo
+              </button>
               <button onClick={() => { setModal("export", false); exportarPng(); toast("Imagen PNG descargada"); }}>
                 <IconoImagen /> Imagen PNG
               </button>

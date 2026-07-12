@@ -4,8 +4,9 @@
 import { evaluarReglas } from "../scraper/restricciones";
 import {
   cargarLocal, E, guardarLocal, touch,
-  type CursoCatalogo, type ComboJson, type OpcionJson,
+  type CursoCatalogo, type ComboJson, type OpcionJson, type Resultado,
 } from "./estado";
+import { leerInvitacionDeUrl } from "./compartir";
 import { generarResultado, metricasDeOpciones, type BloqueoRango } from "./generarCliente";
 import { TEMAS, temaPorId } from "./temas";
 import {
@@ -144,8 +145,11 @@ async function autoMostrarUltimoHorario() {
   _autoMostrado = true;
   const vista = E.vista;
   await generar();
-  if (!E.resultado) return;
-  if (E.resultado.estrategias.some((e) => e.id === vista.estrategia)) {
+  /* TS mantiene el narrowing de la guarda de arriba a través del await:
+     el cast refleja que generar() lo mutó. */
+  const res = E.resultado as Resultado | null;
+  if (!res) return;
+  if (res.estrategias.some((e) => e.id === vista.estrategia)) {
     E.estrategia = vista.estrategia;
   }
   const combos = estrategiaActiva()?.combos ?? [];
@@ -648,12 +652,13 @@ export function deshacerSwap() {
 
 /* ---------- modales ---------- */
 
-export function setModal(cual: "pensum" | "acerca" | "bienvenida" | "export" | "temas", abierto: boolean) {
+export function setModal(cual: "pensum" | "acerca" | "bienvenida" | "export" | "temas" | "compartir", abierto: boolean) {
   if (cual === "pensum") E.modalPensum = abierto;
   if (cual === "acerca") E.modalAcerca = abierto;
   if (cual === "bienvenida") E.modalBienvenida = abierto;
   if (cual === "export") E.menuExportar = abierto;
   if (cual === "temas") E.menuTemas = abierto;
+  if (cual === "compartir") E.modalCompartir = abierto;
   touch();
 }
 
@@ -661,6 +666,7 @@ export function setModal(cual: "pensum" | "acerca" | "bienvenida" | "export" | "
 
 export function iniciarApp() {
   cargarLocal();
+  leerInvitacionDeUrl();   // #amigo= pisa la selección guardada
   document.body.classList.toggle("sidebar-oculta", E.sidebarOculta);
   aplicarTema();
   cargarCatalogo(false);

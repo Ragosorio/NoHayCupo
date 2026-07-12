@@ -2,10 +2,11 @@
 import { useStore } from "@nanostores/react";
 import { useEffect } from "react";
 import { abrirMenuMovil, cerrarMenuMovil, generar, iniciarApp, setModal } from "@/lib/cliente/acciones";
+import { quitarAmigo } from "@/lib/cliente/compartir";
 import { $v, E } from "@/lib/cliente/estado";
 import { iniciarTour } from "@/lib/cliente/tour";
 import { IconoCalendarioHero } from "./Iconos";
-import { AnimacionTema, ModalAcerca, ModalBienvenida, ModalPensum, Toast } from "./Modales";
+import { AnimacionTema, ModalAcerca, ModalBienvenida, ModalCompartir, ModalPensum, Toast } from "./Modales";
 import PanelCursos from "./PanelCursos";
 import PanelPerfil from "./PanelPerfil";
 import PanelTiempo from "./PanelTiempo";
@@ -22,6 +23,7 @@ export default function App() {
         setModal("acerca", false);
         setModal("export", false);
         setModal("temas", false);
+        setModal("compartir", false);
       }
     };
     const alClic = (ev: MouseEvent) => {
@@ -56,6 +58,16 @@ export default function App() {
         </aside>
 
         <section className="contenido">
+          {E.amigo && (
+            <div className="banner-amigo no-print">
+              <span>
+                <strong>{E.amigo.de}</strong> te compartió su horario: estos son sus
+                cursos y secciones. Armá tu versión — las clases donde coincidan se
+                marcan en el calendario.
+              </span>
+              <button className="btn btn-mini" onClick={quitarAmigo}>Dejar de comparar</button>
+            </div>
+          )}
           {E.resultado ? (
             <Resultados />
           ) : (
@@ -82,6 +94,7 @@ export default function App() {
       <ModalPensum />
       <ModalAcerca />
       <ModalBienvenida />
+      <ModalCompartir />
       <AnimacionTema />
       <Toast />
     </>

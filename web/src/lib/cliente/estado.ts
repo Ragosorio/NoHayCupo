@@ -86,7 +86,10 @@ export const E = {
   sidebarOculta: false,
   menuMovil: false,   // drawer móvil abierto (efímero, no se persiste)
   menuTemas: false,   // picker de temas abierto (efímero)
-  animTema: null as "futbol" | "usac" | null,   // animación de bienvenida del tema
+  animTema: null as string | null,   // id de la animación de bienvenida del tema
+  /** Invitación de un amigo (llegó por URL #amigo=): sus secciones elegidas. */
+  amigo: null as { de: string; secciones: Record<string, Array<{ cat: string; sec: string }>> } | null,
+  modalCompartir: false,
   topN: 3,
   resultado: null as Resultado | null,
   estadoGenerar: "",
@@ -145,6 +148,7 @@ export function guardarLocal() {
     sidebarOculta: E.sidebarOculta,
     topN: E.topN,
     miHorario: E.miHorario,
+    amigo: E.amigo,
     vista: E.resultado
       ? { generado: true, estrategia: E.estrategia, opcion: E.opcion }
       : E.vista,
@@ -173,6 +177,7 @@ export function cargarLocal() {
     E.sidebarOculta = !!d.sidebarOculta;
     E.topN = d.topN || 3;
     E.miHorario = d.miHorario || null;
+    E.amigo = d.amigo || null;
     E.vista = d.vista || null;
   } catch { /* localStorage corrupto: empezar de cero */ }
 }

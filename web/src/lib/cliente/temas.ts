@@ -15,8 +15,8 @@ export interface Tema {
   acentoTinta: string;
   /** Color de la UI del navegador (<meta name="theme-color">): el --tarjeta. */
   marco: string;
-  /** Animación de bienvenida al elegirlo (opcional). */
-  animacion?: "futbol" | "usac";
+  /** Id de la animación de bienvenida (rama en AnimacionTema, opcional). */
+  animacion?: string;
 }
 
 export const TEMAS: Tema[] = [
@@ -57,6 +57,26 @@ export const TEMAS: Tema[] = [
     id: "usac", nombre: "Modo USAC", descripcion: "Azul y blanco, tricentenaria",
     oscuro: false, acento: "#1355a5", acentoTinta: "#ffffff", marco: "#ffffff",
     animacion: "usac",
+  },
+  {
+    id: "cute", nombre: "Modo cute", descripcion: "Pastelitos, florcitas y un ajolote",
+    oscuro: false, acento: "#a21caf", acentoTinta: "#ffffff", marco: "#ffffff",
+    animacion: "cute",
+  },
+  {
+    id: "campeon", nombre: "Campeones", descripcion: "Albiceleste con la copa y el 10",
+    oscuro: false, acento: "#1d6fb8", acentoTinta: "#ffffff", marco: "#ffffff",
+    animacion: "campeon",
+  },
+  {
+    id: "siu", nombre: "SIUUU", descripcion: "El salto del 7, verde y rojo",
+    oscuro: true, acento: "#2ebd59", acentoTinta: "#052012", marco: "#221013",
+    animacion: "siu",
+  },
+  {
+    id: "dtmf", nombre: "Verde DTMF", descripcion: "Debí tirar más fotos…",
+    oscuro: false, acento: "#1a7f37", acentoTinta: "#ffffff", marco: "#ffffff",
+    animacion: "dtmf",
   },
 ];
 

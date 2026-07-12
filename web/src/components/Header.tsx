@@ -4,6 +4,7 @@ import { alternarSidebar, cambiarTema, setModal } from "@/lib/cliente/acciones";
 import { $v, E } from "@/lib/cliente/estado";
 import { TEMAS } from "@/lib/cliente/temas";
 import { IconoMenu, IconoPaleta, IconoX, LogoNHC } from "./Iconos";
+import MiniaturaTema from "./MiniaturasTemas";
 
 export default function Header() {
   useStore($v);
@@ -35,7 +36,7 @@ export default function Header() {
             {TEMAS.map((t) => (
               <button key={t.id} className={t.id === E.tema ? "activo" : ""}
                 onClick={() => cambiarTema(t.id)}>
-                <span className="tema-punto" style={{ background: t.acento }} />
+                <MiniaturaTema tema={t} />
                 <span className="tema-info">
                   <strong>{t.nombre}</strong>
                   <small>{t.descripcion}</small>

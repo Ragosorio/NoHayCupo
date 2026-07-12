@@ -4,6 +4,7 @@ import {
   aplicarSwap, bloqueosComoRangos, comboMostrado, ghostsPara, seleccionarEnEditor,
   type CursoMostrado,
 } from "@/lib/cliente/acciones";
+import { coincideConAmigo } from "@/lib/cliente/compartir";
 import { $v, colorDe, E } from "@/lib/cliente/estado";
 import { esTemaOscuro } from "@/lib/cliente/temas";
 import { aMin, DIAS_NOMBRE, DIAS_ORDEN, nombreBonito } from "@/lib/cliente/util";
@@ -95,10 +96,12 @@ export default function Calendario({ mostrado }: { mostrado: CursoMostrado[] }) 
               )}
               {delDia.map((e, i) => {
                 const esLab = e.categoria !== "Clase";
+                const conAmigo = coincideConAmigo(e.codigo, e.categoria, e.seccion);
                 return (
                   <div key={`e${i}`}
                     className={"evento" + (esLab ? " lab" : "")
                       + (E.editor ? " editable" : "")
+                      + (conAmigo ? " coincide" : "")
                       + (sel === e.codigo ? " seleccionado" : "")
                       + (sel && sel !== e.codigo ? " atenuado" : "")}
                     style={{
@@ -109,6 +112,7 @@ export default function Calendario({ mostrado }: { mostrado: CursoMostrado[] }) 
                       height: Math.max(24, (e.fin - e.inicio) * pxPorMin - 3),
                     } as React.CSSProperties}
                     title={`${e.codigo} ${nombreBonito(e.nombre)}\n${e.categoria} ${e.seccion} · ${e.horas}\n${nombreBonito(e.catedratico)}`
+                      + (conAmigo ? `\nEn esta clase coincidís con ${E.amigo!.de}` : "")
                       + (E.editor ? "\n(clic para ver a dónde se puede mover)" : "")}
                     onClick={E.editor ? () => seleccionarEnEditor(e.codigo) : undefined}>
                     {esLab && (
