@@ -1,75 +1,88 @@
 # NoHayCupo
 
-Optimizador de horarios para la Facultad de Ingeniería USAC. Descarga el
-catálogo público de horarios, genera **todas** las combinaciones sin traslapes
-para tus cursos (clase + laboratorio/práctica como unidad obligatoria) y las
-rankea con 4 estrategias, con plan B por si una sección se llena.
+**El generador de horarios de la Facultad de Ingeniería de la USAC.**
+Elegís tus cursos, la app calcula **todas** las combinaciones de secciones sin
+traslapes usando el catálogo oficial de FIUSAC, y te las rankea con 4
+estrategias. Después la ajustás a mano, la compartís con tus amigos para
+coincidir en clases, y la exportás a Google Calendar, Excel, PNG o PDF.
 
-> **La versión web (deployable en Vercel) vive en [`web/`](web/README.md)** —
-> Astro + islas de React + Tailwind, con el solver corriendo en el navegador.
-> Lo de abajo es la versión Python original: sigue funcionando, es la
-> referencia del motor y el oráculo de los tests de paridad.
+**Probala: <https://nohaycupo.vercel.app/>** — gratis, sin cuentas, sin anuncios.
+Nada sale de tu navegador.
 
-Además integra la **red de estudios de Ingeniería en Ciencias y Sistemas**
-(pénsum 28): marcás qué cursos ya aprobaste y la app calcula qué podés llevar
-(prerrequisitos cumplidos), te avisa si un curso elegible no tiene oferta este
-semestre, y agrega todos los elegibles a tu plan con un clic.
+## Qué hace
 
-**Cero dependencias**: solo Python 3 (stdlib). No hay `pip install`.
+| | |
+|---|---|
+| **Todas las combinaciones** | Backtracking sobre el catálogo real; clase + laboratorio/práctica se inscriben como unidad y jamás chocan. |
+| **4 estrategias** | Salir temprano, entrar tarde, máximo día libre, bloques libres parejos. |
+| **Tu tiempo manda** | Pintás horas «no puedo» (jamás se usan) y «prefiero no» (se minimizan). |
+| **Restricciones por carnet** | Las secciones «Ver Restricciones» se verifican solas con tu número de carnet y carrera. |
+| **Pénsum integrado** | Las redes de estudio de las 10 carreras de Ingeniería: marcás lo aprobado y sabe qué podés llevar. |
+| **Editor manual** | Mové cualquier curso a otra sección que quepa, con deshacer y «Mi horario». |
+| **Plan B** | Si una sección se llena: mismas horas con otro catedrático u otro horario que cabe; badge «crítico» si no hay respaldo. |
+| **Con amigos** | Compartí tu horario por link; tu amigo arma el suyo y la app marca en qué clases coinciden. |
+| **Exportar** | PNG, Google Calendar (.ics), Excel (.xlsx), PDF y prompt para IA. |
+| **Temas** | 13 temas con animaciones de bienvenida (fútbol, USAC, cute, campeones…) — [crear el tuyo](docs/TEMAS.md). |
 
-## Cómo correrlo
+## Estructura del repo
+
+La app que se deploya es **`web/`** (Astro + islas React + Tailwind; el motor
+corre en el navegador). El código Python de la raíz es la **implementación de
+referencia del motor** y el oráculo de los tests de paridad — sigue funcionando
+(`python3 -m ui.app`), pero el desarrollo activo es la web.
+
+```
+web/          ← LA APP (Astro + React + TS; deploy en Vercel)
+  src/lib/engine/     motor TS puro (paridad 1:1 con engine/ de Python)
+  src/lib/cliente/    estado, acciones, temas, compartir, exportar
+  src/components/     islas React
+  src/pages/api/      endpoints serverless (scraping cacheado por la CDN)
+engine/       motor Python de referencia (puro, sin I/O)
+scraper/      descarga + parseo del catálogo, pénsums y restricciones (Python)
+ui/           UI local original (stdlib, http://localhost:8765)
+scripts/      exportar_paridad.py → regenera el oráculo de los tests de la web
+tests/        tests del motor Python (fixtures = HTML real, jamás datos a mano)
+docs/         arquitectura, contribución, temas, plan de migración
+.claude/      skills para trabajar el repo con agentes (Claude Code)
+```
+
+## Correr la web
 
 ```bash
-cd NoHayCupo
-python3 -m ui.app          # abre http://localhost:8765
-# o en otro puerto:
-python3 -m ui.app --port 9000
+cd web
+npm install
+npm run dev        # http://localhost:4321
+npm test           # paridad TS↔Python + scraper
+npm run build      # build de producción (adapter de Vercel)
 ```
 
-Después en el navegador:
+Deploy: importar el repo en Vercel con **Root Directory = `web`**. Detalles en
+[web/README.md](web/README.md).
 
-1. **Abrí tu pénsum** (panel 1) y marcá lo que ya aprobaste. El botón
-   *"＋ Agregar los N que podés llevar"* mete a tu plan todos los cursos con
-   prerrequisitos cumplidos que sí tienen oferta este semestre.
-2. O **buscá y agregá** cursos a mano (por código o nombre). Si agregás uno
-   con prerrequisitos pendientes, el chip te lo advierte.
-3. Si un curso tiene secciones *"Ver Restricciones"*, marcá las que aplican a
-   tu carrera — no se descartan solas.
-4. **Generar horarios** → compará las 4 estrategias en pestañas, cambiá entre
-   las top-3 opciones de cada una, y revisá el panel *"Si una sección se llena"*.
-5. **Exportar / Imprimir** usa el diálogo de impresión del navegador (guardá
-   como PDF).
-
-El catálogo se cachea 6 horas en `data/cache/` (el pénsum, 30 días); el botón
-*"↻ Actualizar catálogo"* fuerza la re-descarga. Tu selección de cursos y tus
-cursos aprobados quedan guardados en el navegador (localStorage).
-
-## Tests
+## Correr la versión Python (referencia)
 
 ```bash
-python3 -m unittest discover tests -v
+python3 -m ui.app                      # http://localhost:8765 — solo stdlib
+python3 -m unittest discover tests -v  # tests del motor
 ```
-
-Los tests corren contra `tests/fixtures/muestra.html`, un recorte del HTML
-**real** del catálogo (cursos 0768, 0147 y 0550) — los casos documentados en
-SPEC.md sección 2.4 y el Addendum.
-
-## Estructura
-
-```
-scraper/   fetch (descarga+caché) y parse (HTML -> modelos)
-engine/    modelos, traslapes, opciones por curso, solver, estrategias
-ui/        servidor stdlib + frontend estático (index.html, app.js, styles.css)
-data/      caché del HTML por semestre
-tests/     casos reales como fixtures
-```
-
-Ver [SPEC.md](SPEC.md) para el diseño completo y las trampas conocidas de la
-fuente de datos.
 
 ## Documentación
 
 - [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md) — dónde está cada cosa y cómo fluye una generación.
 - [docs/CONTRIBUIR.md](docs/CONTRIBUIR.md) — cómo correr, probar y las reglas de la casa.
-- [docs/PLAN-MIGRACION.md](docs/PLAN-MIGRACION.md) — plan (pendiente de visto bueno) para migrar a Astro y deployar en Vercel sin romper nada.
-- `.claude/skills/` — skills para trabajar el repo con Claude Code: verificar la app, actualizar fixtures desde datos reales, agregar estrategias.
+- [docs/TEMAS.md](docs/TEMAS.md) — cómo crear un tema visual nuevo (con animación incluida).
+- [AGENTS.md](AGENTS.md) — **si vas a modificar el repo con una IA, empezá acá**: arquitectura, invariantes y qué no se toca.
+- [SPEC.md](SPEC.md) — diseño completo y trampas conocidas de la fuente de datos.
+
+## Contribuir
+
+PRs bienvenidos. Lo innegociable: los datos de horarios vienen SIEMPRE del
+scraper (nunca transcribir horarios a mano), el motor se queda puro (sin red ni
+DOM), y si tocás el motor TS los tests de paridad deben seguir al 100 %
+(regenerá el oráculo con `python3 -m scripts.exportar_paridad`). El resto está
+en [docs/CONTRIBUIR.md](docs/CONTRIBUIR.md).
+
+---
+
+Hecho con ❤ por [ragosorio](https://ragosorio.com/) para la USAC — que esta
+vez sí haya cupo.

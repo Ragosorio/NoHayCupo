@@ -13,25 +13,71 @@ const DESCRIPCION =
   + "San Carlos de Guatemala). Arma todas las combinaciones sin traslapes del catálogo "
   + "real de FIUSAC, respeta tus horas ocupadas, verifica secciones restringidas con tu "
   + "carnet y exporta a Google Calendar, Excel, PNG o PDF. Gratis, sin cuentas.";
-const jsonLd = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  name: "NoHayCupo",
-  alternateName: "No Hay Cupo — Horarios USAC",
-  url: SITE,
-  description: DESCRIPCION,
-  applicationCategory: "EducationApplication",
-  operatingSystem: "Web",
-  inLanguage: "es",
-  isAccessibleForFree: true,
-  offers: { "@type": "Offer", price: "0", priceCurrency: "GTQ" },
-  creator: { "@type": "Person", name: "Rolando Osorio", url: "https://ragosorio.com/" },
-  about: {
-    "@type": "CollegeOrUniversity",
-    name: "Universidad de San Carlos de Guatemala",
-    department: { "@type": "EducationalOrganization", name: "Facultad de Ingeniería (FIUSAC)" },
+const FAQ: Array<[string, string]> = [
+  ["¿Qué es NoHayCupo?",
+    "Es el generador de horarios de la Facultad de Ingeniería de la USAC (Universidad de "
+    + "San Carlos de Guatemala). Elegís tus cursos y calcula TODAS las combinaciones de "
+    + "secciones sin traslapes usando el catálogo oficial de FIUSAC, rankeadas con 4 "
+    + "estrategias: salir temprano, entrar tarde, máximo día libre y bloques libres parejos."],
+  ["¿Cómo armo mi horario de la USAC con esta página?",
+    "Buscá tus cursos por código o nombre (o abrí tu pénsum y marcá lo aprobado para que "
+    + "la app sepa qué podés llevar), pintá las horas que no querés usar, y presioná "
+    + "«Generar horarios». Después podés ajustar el resultado a mano moviendo cursos a "
+    + "otras secciones que quepan."],
+  ["¿Sirve para el primer semestre, el segundo semestre y vacaciones?",
+    "Sí. Usa el catálogo oficial de horarios de FIUSAC del periodo que elijás: primer "
+    + "semestre, segundo semestre, y escuelas de vacaciones de junio y diciembre."],
+  ["¿Puedo armar el horario con mis amigos?",
+    "Sí: desde «Exportar → Compartir con un amigo» se copia una invitación con tu horario. "
+    + "Tu amigo abre el link, arma su propia versión y la app les marca en qué clases y "
+    + "secciones coinciden, para cuadrar cursos y tiempo libre juntos."],
+  ["¿Guarda mis datos o necesito una cuenta?",
+    "No hay cuentas y nada sale de tu navegador: tu selección, tu pénsum y tus horarios "
+    + "se guardan solo en tu dispositivo (localStorage)."],
+  ["¿Cuánto cuesta?",
+    "Nada. Es gratis, sin anuncios y open source (licencia MIT, código en GitHub)."],
+];
+const jsonLd = JSON.stringify([
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "NoHayCupo",
+    alternateName: ["No Hay Cupo", "NoHayCupo — Horarios USAC", "Generador de horarios FIUSAC"],
+    url: SITE,
+    description: DESCRIPCION,
+    applicationCategory: "EducationApplication",
+    operatingSystem: "Web",
+    inLanguage: "es",
+    isAccessibleForFree: true,
+    offers: { "@type": "Offer", price: "0", priceCurrency: "GTQ" },
+    featureList: [
+      "Todas las combinaciones de horario sin traslapes del catálogo oficial de FIUSAC",
+      "4 estrategias de ranking: salir temprano, entrar tarde, máximo día libre, bloques libres",
+      "Bloqueos de tiempo personales (imposible / mejor evitar)",
+      "Verificación automática de secciones restringidas con el número de carnet",
+      "Pénsum integrado de las 10 carreras de Ingeniería (prerrequisitos y créditos)",
+      "Editor manual del horario y plan B si una sección se llena",
+      "Compartir horario con amigos por link y marcar coincidencias",
+      "Exportar a Google Calendar (.ics), Excel (.xlsx), imagen PNG y PDF",
+      "Temas visuales personalizables",
+    ],
+    creator: { "@type": "Person", name: "Rolando Osorio", url: "https://ragosorio.com/" },
+    about: {
+      "@type": "CollegeOrUniversity",
+      name: "Universidad de San Carlos de Guatemala",
+      department: { "@type": "EducationalOrganization", name: "Facultad de Ingeniería (FIUSAC)" },
+    },
   },
-});
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQ.map(([p, r]) => ({
+      "@type": "Question",
+      name: p,
+      acceptedAnswer: { "@type": "Answer", text: r },
+    })),
+  },
+]);
 ---
 
 <!doctype html>
@@ -79,6 +125,15 @@ const jsonLd = JSON.stringify({
     <Header client:load />
     <App client:load />
     <footer class="pie-seo">
+      <section class="faq-seo" aria-label="Preguntas frecuentes">
+        <h2>Preguntas frecuentes</h2>
+        {FAQ.map(([pregunta, respuesta]) => (
+          <details>
+            <summary>{pregunta}</summary>
+            <p>{respuesta}</p>
+          </details>
+        ))}
+      </section>
       <p>
         <strong>NoHayCupo</strong> — el generador de horarios de la Facultad de
         Ingeniería de la USAC (Universidad de San Carlos de Guatemala). Compará todas

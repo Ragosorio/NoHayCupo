@@ -29,13 +29,22 @@ src/
 ├── lib/
 │   ├── engine/              # motor de horarios (TS puro, corre en el cliente)
 │   ├── scraper/             # parsers HTML (corren en el servidor)
-│   └── cliente/             # estado (nanostores), acciones, export, tour
-└── styles/global.css        # Tailwind + design system por variables CSS
+│   └── cliente/             # estado (nanostores), acciones, temas,
+│                            #   compartir (horarios por URL), export, tour
+└── styles/global.css        # Tailwind + design system por tokens CSS
 tests/                       # Vitest: paridad 1:1 contra el motor Python
 ```
 
 Reglas: `lib/engine` no toca red ni DOM; las islas se comunican solo por el
 estado compartido; el usuario vive en `localStorage` (sin cuentas, sin DB).
+Las reglas completas para agentes/IA están en [../AGENTS.md](../AGENTS.md).
+
+- **Temas**: tokens en `styles/global.css` + registro en `lib/cliente/temas.ts`
+  (favicon dinámico incluido). Guía: [../docs/TEMAS.md](../docs/TEMAS.md).
+- **Compartir con amigos**: la invitación viaja completa en la URL
+  (`#amigo=base64url(JSON)`); ver `lib/cliente/compartir.ts`.
+- **SEO**: head + FAQ + JSON-LD en `pages/index.astro`; `public/llms.txt`,
+  `robots.txt` y `sitemap.xml`. El dominio canónico vive en `astro.config.mjs`.
 
 ## Deploy a Vercel
 

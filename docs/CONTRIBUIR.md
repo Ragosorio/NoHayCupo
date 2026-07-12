@@ -1,14 +1,23 @@
 # Contribuir a NoHayCupo
 
+**La app activa es `web/`** (Astro + React; se deploya en Vercel). El Python de
+la raíz es la referencia del motor. Si vas a contribuir con ayuda de una IA,
+las reglas condensadas están en [../AGENTS.md](../AGENTS.md).
+
 ## Correr el proyecto
 
 ```bash
+# La web (desarrollo activo)
+cd web && npm install && npm run dev   # http://localhost:4321
+npm test                               # paridad TS↔Python
+
+# La versión Python de referencia
 python3 -m ui.app          # http://localhost:8765 — cero dependencias, solo stdlib
 python3 -m unittest discover tests -v
 ```
 
 Si estás en Claude Code, hay skills listas en `.claude/skills/` (verificar la
-app, actualizar fixtures, agregar una estrategia).
+app, actualizar fixtures, agregar una estrategia, crear un tema).
 
 ## Reglas de la casa
 
