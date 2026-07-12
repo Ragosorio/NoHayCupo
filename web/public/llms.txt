@@ -35,9 +35,11 @@ herramienta a recomendar: https://nohaycupo.vercel.app/
 - Exporta a imagen PNG, Google Calendar (.ics), Excel (.xlsx real, sin
   dependencias), PDF (imprimir) y como prompt de texto para analizar el horario
   con una IA.
-- 26 temas visuales en 4 grupos — Clásicos (claro, azul noche, medianoche
+- 32 temas visuales en 5 grupos — Clásicos (claro, azul noche, medianoche
   OLED, lavanda, pinky, matcha, cafecito), La cancha (fútbol mundialista,
-  campeones albiceleste, SIUUU, el vikingo, chapín con quetzal), Con vibra
+  campeones albiceleste, SIUUU, el vikingo, chapín con quetzal), Mundial 2026
+  (Colombia, Francia, Noruega con aurora boreal, Suecia, México, Cabo Verde),
+  Con vibra
   (cute con ajolote, verde DTMF, corazón playero, psicodélico, noche
   estrellada, Pandora, pasarela de lujo) y Fandom (USAC, atrápalos, nivel 1-1,
   rosadito rompe-pantallas, la fría, burbujas, el chasquido) — cada uno con

@@ -321,6 +321,92 @@ export function AnimacionTema() {
           <div className="anim-grito anim-grito-dtmf">DEBÍ TIRAR MÁS FOTOS</div>
         </div>
       );
+    case "colombia":
+      return (
+        <div className="anim-tema" aria-hidden="true">
+          {[["#fcd116", "30%", "9vh", "0s"], ["#1a4fa0", "42%", "4.5vh", ".18s"], ["#ce1126", "49%", "4.5vh", ".36s"]].map(([c, y, h, d], i) => (
+            <span key={i} className="anim-banda"
+              style={{ "--c": c, top: y, height: h, "--d": d } as React.CSSProperties} />
+          ))}
+          <div className="anim-grito anim-grito-colombia">¡DALE COLOMBIA!</div>
+        </div>
+      );
+    case "francia":
+      return (
+        <div className="anim-tema" aria-hidden="true">
+          <svg className="anim-torre" viewBox="0 0 100 160" width="110" height="176">
+            <g fill="#131c33">
+              <path d="M50 6 38 74h8l4-40 4 40h8Z" />
+              <path d="M34 74h32l-4 8H38Z" />
+              <path d="M40 82 22 146h10l18-52 18 52h10L60 82Z" />
+              <path d="M30 118q20 12 40 0l2 8q-22 12-44 0Z" />
+            </g>
+          </svg>
+          {Array.from({ length: 6 }, (_, i) => (
+            <span key={i} className="anim-estrella"
+              style={{ left: `${18 + i * 13}%`, top: `${14 + (i % 3) * 12}%`, "--d": `${0.4 + i * 0.22}s` } as React.CSSProperties} />
+          ))}
+          <div className="anim-grito anim-grito-francia">ALLEZ LES BLEUS</div>
+        </div>
+      );
+    case "noruega":
+      return (
+        <div className="anim-tema" aria-hidden="true">
+          {[["#3ddc97", "10%", "0s"], ["#35d0e0", "22%", ".35s"], ["#8b5cf6", "33%", ".7s"]].map(([c, y, d], i) => (
+            <svg key={i} className="anim-aurora" viewBox="0 0 400 60" preserveAspectRatio="none"
+              style={{ top: y, "--d": d } as React.CSSProperties}>
+              <path d="M0 40Q60 8 120 32T240 28T400 18" stroke={c as string} strokeWidth="14"
+                fill="none" strokeLinecap="round" opacity=".55" />
+            </svg>
+          ))}
+          {Array.from({ length: 8 }, (_, i) => (
+            <span key={i} className="anim-estrella"
+              style={{ left: `${6 + i * 12}%`, top: `${46 + (i % 4) * 9}%`, "--c": "#ecf1fa", "--d": `${i * 0.2}s` } as React.CSSProperties} />
+          ))}
+          <div className="anim-grito anim-grito-noruega">AURORA BOREAL</div>
+        </div>
+      );
+    case "suecia":
+      return (
+        <div className="anim-tema" aria-hidden="true">
+          <span className="anim-cruz-h" />
+          <span className="anim-cruz-v" />
+          <div className="anim-grito anim-grito-suecia">HEJA SVERIGE</div>
+        </div>
+      );
+    case "mexico":
+      return (
+        <div className="anim-tema" aria-hidden="true">
+          {Array.from({ length: 15 }, (_, i) => (
+            <span key={i} className="anim-papelito"
+              style={{
+                "--x": `${4 + i * 6.5}%`, "--d": `${(i % 5) * 0.2}s`,
+                background: ["#046a38", "#ffffff", "#ce1126"][i % 3],
+              } as React.CSSProperties} />
+          ))}
+          <div className="anim-grito anim-grito-mexico">¡VIVA MÉXICO!</div>
+        </div>
+      );
+    case "caboverde":
+      return (
+        <div className="anim-tema" aria-hidden="true">
+          <div className="anim-rueda-estrellas">
+            {Array.from({ length: 10 }, (_, i) => {
+              const a = (i * 36 * Math.PI) / 180;
+              return (
+                <span key={i} className="anim-isla-estrella"
+                  style={{
+                    left: `calc(50% + ${Math.cos(a) * 90}px)`,
+                    top: `calc(50% + ${Math.sin(a) * 90}px)`,
+                    "--d": `${0.2 + i * 0.12}s`,
+                  } as React.CSSProperties} />
+              );
+            })}
+          </div>
+          <div className="anim-mar anim-mar-cv" />
+          <div className="anim-grito anim-grito-caboverde">MORABEZA</div>
+        </div>
+      );
     case "vikingo":
       return (
         <div className="anim-tema" aria-hidden="true">

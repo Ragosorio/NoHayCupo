@@ -58,7 +58,7 @@ html[data-theme="dark"], html[data-theme="negro"], …, html[data-theme="mitema"
   id: "mitema",            // el mismo string del data-theme
   nombre: "Mi tema",       // como aparece en el picker
   descripcion: "Corto y con personalidad",
-  grupo: "Con vibra",      // sección del picker: Clásicos | La cancha | Con vibra | Fandom
+  grupo: "Con vibra",      // sección: Clásicos | La cancha | Mundial 2026 | Con vibra | Fandom
   oscuro: false,           // elige la paleta de colores de cursos y el color-scheme
   acento: "#…",            // = --acento (pinta el favicon y el puntito del picker)
   acentoTinta: "#…",       // = --acento-tinta (letras NHC del favicon)

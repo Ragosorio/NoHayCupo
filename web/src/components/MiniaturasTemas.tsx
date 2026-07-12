@@ -221,6 +221,59 @@ export default function MiniaturaTema({ tema }: { tema: Tema }) {
           <circle cx="17" cy="18" r="1.2" fill="#fff" opacity=".7" />
         </M>
       );
+    case "colombia": // tricolor con la mitad amarilla
+      return (
+        <M fondo="#fcd116">
+          <rect x="0" y="12" width="24" height="6" fill="#1a4fa0" />
+          <rect x="0" y="18" width="24" height="6" fill="#ce1126" />
+        </M>
+      );
+    case "francia": // bleu-blanc-rouge con la torre
+      return (
+        <M fondo="#ffffff">
+          <rect x="0" y="0" width="8" height="24" fill="#0055a4" />
+          <rect x="16" y="0" width="8" height="24" fill="#ef4135" />
+          <path d="M12 5.5 9.6 18.5h1.7l.7-8.5.7 8.5h1.7Z" fill="#131c33" />
+          <path d="M9.8 15h4.4" stroke="#131c33" strokeWidth="1.2" />
+        </M>
+      );
+    case "noruega": // aurora sobre la noche polar
+      return (
+        <M fondo="#071125">
+          <path d="M3 16C7 9 11 13 14 8s5-3 7-6" stroke="#3ddc97" strokeWidth="3"
+            fill="none" strokeLinecap="round" opacity=".85" />
+          <circle cx="6" cy="6" r="1" fill="#ecf1fa" />
+          <circle cx="18" cy="18.5" r="1.2" fill="#d94b64" />
+        </M>
+      );
+    case "suecia": // la cruz nórdica amarilla
+      return (
+        <M fondo="#0d2440">
+          <rect x="7.5" y="0" width="5" height="24" fill="#fecc02" />
+          <rect x="0" y="9.5" width="24" height="5" fill="#fecc02" />
+        </M>
+      );
+    case "mexico": // tricolor vertical con el centro
+      return (
+        <M fondo="#ffffff">
+          <rect x="0" y="0" width="8" height="24" fill="#046a38" />
+          <rect x="16" y="0" width="8" height="24" fill="#ce1126" />
+          <circle cx="12" cy="12" r="3" fill="none" stroke="#8a5a3b" strokeWidth="1.6" />
+          <circle cx="12" cy="12" r="1.1" fill="#8a5a3b" />
+        </M>
+      );
+    case "caboverde": // océano con franjas y círculo de estrellas
+      return (
+        <M fondo="#1d4fa4">
+          <rect x="0" y="13" width="24" height="2.4" fill="#ffffff" />
+          <rect x="0" y="15.4" width="24" height="2.4" fill="#cf2027" />
+          <rect x="0" y="17.8" width="24" height="2.4" fill="#ffffff" />
+          {[0, 60, 120, 180, 240, 300].map((a) => {
+            const r = 4.6, x = 9 + r * Math.cos((a * Math.PI) / 180), y = 15 + r * Math.sin((a * Math.PI) / 180);
+            return <circle key={a} cx={x} cy={y} r="1" fill="#fcd116" />;
+          })}
+        </M>
+      );
     case "chasquido": // seis gemas en arco
       return (
         <M fondo="#120b1d">

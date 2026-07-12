@@ -10,7 +10,7 @@ export interface Tema {
   id: string;
   nombre: string;
   descripcion: string;
-  /** Sección del picker: "Clásicos" | "La cancha" | "Con vibra" | "Fandom". */
+  /** Sección del picker: Clásicos | La cancha | Mundial 2026 | Con vibra | Fandom. */
   grupo: string;
   /** Decide la paleta de colores de cursos y el color-scheme del navegador. */
   oscuro: boolean;
@@ -80,6 +80,38 @@ export const TEMAS: Tema[] = [
     id: "chapin", nombre: "Chapín", descripcion: "Azul, blanco y un quetzal", grupo: "La cancha",
     oscuro: false, acento: "#2374a8", acentoTinta: "#ffffff", marco: "#ffffff",
     animacion: "chapin",
+  },
+
+  /* ---- Mundial 2026 (Argentina ya es «Campeones» y Guate es «Chapín») ---- */
+  {
+    id: "colombia", nombre: "Colombia", descripcion: "Tricolor con sabor a café", grupo: "Mundial 2026",
+    oscuro: false, acento: "#1a4fa0", acentoTinta: "#ffffff", marco: "#fffdf5",
+    animacion: "colombia",
+  },
+  {
+    id: "francia", nombre: "Francia", descripcion: "Bleu, blanc, rouge et la tour", grupo: "Mundial 2026",
+    oscuro: false, acento: "#0055a4", acentoTinta: "#ffffff", marco: "#ffffff",
+    animacion: "francia",
+  },
+  {
+    id: "noruega", nombre: "Noruega", descripcion: "Noche polar con aurora boreal", grupo: "Mundial 2026",
+    oscuro: true, acento: "#d94b64", acentoTinta: "#2b060d", marco: "#0e1b36",
+    animacion: "noruega",
+  },
+  {
+    id: "suecia", nombre: "Suecia", descripcion: "Azul profundo, cruz amarilla", grupo: "Mundial 2026",
+    oscuro: true, acento: "#fecc02", acentoTinta: "#241d02", marco: "#0d2440",
+    animacion: "suecia",
+  },
+  {
+    id: "mexico", nombre: "México", descripcion: "Verde bandera y confeti", grupo: "Mundial 2026",
+    oscuro: false, acento: "#046a38", acentoTinta: "#ffffff", marco: "#ffffff",
+    animacion: "mexico",
+  },
+  {
+    id: "caboverde", nombre: "Cabo Verde", descripcion: "Océano, estrellas y morabeza", grupo: "Mundial 2026",
+    oscuro: false, acento: "#1d4fa4", acentoTinta: "#ffffff", marco: "#ffffff",
+    animacion: "caboverde",
   },
 
   /* ---- Con vibra ---- */

@@ -157,6 +157,120 @@
   --sombra: 0 1px 2px rgba(0, 10, 0, .4), 0 6px 24px rgba(0, 10, 0, .3);
 }
 
+/* Colombia — amarillo suave con azul y rojo de tricolor. */
+[data-theme="colombia"] {
+  --fondo: #fdf7e3;
+  --tarjeta: #fffdf5;
+  --tarjeta-2: #f9eec6;
+  --tinta: #33290f;
+  --tinta-suave: #6f6237;
+  --tinta-tenue: #a89a6b;
+  --borde: #efe2b5;
+  --linea: #f7eed3;
+  --acento: #1a4fa0;
+  --acento-tinta: #ffffff;
+  --acento-suave: #e7eefb;
+  --ok-bg: #e5f4e6;  --ok-fg: #1c5e2a;  --ok-borde: #3d9e50;
+  --warn-bg: #fcf0cd; --warn-fg: #77550a; --warn-borde: #d8a412;
+  --mal-bg: #fdeaea;  --mal-fg: #93191f;  --mal-borde: #ce1126;
+  --sombra: 0 1px 2px rgba(120, 90, 10, .06), 0 6px 20px rgba(120, 90, 10, .08);
+}
+
+/* Francia — bleu, blanc, rouge: limpio y elegante. */
+[data-theme="francia"] {
+  --fondo: #f2f4f9;
+  --tarjeta: #ffffff;
+  --tarjeta-2: #e4e9f3;
+  --tinta: #131c33;
+  --tinta-suave: #4d5a75;
+  --tinta-tenue: #8b97ad;
+  --borde: #d7ddeb;
+  --linea: #e9edf5;
+  --acento: #0055a4;
+  --acento-tinta: #ffffff;
+  --acento-suave: #e3edf9;
+  --ok-bg: #e5f4eb;  --ok-fg: #15613b;  --ok-borde: #2f9e5f;
+  --warn-bg: #fdf3dd; --warn-fg: #7a5410; --warn-borde: #e2b75c;
+  --mal-bg: #fdeaea;  --mal-fg: #99161f;  --mal-borde: #ef4135;
+  --sombra: 0 1px 2px rgba(0, 40, 100, .05), 0 6px 20px rgba(0, 40, 100, .07);
+}
+
+/* Noruega — noche polar azul con rojo nórdico; la aurora saluda. */
+[data-theme="noruega"] {
+  --fondo: #071125;
+  --tarjeta: #0e1b36;
+  --tarjeta-2: #142344;
+  --tinta: #ecf1fa;
+  --tinta-suave: #a3b1cc;
+  --tinta-tenue: #61708f;
+  --borde: #20305a;
+  --linea: #16234a;
+  --acento: #d94b64;
+  --acento-tinta: #2b060d;
+  --acento-suave: #331526;
+  --ok-bg: #0f2e21;  --ok-fg: #7fe0b0;  --ok-borde: #2f9e5f;
+  --warn-bg: #2c2312; --warn-fg: #ecc87e; --warn-borde: #a8842f;
+  --mal-bg: #331520;  --mal-fg: #f4a3ad;  --mal-borde: #c24052;
+  --sombra: 0 1px 2px rgba(0, 5, 20, .5), 0 6px 24px rgba(0, 5, 20, .4);
+}
+
+/* Suecia — azul profundo con la cruz amarilla como acento. */
+[data-theme="suecia"] {
+  --fondo: #06182b;
+  --tarjeta: #0d2440;
+  --tarjeta-2: #133052;
+  --tinta: #eaf2fa;
+  --tinta-suave: #9fb6cc;
+  --tinta-tenue: #5e7893;
+  --borde: #1d3a5e;
+  --linea: #132b4a;
+  --acento: #fecc02;
+  --acento-tinta: #241d02;
+  --acento-suave: #2b2708;
+  --ok-bg: #10301f;  --ok-fg: #7fd6a4;  --ok-borde: #2f9e5f;
+  --warn-bg: #2c2312; --warn-fg: #f0d080; --warn-borde: #b8912f;
+  --mal-bg: #321722;  --mal-fg: #f1a0a3;  --mal-borde: #c24045;
+  --sombra: 0 1px 2px rgba(0, 10, 25, .5), 0 6px 24px rgba(0, 10, 25, .4);
+}
+
+/* México — verde bandera con blanco fresco. */
+[data-theme="mexico"] {
+  --fondo: #f0f7f0;
+  --tarjeta: #ffffff;
+  --tarjeta-2: #ddeede;
+  --tinta: #14301d;
+  --tinta-suave: #4c6b55;
+  --tinta-tenue: #88a58f;
+  --borde: #cbe4ce;
+  --linea: #e2f0e4;
+  --acento: #046a38;
+  --acento-tinta: #ffffff;
+  --acento-suave: #ddf1e4;
+  --ok-bg: #ddf1e4;  --ok-fg: #0d5c33;  --ok-borde: #2f9e5f;
+  --warn-bg: #fdf3dd; --warn-fg: #7a5410; --warn-borde: #e2b75c;
+  --mal-bg: #fdeaea;  --mal-fg: #93191f;  --mal-borde: #ce1126;
+  --sombra: 0 1px 2px rgba(5, 80, 40, .06), 0 6px 20px rgba(5, 80, 40, .08);
+}
+
+/* Cabo Verde — azul océano con estrellas y calma isleña. */
+[data-theme="caboverde"] {
+  --fondo: #eef6f9;
+  --tarjeta: #ffffff;
+  --tarjeta-2: #daecf3;
+  --tinta: #0f2a35;
+  --tinta-suave: #46687a;
+  --tinta-tenue: #85a5b3;
+  --borde: #c9e2ec;
+  --linea: #e1eff5;
+  --acento: #1d4fa4;
+  --acento-tinta: #ffffff;
+  --acento-suave: #e5edfa;
+  --ok-bg: #e2f4ea;  --ok-fg: #15613b;  --ok-borde: #2f9e5f;
+  --warn-bg: #fdf3d5; --warn-fg: #755408; --warn-borde: #d8b012;
+  --mal-bg: #fdeaea;  --mal-fg: #93191f;  --mal-borde: #cf2027;
+  --sombra: 0 1px 2px rgba(10, 50, 90, .05), 0 6px 20px rgba(10, 50, 90, .07);
+}
+
 /* Modo cute — lila pastel con florcitas; el ajolote saluda al entrar. */
 [data-theme="cute"] {
   --fondo: #faf1fb;
@@ -505,7 +619,8 @@ html { color-scheme: light; }
 html[data-theme="dark"], html[data-theme="negro"], html[data-theme="morado"],
 html[data-theme="futbol"], html[data-theme="siu"], html[data-theme="vikingo"],
 html[data-theme="gallo"], html[data-theme="pandora"], html[data-theme="chasquido"],
-html[data-theme="estrellada"] { color-scheme: dark; }
+html[data-theme="estrellada"], html[data-theme="noruega"],
+html[data-theme="suecia"] { color-scheme: dark; }
 
 body {
   margin: 0;
@@ -1257,6 +1372,93 @@ body.sidebar-oculta .sidebar { display: none; }
 }
 .anim-grito-dtmf { color: #1a7f37; top: 58%; font-size: clamp(20px, 4.6vw, 36px); }
 
+/* Colombia: las tres bandas cruzan la pantalla escalonadas. */
+.anim-banda {
+  position: absolute; left: 0; right: 0; background: var(--c, #fcd116);
+  transform: translateX(-104%); opacity: .92;
+  animation: banda-cruza 2.9s cubic-bezier(.3, .1, .3, 1) var(--d, 0s) forwards;
+}
+@keyframes banda-cruza {
+  0%   { transform: translateX(-104%); }
+  30%  { transform: translateX(0); }
+  70%  { transform: translateX(0); }
+  100% { transform: translateX(104%); }
+}
+.anim-grito-colombia { color: #1a4fa0; top: 64%; }
+
+/* Francia: la torre sube y las lucecitas titilan. */
+.anim-torre {
+  position: absolute; left: 50%; margin-left: -55px; bottom: 0;
+  filter: drop-shadow(0 8px 18px rgba(0, 30, 80, .35));
+  animation: torre-sube 3s cubic-bezier(.25, .1, .3, 1) forwards;
+}
+@keyframes torre-sube {
+  0%   { transform: translateY(105%); }
+  32%  { transform: translateY(6%); }
+  42%  { transform: translateY(0); }
+  86%  { opacity: 1; }
+  100% { transform: translateY(0); opacity: 0; }
+}
+.anim-grito-francia { color: #0055a4; top: 20%; }
+
+/* Noruega: cintas de aurora que ondean sobre la noche polar. */
+.anim-aurora {
+  position: absolute; left: -4vw; width: 108vw; height: 16vh;
+  filter: blur(6px);
+  animation: aurora-ondea 3s ease-in-out var(--d, 0s) forwards; opacity: 0;
+}
+@keyframes aurora-ondea {
+  0%   { opacity: 0; transform: translateY(14px) scaleY(.7); }
+  22%  { opacity: 1; }
+  50%  { transform: translateY(-8px) scaleY(1.1); }
+  78%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(6px) scaleY(.9); }
+}
+.anim-grito-noruega { color: #3ddc97; top: 58%; }
+
+/* Suecia: la cruz nórdica se dibuja sola. */
+.anim-cruz-h {
+  position: absolute; left: 0; right: 0; top: 44%; height: 7vh;
+  background: rgba(254, 204, 2, .9); transform-origin: left center;
+  transform: scaleX(0); animation: cruz-h 2.8s ease forwards;
+}
+.anim-cruz-v {
+  position: absolute; top: 0; bottom: 0; left: 32%; width: 7vh;
+  background: rgba(254, 204, 2, .9); transform-origin: center top;
+  transform: scaleY(0); animation: cruz-v 2.8s ease .25s forwards;
+}
+@keyframes cruz-h {
+  0% { transform: scaleX(0); } 30% { transform: scaleX(1); }
+  80% { opacity: 1; transform: scaleX(1); } 100% { opacity: 0; transform: scaleX(1); }
+}
+@keyframes cruz-v {
+  0% { transform: scaleY(0); } 30% { transform: scaleY(1); }
+  75% { opacity: 1; transform: scaleY(1); } 100% { opacity: 0; transform: scaleY(1); }
+}
+.anim-grito-suecia { color: #fecc02; top: 68%; }
+
+.anim-grito-mexico { color: #046a38; top: 40%; }
+
+/* Cabo Verde: el círculo de estrellas gira y el mar sube. */
+.anim-rueda-estrellas {
+  position: absolute; inset: 0;
+  animation: rueda-gira 3s ease-in-out forwards; transform-origin: 50% 42%;
+}
+@keyframes rueda-gira {
+  0% { transform: rotate(-30deg); } 45% { transform: rotate(0deg); }
+  85% { opacity: 1; } 100% { opacity: 0; transform: rotate(8deg); }
+}
+.anim-isla-estrella {
+  position: absolute; width: 12px; height: 12px; margin: -6px 0 0 -6px;
+  background: #fcd116; border-radius: 50%;
+  box-shadow: 0 0 12px 3px rgba(252, 209, 22, .5);
+  transform: translateY(-9vh) scale(0);
+  animation: isla-estrella .5s ease-out var(--d, 0s) forwards;
+}
+@keyframes isla-estrella { to { transform: translateY(-9vh) scale(1); } }
+.anim-mar-cv { background: rgba(29, 79, 164, .28); }
+.anim-grito-caboverde { color: #1d4fa4; top: 70%; letter-spacing: .18em; }
+
 /* El vikingo: la silueta zen sube y flota; el 9 de fondo. */
 .anim-nueve { color: rgba(108, 171, 221, .16); right: auto; left: 6vw; }
 .anim-zen {
@@ -1340,7 +1542,8 @@ body.sidebar-oculta .sidebar { display: none; }
 }
 .anim-estrella {
   position: absolute; width: 5px; height: 5px; border-radius: 50%;
-  background: #f0c53f; box-shadow: 0 0 10px 3px rgba(240, 197, 63, .55);
+  background: var(--c, #f0c53f);
+  box-shadow: 0 0 10px 3px color-mix(in srgb, var(--c, #f0c53f) 55%, transparent);
   animation: titilar 2.8s ease-in-out var(--d, 0s) forwards; opacity: 0;
 }
 @keyframes titilar {
