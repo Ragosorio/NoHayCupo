@@ -628,13 +628,6 @@ export function opcionChocaConEditor(codigo: string, opcionId: number) {
   return algunTraslape(sesionesDeOpcionJson(res.opciones[codigo][opcionId]), resto);
 }
 
-/** Agrega un curso mientras se arma el horario en modo consulta y regenera
- * conservando las secciones ya elegidas. */
-export async function agregarCursoConsulta(codigo: string) {
-  agregarCurso(codigo);
-  await generarConsulta();
-}
-
 /* ---------- reset total (menos el tema) ---------- */
 
 /** Borra todo lo guardado en este navegador (cursos, horario, carnet, pénsum…)
