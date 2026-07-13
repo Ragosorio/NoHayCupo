@@ -11,6 +11,7 @@ import { IconoCalendarioHero } from "./Iconos";
 import { AnimacionTema, ModalAcerca, ModalBienvenida, ModalCompartir, ModalPensum, Toast } from "./Modales";
 import ModalContribuir from "./ModalContribuir";
 import ModalCurso from "./ModalCurso";
+import ModalReset from "./ModalReset";
 import PanelCursos from "./PanelCursos";
 import PanelPerfil from "./PanelPerfil";
 import PanelTiempo from "./PanelTiempo";
@@ -30,6 +31,7 @@ export default function App() {
         setModal("temas", false);
         setModal("compartir", false);
         setModal("contribuir", false);
+        setModal("reset", false);
         cerrarDetalleCurso();
         cerrarChat();
       }
@@ -105,19 +107,37 @@ export default function App() {
           ) : (
             <div id="vacioHero" className="hero">
               <div className="hero-icon" aria-hidden="true"><IconoCalendarioHero /></div>
-              <h2>Tu horario ideal, sin traslapes</h2>
-              <p className="hero-sub">
-                Elegí tus cursos, contale a la app qué horas no querés usar,<br />
-                y compará todas las combinaciones posibles del catálogo real.
-              </p>
-              <div className="hero-acciones">
-                <button className="btn btn-primary btn-ancho-auto" onClick={iniciarTour}>
-                  Mostrame cómo funciona
-                </button>
-                <button className="btn btn-ancho-auto solo-movil" onClick={abrirMenuMovil}>
-                  Elegir mis cursos
-                </button>
-              </div>
+              {E.modo === "consulta" ? (
+                <>
+                  <h2>Armá el horario que ya tenés</h2>
+                  <p className="hero-sub">
+                    {E.seleccion.length === 0
+                      ? <>Primero agregá los cursos que vas a llevar en el panel de la izquierda.<br />Después elegís la sección exacta de cada uno y ves cómo queda tu semana.</>
+                      : <>Ya tenés {E.seleccion.length} curso(s). Tocá <strong>«Armar mi horario»</strong> y elegí la sección de cada uno.</>}
+                  </p>
+                  <div className="hero-acciones">
+                    <button className="btn btn-ancho-auto solo-movil" onClick={abrirMenuMovil}>
+                      {E.seleccion.length === 0 ? "Agregar mis cursos" : "Ver mis cursos"}
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <h2>Tu horario ideal, sin traslapes</h2>
+                  <p className="hero-sub">
+                    Elegí tus cursos, contale a la app qué horas no querés usar,<br />
+                    y compará todas las combinaciones posibles del catálogo real.
+                  </p>
+                  <div className="hero-acciones">
+                    <button className="btn btn-primary btn-ancho-auto" onClick={iniciarTour}>
+                      Mostrame cómo funciona
+                    </button>
+                    <button className="btn btn-ancho-auto solo-movil" onClick={abrirMenuMovil}>
+                      Elegir mis cursos
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           )}
         </section>
@@ -126,6 +146,7 @@ export default function App() {
       <ChatIA />
       <ModalCurso />
       <ModalContribuir />
+      <ModalReset />
       <ModalPensum />
       <ModalAcerca />
       <ModalBienvenida />

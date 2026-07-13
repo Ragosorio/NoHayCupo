@@ -158,6 +158,7 @@ export const E = {
   modalAcerca: false,
   modalBienvenida: false,
   modalContribuir: false,   // «cómo subir grupos»
+  modalReset: false,        // confirmación de «borrar mis datos»
   menuExportar: false,
 };
 

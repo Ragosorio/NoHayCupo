@@ -11,6 +11,7 @@ import { $v, colorDe, E, type ComboJson, type OpcionJson } from "@/lib/cliente/e
 import { exportarExcel, exportarIcs, exportarPng, exportarPrompt } from "@/lib/cliente/exportar";
 import { DIAS_NOMBRE, nombreBonito } from "@/lib/cliente/util";
 import Calendario from "./Calendario";
+import ConstructorSecciones from "./ConstructorSecciones";
 import {
   IconoAlerta, IconoCalendario, IconoChispa, IconoCompartir, IconoImagen,
   IconoImpresora, IconoLapiz, IconoTabla,
@@ -331,6 +332,7 @@ export default function Resultados() {
       {mostrado ? (
         <>
           {metricas && <Metricas m={metricas} />}
+          {consulta && E.editor && <ConstructorSecciones />}
           {!E.editor && <SeccionesEquivalentes />}
           <Calendario mostrado={mostrado} />
           {E.editor && <Alternativas />}

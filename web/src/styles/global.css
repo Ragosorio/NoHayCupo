@@ -781,6 +781,81 @@ body.sidebar-oculta .sidebar { display: none; }
 }
 .consulta-guia p { font-size: 12.5px; color: var(--tinta-suave); margin: 0; line-height: 1.45; }
 
+/* Constructor de secciones (modo «ya tengo mi horario») */
+.constructor { margin-bottom: 16px; }
+.cs-buscador { position: relative; margin-bottom: 12px; }
+.cs-buscador input {
+  width: 100%; padding: 11px 13px; font-size: 14px;
+  background: var(--tarjeta); border: 1px solid var(--borde); border-radius: 10px;
+  color: var(--tinta);
+}
+.cs-buscador input:focus { outline: none; border-color: var(--acento); }
+.cs-agregar {
+  position: absolute; z-index: 30; left: 0; right: 0; top: calc(100% + 4px);
+  background: var(--tarjeta); border: 1px solid var(--borde); border-radius: 10px;
+  box-shadow: var(--sombra-fuerte, var(--sombra)); overflow: hidden;
+}
+.cs-agregar-tit {
+  font-size: 10.5px; text-transform: uppercase; letter-spacing: .07em;
+  color: var(--tinta-tenue); padding: 8px 12px 4px;
+}
+.cs-agregar li:not(.cs-agregar-tit) {
+  display: flex; align-items: baseline; gap: 8px; padding: 9px 12px; cursor: pointer;
+  font-size: 13px;
+}
+.cs-agregar li:not(.cs-agregar-tit):hover { background: var(--tarjeta-2); }
+.cs-agregar .codigo { font-weight: 700; color: var(--acento); }
+.cs-agregar .nombre { flex: 1; color: var(--tinta); }
+.cs-agregar .meta { font-size: 11.5px; color: var(--tinta-suave); }
+
+.cs-lista { display: flex; flex-direction: column; gap: 8px; }
+.cs-curso {
+  border: 1px solid var(--borde); border-left: 3px solid var(--color, var(--borde));
+  border-radius: 10px; background: var(--tarjeta); overflow: hidden;
+}
+.cs-curso-head {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; padding: 11px 13px; background: none; border: none; cursor: pointer;
+  text-align: left; color: var(--tinta);
+}
+.cs-curso-head:hover { background: var(--tarjeta-2); }
+.cs-curso-id { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.cs-codigo { font-size: 11px; font-weight: 700; color: var(--tinta-suave); letter-spacing: .03em; }
+.cs-nombre { font-size: 13.5px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cs-curso-actual { font-size: 12.5px; color: var(--tinta-suave); display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+.cs-curso-actual strong { color: var(--tinta); }
+.cs-chevron { font-size: 9px; color: var(--tinta-tenue); }
+
+.cs-opciones {
+  display: flex; flex-direction: column; gap: 6px; padding: 4px 10px 10px;
+  max-height: 320px; overflow-y: auto;
+}
+.cs-opcion {
+  text-align: left; width: 100%; padding: 9px 11px; border-radius: 8px;
+  border: 1px solid var(--borde); background: var(--tarjeta-2); cursor: pointer;
+  color: var(--tinta);
+}
+.cs-opcion:hover { border-color: var(--tinta-tenue); }
+.cs-opcion.activa { border-color: var(--color, var(--acento)); background: color-mix(in srgb, var(--color, var(--acento)) 12%, transparent); }
+.cs-opcion.choca { opacity: .82; }
+.cs-opcion-top { display: flex; align-items: center; gap: 8px; margin-bottom: 3px; }
+.cs-opcion-sec { font-weight: 700; font-size: 13px; }
+.cs-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; padding: 1px 6px; border-radius: 999px; }
+.cs-tag.ok { background: var(--ok-bg, rgba(37,211,102,.15)); color: var(--ok-fg, #128c4a); }
+.cs-tag.warn { background: var(--warn-bg); color: var(--warn-fg); }
+.cs-opcion-linea { font-size: 11.5px; color: var(--tinta-suave); line-height: 1.5; }
+.cs-opcion-cat { color: var(--tinta); font-weight: 600; margin-right: 5px; }
+
+/* Modal «borrar mis datos» */
+.modal-reset { max-width: 440px; }
+.modal-reset-cuerpo { padding: 4px 2px 2px; }
+.modal-reset-cuerpo .hint { margin-top: 10px; }
+.modal-reset-btns { display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px; }
+.btn-peligro {
+  background: var(--mal-bg); border-color: var(--mal-borde); color: var(--mal-fg); font-weight: 700;
+}
+.btn-peligro:hover:not(:disabled) { filter: brightness(1.05); border-color: var(--mal-fg); }
+
 /* ===== Campos ===== */
 .fila-2 { display: flex; gap: 10px; margin-bottom: 12px; }
 .campo { display: flex; flex-direction: column; gap: 4px; font-size: 11.5px; color: var(--tinta-suave); }

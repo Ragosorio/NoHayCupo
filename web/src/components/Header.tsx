@@ -5,7 +5,7 @@ import { alternarSidebar, cambiarTema, setModal } from "@/lib/cliente/acciones";
 import { alternarChat } from "@/lib/cliente/ia/chat";
 import { $v, E } from "@/lib/cliente/estado";
 import { TEMAS } from "@/lib/cliente/temas";
-import { IconoChispa, IconoMenu, IconoPaleta, IconoX, LogoNHC } from "./Iconos";
+import { IconoBasura, IconoChispa, IconoMenu, IconoPaleta, IconoX, LogoNHC } from "./Iconos";
 import MiniaturaTema from "./MiniaturasTemas";
 
 export default function Header() {
@@ -26,6 +26,11 @@ export default function Header() {
       </div>
       <div className="topbar-controls no-print">
         <span className="estado-catalogo">{E.estadoCatalogo}</span>
+        <button className="btn btn-icono" title="Borrar mis datos de este navegador (conserva el tema)"
+          aria-label="Borrar mis datos guardados"
+          onClick={() => setModal("reset", true)}>
+          <IconoBasura />
+        </button>
         <button id="btnIA" className={`btn btn-icono${E.chat.abierto ? " activo-ia" : ""}`}
           title="Cupito — asistente IA local" aria-label="Abrir a Cupito, el asistente IA"
           aria-expanded={E.chat.abierto} onClick={alternarChat}>

@@ -582,14 +582,71 @@ export function setModo(m: "generar" | "consulta") {
 }
 
 /** Modo consulta: genera las combinaciones (para tener res.opciones) y deja
- * al estudiante armando su horario sección por sección. Si ya tenía un
- * horario propio guardado, lo muestra en vez de forzar el editor. */
+ * al estudiante armando su horario sección por sección en el editor. Preserva
+ * las secciones que ya hubiera elegido (mismo código + índice de opción, que
+ * es estable aunque se agreguen o quiten otros cursos). */
 export async function generarConsulta() {
+  const previos = E.editor
+    ? new Map(E.editor.ids)
+    : E.miHorario
+      ? new Map(Object.entries(E.miHorario.ids))
+      : null;
   await generar();
   if (!E.resultado) return;
-  if (E.miHorario) E.opcion = "mia";
-  else entrarEditor();
+  entrarEditor();
+  if (previos && E.editor) {
+    for (const [cod, id] of previos) {
+      if (E.editor.ids.has(cod) && (E.resultado.opciones[cod]?.length ?? 0) > id) {
+        E.editor.ids.set(cod, id);
+      }
+    }
+  }
   touch();
+}
+
+/** Fija la sección (índice de opción) de un curso en el editor, permitiendo
+ * cualquier opción del catálogo aunque choque con el resto — es el estudiante
+ * quien está copiando su horario real. Con undo, como cualquier cambio. */
+export function elegirSeccionConsulta(codigo: string, opcionId: number) {
+  const ed = E.editor;
+  if (!ed || ed.ids.get(codigo) === opcionId) return;
+  ed.undo.push(new Map(ed.ids));
+  ed.ids.set(codigo, opcionId);
+  guardarLocal();
+  touch();
+}
+
+/** ¿La opción `opcionId` de `codigo` choca con lo que el resto de cursos tiene
+ * elegido ahora mismo en el editor? Para avisar sin bloquear la elección. */
+export function opcionChocaConEditor(codigo: string, opcionId: number) {
+  const res = E.resultado;
+  if (!res || !E.editor) return false;
+  const resto: SesionLigera[] = [];
+  for (const [otro, id] of E.editor.ids) {
+    if (otro !== codigo) resto.push(...sesionesDeOpcionJson(res.opciones[otro][id]));
+  }
+  return algunTraslape(sesionesDeOpcionJson(res.opciones[codigo][opcionId]), resto);
+}
+
+/** Agrega un curso mientras se arma el horario en modo consulta y regenera
+ * conservando las secciones ya elegidas. */
+export async function agregarCursoConsulta(codigo: string) {
+  agregarCurso(codigo);
+  await generarConsulta();
+}
+
+/* ---------- reset total (menos el tema) ---------- */
+
+/** Borra todo lo guardado en este navegador (cursos, horario, carnet, pénsum…)
+ * y deja la app como recién instalada, conservando SOLO el tema elegido. */
+export function resetearTodo() {
+  const tema = E.tema;
+  try {
+    localStorage.removeItem("nhc");
+    localStorage.removeItem("nhc_visto");
+    if (tema) localStorage.setItem("nhc", JSON.stringify({ tema }));
+  } catch { /* localStorage no disponible: recargar igual */ }
+  location.reload();
 }
 
 export function quitarYRegenerar(codigo: string) {
@@ -706,7 +763,7 @@ export function deshacerSwap() {
 
 /* ---------- modales ---------- */
 
-export function setModal(cual: "pensum" | "acerca" | "bienvenida" | "export" | "temas" | "compartir" | "contribuir", abierto: boolean) {
+export function setModal(cual: "pensum" | "acerca" | "bienvenida" | "export" | "temas" | "compartir" | "contribuir" | "reset", abierto: boolean) {
   if (cual === "pensum") E.modalPensum = abierto;
   if (cual === "acerca") E.modalAcerca = abierto;
   if (cual === "bienvenida") E.modalBienvenida = abierto;
@@ -714,6 +771,7 @@ export function setModal(cual: "pensum" | "acerca" | "bienvenida" | "export" | "
   if (cual === "temas") E.menuTemas = abierto;
   if (cual === "compartir") E.modalCompartir = abierto;
   if (cual === "contribuir") E.modalContribuir = abierto;
+  if (cual === "reset") E.modalReset = abierto;
   touch();
 }
 
