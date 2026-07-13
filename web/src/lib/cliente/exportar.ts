@@ -1,5 +1,5 @@
 /** Exportar el horario: PNG (canvas), .ics y prompt para IA — puerto de app.js. */
-import { bloqueosComoRangos, comboMostrado, etiquetaComponentes, toast } from "./acciones";
+import { bloqueosComoRangos, comboMostrado, etiquetaComponentes, seccionMostrada, toast } from "./acciones";
 import { colorDe, E } from "./estado";
 import { esTemaOscuro } from "./temas";
 import { aMin, DIAS_NOMBRE, DIAS_ORDEN, nombreBonito, nombrePeriodo } from "./util";
@@ -13,7 +13,7 @@ function eventosDe(mostrado: NonNullable<ReturnType<typeof comboMostrado>>) {
         eventos.push({
           dia, inicio: aMin(comp.inicio), fin: aMin(comp.fin),
           codigo: curso.codigo, nombre: curso.nombre,
-          seccion: comp.seccion, categoria: comp.categoria,
+          seccion: seccionMostrada(curso.codigo, comp), categoria: comp.categoria,
           horas: `${comp.inicio}–${comp.fin}`,
           fondo, borde, tinta,
         });
@@ -145,7 +145,7 @@ export function exportarIcs() {
           `DTSTART:${fmt(fecha, comp.inicio)}`,
           `DTEND:${fmt(fecha, comp.fin)}`,
           `RRULE:FREQ=WEEKLY;BYDAY=${ICS_DIA[dia]};COUNT=18`,
-          `SUMMARY:${nombre} · sec ${comp.seccion}`,
+          `SUMMARY:${nombre} · sec ${seccionMostrada(curso.codigo, comp)}`,
           `DESCRIPTION:${nombreBonito(comp.catedratico || "")}`,
           "END:VEVENT",
         );
@@ -241,7 +241,7 @@ export function exportarExcel() {
   for (const curso of mostrado) {
     for (const comp of curso.opcion.componentes) {
       filas.push([
-        curso.codigo, nombreBonito(curso.nombre), comp.categoria, comp.seccion,
+        curso.codigo, nombreBonito(curso.nombre), comp.categoria, seccionMostrada(curso.codigo, comp),
         comp.dias.map((d) => DIAS_NOMBRE[d]).join(" y "),
         comp.inicio, comp.fin, nombreBonito(comp.catedratico || ""),
       ]);

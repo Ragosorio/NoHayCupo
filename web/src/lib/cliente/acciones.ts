@@ -4,7 +4,7 @@
 import { evaluarReglas } from "../scraper/restricciones";
 import {
   cargarLocal, E, guardarLocal, touch,
-  type CursoCatalogo, type ComboJson, type OpcionJson, type Resultado,
+  type ComponenteJson, type CursoCatalogo, type ComboJson, type OpcionJson, type Resultado,
 } from "./estado";
 import { leerInvitacionDeUrl } from "./compartir";
 import { generarResultado, metricasDeOpciones, type BloqueoRango } from "./generarCliente";
@@ -317,6 +317,38 @@ export function etiquetaComponentes(curso: CursoCatalogo): string | null {
   if (!practicos.length) return null;
   const partes = curso.tiene_clase ? ["Clase", ...practicos] : practicos;
   return curso.tiene_clase ? partes.join(" + ") : `Solo ${partes.join(" + ")}`;
+}
+
+/* ---------- sección mostrada (relabel entre secciones equivalentes) ----------
+ * Cuando dos secciones comparten EXACTAMENTE el mismo horario, el motor
+ * muestra una (p. ej. la B) pero el estudiante pudo quedar en la otra (la A).
+ * Estas funciones dejan elegir qué letra ver impresa, sin tocar el motor. */
+
+const claveEtiqueta = (codigo: string, categoria: string) => `${codigo}|${categoria}`;
+
+/** Las secciones intercambiables de un componente (la mostrada + sus
+ * equivalentes), ordenadas para el picker. Vacío si no hay alternativas. */
+export function seccionesEquivalentes(comp: ComponenteJson): string[] {
+  if (!comp.equivalentes?.length) return [];
+  const todas = [comp.seccion, ...comp.equivalentes.map((e) => e.seccion)];
+  return [...new Set(todas)].sort();
+}
+
+/** La sección a MOSTRAR para este componente: el override elegido si sigue
+ * siendo una equivalente válida, o la original. */
+export function seccionMostrada(codigo: string, comp: ComponenteJson): string {
+  const elegida = E.etiquetas[claveEtiqueta(codigo, comp.categoria)];
+  if (!elegida) return comp.seccion;
+  const validas = seccionesEquivalentes(comp);
+  return validas.includes(elegida) ? elegida : comp.seccion;
+}
+
+export function cambiarEtiquetaSeccion(codigo: string, categoria: string, seccion: string, original: string) {
+  const clave = claveEtiqueta(codigo, categoria);
+  if (seccion === original) delete E.etiquetas[clave];
+  else E.etiquetas[clave] = seccion;
+  guardarLocal();
+  touch();
 }
 
 export function agregarCurso(codigo: string) {

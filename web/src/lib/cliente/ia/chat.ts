@@ -20,6 +20,28 @@ function pushIA(m: Partial<MensajeChat> & { texto: string }) {
   E.chat.mensajes.push({ rol: "ia", ...m });
 }
 
+const dormir = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/** Escribe un mensaje de Cupito con efecto de tipeo (reusa la burbuja de
+ * streaming). Si el panel está cerrado no vale la pena animar: se empuja
+ * directo. Solo para mensajes que NO vienen del modelo (el saludo). */
+async function tipear(texto: string) {
+  if (!E.chat.abierto) { pushIA({ texto }); touch(); return; }
+  E.chat.pensando = true;
+  E.chat.parcial = "";
+  touch();
+  const paso = Math.max(1, Math.round(texto.length / 70));
+  for (let i = paso; i < texto.length; i += paso) {
+    E.chat.parcial = texto.slice(0, i);
+    touch();
+    await dormir(16);
+  }
+  E.chat.pensando = false;
+  E.chat.parcial = "";
+  pushIA({ texto });
+  touch();
+}
+
 /* ---------- acompañamiento visual ---------- */
 
 /** A qué parte de la app llevar la vista según lo que Cupito tocó. */
@@ -110,7 +132,8 @@ export async function activarIA() {
     localStorage.setItem(LS_ACTIVADA, "1");
     E.chat.fase = "listo";
     E.chat.progreso = { texto: "", pct: null };
-    if (!E.chat.mensajes.length) pushIA({ texto: SALUDO });
+    touch();
+    if (!E.chat.mensajes.length) await tipear(SALUDO);
   } catch (e) {
     localStorage.removeItem(LS_ACTIVADA);
     E.chat.fase = "error";

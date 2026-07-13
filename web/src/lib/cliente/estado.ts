@@ -137,6 +137,11 @@ export const E = {
   indicePensums: [] as Array<{ id: number; carrera: string; plan: string; vigencia_desde: number }>,
   carrera: "Ingeniería en Ciencias y Sistemas",
   pensumId: null as number | null,
+  /** Override visual de la sección mostrada: clave `codigo|categoria` →
+   * la sección equivalente que el estudiante quiere ver impresa (p. ej.
+   * quedó en la A pero el sistema muestra la B, mismo horario). Solo
+   * cosmético — no toca el motor ni las combinaciones. */
+  etiquetas: {} as Record<string, string>,
   editor: null as Editor | null,
   chat: {
     abierto: false, fase: "cerrado", tier: null,
@@ -184,6 +189,7 @@ export function guardarLocal() {
     sidebarOculta: E.sidebarOculta,
     topN: E.topN,
     miHorario: E.miHorario,
+    etiquetas: E.etiquetas,
     amigo: E.amigo,
     vista: E.resultado
       ? { generado: true, estrategia: E.estrategia, opcion: E.opcion }
@@ -213,6 +219,7 @@ export function cargarLocal() {
     E.sidebarOculta = !!d.sidebarOculta;
     E.topN = d.topN || 3;
     E.miHorario = d.miHorario || null;
+    E.etiquetas = d.etiquetas || {};
     E.amigo = d.amigo || null;
     E.vista = d.vista || null;
   } catch { /* localStorage corrupto: empezar de cero */ }

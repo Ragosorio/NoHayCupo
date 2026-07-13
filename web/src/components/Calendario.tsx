@@ -1,8 +1,8 @@
 /** El calendario semanal: eventos, bloqueos sombreados y ghosts del editor. */
 import { useStore } from "@nanostores/react";
 import {
-  aplicarSwap, bloqueosComoRangos, comboMostrado, ghostsPara, seleccionarEnEditor,
-  type CursoMostrado,
+  aplicarSwap, bloqueosComoRangos, comboMostrado, ghostsPara, seccionMostrada,
+  seleccionarEnEditor, type CursoMostrado,
 } from "@/lib/cliente/acciones";
 import { coincideConAmigo } from "@/lib/cliente/compartir";
 import { $v, colorDe, E } from "@/lib/cliente/estado";
@@ -18,7 +18,7 @@ export function eventosDe(mostrado: CursoMostrado[]) {
         eventos.push({
           dia, inicio: aMin(comp.inicio), fin: aMin(comp.fin),
           codigo: curso.codigo, nombre: curso.nombre,
-          seccion: comp.seccion, categoria: comp.categoria,
+          seccion: seccionMostrada(curso.codigo, comp), categoria: comp.categoria,
           catedratico: comp.catedratico, horas: `${comp.inicio}–${comp.fin}`,
           fondo, borde, tinta,
         });

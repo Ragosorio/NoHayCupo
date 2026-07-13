@@ -30,11 +30,13 @@ export interface MotorIA {
   ): Promise<string>;
 }
 
-/** Modelo por defecto para WebLLM. El 1.5B confundía AM/PM y niveles de
- * bloqueo en pruebas reales; el 3B es el mínimo que se siente inteligente
- * en español y todavía corre en laptops comunes con WebGPU. */
-export const MODELO_WEBLLM = "Qwen2.5-3B-Instruct-q4f16_1-MLC";
-export const TAMANO_MODELO = "≈2 GB";
+/** Modelo por defecto para WebLLM. El 3B se sentía inteligente pero era muy
+ * pesado (≈2 min el primer turno hasta en una M4). El 1.5B es ~2x más rápido
+ * y con el prompt endurecido (conversión AM/PM explícita, few-shots, decoding
+ * restringido por schema) ya acierta niveles y horas — el balance velocidad/
+ * precisión que la mayoría de equipos puede correr. */
+export const MODELO_WEBLLM = "Qwen2.5-1.5B-Instruct-q4f16_1-MLC";
+export const TAMANO_MODELO = "≈1 GB";
 
 type SesionLM = {
   prompt(entrada: unknown, opts?: object): Promise<string>;
@@ -49,20 +51,23 @@ type LanguageModelApi = {
 
 const lmApi = () => (globalThis as { LanguageModel?: LanguageModelApi }).LanguageModel;
 
-/** Qué motor puede correr este navegador. Prioridad: Chrome ya listo (cero
- * espera) → WebGPU para WebLLM → Chrome que aún debe bajar su modelo → nada. */
+/** Qué motor puede correr este navegador. Preferimos SIEMPRE la IA nativa de
+ * Chrome (Gemini Nano) cuando existe: la trae/gestiona el navegador, es
+ * compartida entre sitios y no nos cuesta bajar ~1 GB propio. Solo si Chrome
+ * no la expone caemos a WebLLM sobre WebGPU. */
 export async function detectarTier(): Promise<TierIA | null> {
   let chromeDisponible: string | null = null;
   try {
     const lm = lmApi();
     if (lm) chromeDisponible = await lm.availability();
   } catch { /* API a medio salir en algunas versiones: la ignoramos */ }
-  if (chromeDisponible === "available") return "chrome";
+  // "available" (lista) o "downloadable"/"downloading"/"after-download":
+  // en todos esos casos Chrome puede con ella → preferirla a nuestro modelo.
+  if (chromeDisponible && chromeDisponible !== "unavailable") return "chrome";
   try {
     const gpu = (navigator as { gpu?: { requestAdapter(): Promise<unknown> } }).gpu;
     if (gpu && await gpu.requestAdapter()) return "webllm";
   } catch { /* sin WebGPU */ }
-  if (chromeDisponible && chromeDisponible !== "unavailable") return "chrome";
   return null;
 }
 
@@ -169,10 +174,16 @@ async function crearMotorWebLLM(onProgreso: (p: ProgresoIA) => void): Promise<Mo
   // Import dinámico: web-llm pesa varios MB y solo se paga al activar el chat.
   const webllm = await import("@mlc-ai/web-llm");
   const config = {
-    initProgressCallback: (p: { text: string; progress?: number }) => onProgreso({
-      texto: p.text.replace(/\[.*?\]/g, "").trim() || "Preparando el modelo…",
-      pct: typeof p.progress === "number" ? p.progress : null,
-    }),
+    // WebLLM emite el progreso en inglés («Fetching param cache…»): lo
+    // traducimos a una frase corta en español según la fase.
+    initProgressCallback: (p: { text: string; progress?: number }) => {
+      const t = p.text || "";
+      let texto = "Preparando el modelo…";
+      if (/fetch|cache|download/i.test(t)) texto = "Descargando el modelo…";
+      else if (/shader|gpu|compil/i.test(t)) texto = "Compilando para tu GPU…";
+      else if (/load/i.test(t)) texto = "Cargando el modelo…";
+      onProgreso({ texto, pct: typeof p.progress === "number" ? p.progress : null });
+    },
   };
   // Los pesos q4f16 piden el feature "shader-f16"; si el GPU no lo trae
   // (Safari en algunas máquinas), se usa la variante f32 del MISMO modelo.
@@ -196,7 +207,7 @@ async function crearMotorWebLLM(onProgreso: (p: ProgresoIA) => void): Promise<Mo
   }
   return {
     tier: "webllm",
-    etiqueta: "Qwen 2.5 3B (local, WebGPU)",
+    etiqueta: "Qwen 2.5 1.5B (local, WebGPU)",
     abortar() {
       try { engine.interruptGenerate(); } catch { /* nada en curso */ }
     },

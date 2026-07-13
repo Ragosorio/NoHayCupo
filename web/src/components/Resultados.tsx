@@ -1,9 +1,10 @@
 /** Zona de resultados: estrategias, opciones, métricas, calendario, editor y plan B. */
 import { useStore } from "@nanostores/react";
 import {
-  comboMostrado, deshacerSwap, elegirEstrategia, elegirOpcion, entrarEditor,
-  estrategiaActiva, ghostsPara, metricasMostradas, planBDelMostrado,
-  quitarYRegenerar, salirEditor, setModal, toast, verMasOpciones, aplicarSwap,
+  cambiarEtiquetaSeccion, comboMostrado, deshacerSwap, elegirEstrategia, elegirOpcion,
+  entrarEditor, estrategiaActiva, ghostsPara, metricasMostradas, planBDelMostrado,
+  quitarYRegenerar, salirEditor, seccionesEquivalentes, seccionMostrada, setModal,
+  toast, verMasOpciones, aplicarSwap,
 } from "@/lib/cliente/acciones";
 import { coincidenciasConAmigo } from "@/lib/cliente/compartir";
 import { $v, colorDe, E, type ComboJson, type OpcionJson } from "@/lib/cliente/estado";
@@ -19,6 +20,42 @@ const etiquetaOpcion = (op: { componentes: OpcionJson["componentes"] }) =>
   op.componentes
     .map((c) => `${c.categoria} ${c.seccion} (${c.dias.join(" ")} ${c.inicio}–${c.fin})`)
     .join(" + ");
+
+/** Picker de sección mostrada: solo aparece si algún componente del horario
+ * tiene secciones equivalentes (mismo horario, distinta letra). Sirve para
+ * quien quedó en la A pero el sistema le muestra la B. */
+function SeccionesEquivalentes() {
+  const mostrado = comboMostrado();
+  if (!mostrado) return null;
+  const editables = mostrado.flatMap((curso) =>
+    curso.opcion.componentes
+      .filter((comp) => seccionesEquivalentes(comp).length > 1)
+      .map((comp) => ({ curso, comp })));
+  if (!editables.length) return null;
+  return (
+    <div className="secciones-equiv no-print">
+      <p className="hint sin-margen">
+        ¿Quedaste en otra sección con el mismo horario? Elegí la letra que
+        querés que aparezca en tu calendario y al imprimir.
+      </p>
+      <div className="secciones-equiv-lista">
+        {editables.map(({ curso, comp }) => (
+          <label key={`${curso.codigo}|${comp.categoria}`} className="secciones-equiv-item">
+            <span>{curso.codigo} · {comp.categoria}</span>
+            <select value={seccionMostrada(curso.codigo, comp)}
+              onChange={(ev) => cambiarEtiquetaSeccion(curso.codigo, comp.categoria, ev.target.value, comp.seccion)}>
+              {seccionesEquivalentes(comp).map((sec) => (
+                <option key={sec} value={sec}>
+                  Sección {sec}{sec === comp.seccion ? " (por defecto)" : ""}
+                </option>
+              ))}
+            </select>
+          </label>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function Metricas({ m }: { m: NonNullable<ReturnType<typeof metricasMostradas>> }) {
   const libres = m.dias_libres.length
@@ -278,6 +315,7 @@ export default function Resultados() {
       {mostrado ? (
         <>
           {metricas && <Metricas m={metricas} />}
+          {!E.editor && <SeccionesEquivalentes />}
           <Calendario mostrado={mostrado} />
           {E.editor && <Alternativas />}
           {!E.editor && (E.opcion === "mia"

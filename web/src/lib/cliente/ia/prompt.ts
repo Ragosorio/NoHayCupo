@@ -207,6 +207,7 @@ Cómo interpretar a la gente (lo que más importa):
 - Los DOS niveles de bloqueo:
   · "imposible": NO PUEDE físicamente — trabajo fijo, otra obligación, "no puedo", "me es imposible".
   · "evitar": PUEDE pero preferiría no — "prefiero no", "sí puedo pero no quiero", "mi trabajo es flexible", "odio madrugar", "me choca", "si se puede". La app lo esquiva pero lo usa si no queda de otra.
+- REGLA DE ORO del nivel: si en CUALQUIER parte del mensaje dice "prefiero", "preferiría", "flexible", "si se puede" o "aunque sí puedo" → es "evitar", AUNQUE también mencione "trabajo" o "tengo que". La palabra "trabajo" NO obliga a "imposible"; mandá "imposible" solo si el horario es fijo e innegociable.
 - Si se contradice («no puedo… bueno, sí puedo pero no quiero»), vale lo ÚLTIMO que dijo.
 - Si el usuario te corrige el nivel, volvé a pintar EL MISMO rango con el otro nivel (pintar encima reemplaza; no hace falta borrar antes).
 - Intuí la intención detrás de la vida que te cuentan: «trabajo», «entreno», «cuido a mi hermanito», «juego pádel los martes» → bloqueos en esas horas (el nivel según qué tan negociable suene). «Quiero llegar tarde» → estrategia empezar_tarde. «Quiero un día libre» → estrategia maximo_dia_libre.
