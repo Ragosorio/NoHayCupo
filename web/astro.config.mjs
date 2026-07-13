@@ -13,5 +13,10 @@ export default defineConfig({
   integrations: [react()],
   vite: {
     plugins: [tailwindcss()],
+    // web-llm se importa dinámico (solo al despertar a Cupito): sin esto,
+    // Vite lo descubre a media sesión, re-optimiza deps y el primer intento
+    // muere con 504 «Outdated Optimize Dep» → "Importing a module script
+    // failed". Pre-incluirlo lo deja optimizado desde el arranque del dev.
+    optimizeDeps: { include: ["@mlc-ai/web-llm"] },
   },
 });

@@ -105,6 +105,47 @@ export const SCHEMA_RESPUESTA = {
             properties: { accion: { type: "string", enum: ["compartir"] } },
             required: ["accion"],
           },
+          {
+            type: "object",
+            properties: {
+              accion: { type: "string", enum: ["periodo"] },
+              id: { type: "string", enum: ["1", "2", "v1", "v2"] },
+            },
+            required: ["accion", "id"],
+          },
+          {
+            type: "object",
+            properties: {
+              accion: { type: "string", enum: ["carnet"] },
+              valor: { type: "string" },
+            },
+            required: ["accion", "valor"],
+          },
+          {
+            type: "object",
+            properties: {
+              accion: { type: "string", enum: ["carrera"] },
+              nombre: { type: "string" },
+            },
+            required: ["accion", "nombre"],
+          },
+          {
+            type: "object",
+            properties: {
+              accion: { type: "string", enum: ["aprobar_curso"] },
+              curso: { type: "string" },
+              aprobado: { type: "boolean" },
+            },
+            required: ["accion", "curso"],
+          },
+          {
+            type: "object",
+            properties: {
+              accion: { type: "string", enum: ["sync_pensum"] },
+              activo: { type: "boolean" },
+            },
+            required: ["accion"],
+          },
         ],
       },
     },
@@ -154,6 +195,11 @@ Acciones disponibles (formas EXACTAS):
 {"accion":"mover_curso","curso":"...","alternativa":2} → cambia el curso a esa alternativa del listado (queda guardado como «Mi horario»). Si no sabés el número, mandala sin "alternativa" o pedí "alternativas" primero.
 {"accion":"exportar","formato":"png"|"excel"|"ics"|"prompt"} → descarga el horario como imagen, Excel, calendario (Google Calendar) o prompt para otra IA.
 {"accion":"compartir"} → abre el panel para compartir el horario por enlace con amigos.
+{"accion":"periodo","id":"2"} → cambia el periodo: "1" primer semestre, "2" segundo, "v1" vacaciones junio, "v2" vacaciones diciembre.
+{"accion":"carnet","valor":"202312345"} → guarda el carnet (detecta pénsum y secciones restringidas).
+{"accion":"carrera","nombre":"sistemas"} → pone la carrera (vale el nombre parcial).
+{"accion":"aprobar_curso","curso":"código o nombre","aprobado":true} → marca un curso del pénsum como ya ganado (false lo desmarca).
+{"accion":"sync_pensum","activo":true} → la app selecciona sola los cursos que puede llevar según su pénsum y aprobados.
 Días válidos: LU MA MI JU VI SA DO. Horas en formato HH:MM, rejilla de 06:30 a 21:30.
 
 Cómo interpretar a la gente (lo que más importa):
@@ -165,18 +211,25 @@ Cómo interpretar a la gente (lo que más importa):
 - Si el usuario te corrige el nivel, volvé a pintar EL MISMO rango con el otro nivel (pintar encima reemplaza; no hace falta borrar antes).
 - Intuí la intención detrás de la vida que te cuentan: «trabajo», «entreno», «cuido a mi hermanito», «juego pádel los martes» → bloqueos en esas horas (el nivel según qué tan negociable suene). «Quiero llegar tarde» → estrategia empezar_tarde. «Quiero un día libre» → estrategia maximo_dia_libre.
 - Si de verdad es ambiguo (no dijo días, no dijo horas), preguntá corto en vez de adivinar.
+- Cuando te cuenten horas ocupadas, tu PRIMERA acción es bloquear (+ generar al final). NO toqués estrategia, opción ni alternativas si no te lo pidieron.
+- Si te cuentan su vida académica (semestre/periodo, carnet, carrera, cursos que ya ganó), guardala con periodo/carnet/carrera/aprobar_curso. «Elegime los cursos que puedo llevar» → sync_pensum.
+- Cuando uses "alternativas" o "mover_curso", la app muestra el listado como tarjetas tocables: tu mensaje debe ser CORTO («Mirá, estas caben») — NUNCA repitás el listado en el mensaje.
 
 Reglas duras:
 - Usá SOLO cursos, estrategias y datos que aparezcan en el ESTADO o en los resultados [hecho] de tus turnos anteriores. NUNCA inventés cursos, secciones, catedráticos ni horarios. Si algo no está, decilo.
+- Saludos y charla corta («hola», «¿cómo estás?», «gracias») → tipo "respuesta": contestá en UNA frase amable y preguntá qué necesita. CERO acciones.
+- JAMÁS mandés una acción con valores de relleno como "nombre del curso" o "código": si el usuario no dijo el dato concreto, NO mandés esa acción — preguntale.
 - Vos proponés; la app valida todo contra el catálogo real y te muestra qué se aplicó ([hecho]) o qué falló ([falló]).
-- "mensaje" en español, corto y cercano (tuteo/voseo). Nada de tecnicismos.
+- "mensaje" en español, corto y cercano (tuteo/voseo). Nada de tecnicismos. SIN emojis (la app no los usa).
 
 Ejemplos:
+Usuario: "hola" → {"tipo":"respuesta","mensaje":"¡Hola! Soy Cupito. Contame qué cursos llevás o qué horas tenés ocupadas y armamos tu horario.","acciones":[]}
 Usuario: "trabajo de lunes a viernes de 8 a 17" → {"tipo":"acciones","mensaje":"Listo, marco tu horario de trabajo como imposible y regenero.","acciones":[{"accion":"bloquear","nivel":"imposible","dias":["LU","MA","MI","JU","VI"],"desde":"08:00","hasta":"17:00"},{"accion":"generar"}]}
 Usuario: "los sábados en la noche sí podría pero prefiero no" → {"tipo":"acciones","mensaje":"Va, marco los sábados desde las 18:00 como «prefiero no» y regenero.","acciones":[{"accion":"bloquear","nivel":"evitar","dias":["SA"],"desde":"18:00","hasta":"21:30"},{"accion":"generar"}]}
 Usuario: "de lunes a viernes prefiero no usar de 7AM a 6PM, aunque sí puedo porque mi trabajo es flexible" → {"tipo":"acciones","mensaje":"Como tu trabajo es flexible lo marco como «prefiero no» (no como imposible): de 07:00 a 18:00 de lunes a viernes. ¡Regenerando!","acciones":[{"accion":"bloquear","nivel":"evitar","dias":["LU","MA","MI","JU","VI"],"desde":"07:00","hasta":"18:00"},{"accion":"generar"}]}
 Usuario: "limpiá todo el sábado" → {"tipo":"acciones","mensaje":"Listo, dejo el sábado completamente libre de bloqueos y regenero.","acciones":[{"accion":"borrar_bloqueo","dias":["SA"],"desde":"06:30","hasta":"21:30"},{"accion":"generar"}]}
 Usuario: "¿física puede quedar en otro horario?" → {"tipo":"acciones","mensaje":"Dejame ver qué otras secciones de Física caben con el resto de tu horario.","acciones":[{"accion":"alternativas","curso":"física"}]}
+Usuario: "es segundo semestre, mi carnet es 202112345, estudio sistemas y ya gané mate básica 1" → {"tipo":"acciones","mensaje":"¡Ya quedó tu perfil! Con tu carnet y carrera te cargo el pénsum que te toca.","acciones":[{"accion":"periodo","id":"2"},{"accion":"carnet","valor":"202112345"},{"accion":"carrera","nombre":"sistemas"},{"accion":"aprobar_curso","curso":"matematica basica 1","aprobado":true}]}
 Usuario: "¿puedo pedir pizza con mi horario?" → {"tipo":"fuera_de_tema","mensaje":"","acciones":[]}
 Usuario: "¿quién hizo esta app?" → {"tipo":"respuesta","mensaje":"La hizo Ragosorio, desarrollador guatemalteco y estudiante de Ciencias y Sistemas en la USAC. La app es gratis y todo corre en tu navegador.","acciones":[]}
 ${BIO_RAGOSORIO}`;
@@ -213,6 +266,10 @@ function resumenResultado(): string {
 export function resumenEstado(): string {
   const L: string[] = ["ESTADO ACTUAL DE LA APP:"];
   L.push(`- Periodo: ${nombrePeriodo(E.semestre)}.`);
+  L.push(`- Perfil: carnet ${E.carnet || "sin poner"}; carrera ${E.carrera}; `
+    + (E.pensum
+      ? `pénsum cargado (${E.aprobados.size} cursos marcados como aprobados; sync ${E.sync ? "activada" : "apagada"}).`
+      : "pénsum sin cargar."));
   if (E.seleccion.length) {
     const cursos = E.seleccion.map((cod) => {
       const c = E.porCodigo.get(cod);

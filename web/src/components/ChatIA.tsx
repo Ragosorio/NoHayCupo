@@ -3,7 +3,8 @@
 import { useStore } from "@nanostores/react";
 import { useEffect, useRef, useState } from "react";
 import {
-  activarIA, cerrarChat, confirmarPendientes, descartarPendientes, enviarMensaje,
+  activarIA, cerrarChat, confirmarPendientes, descartarPendientes,
+  elegirAlternativa, enviarMensaje,
 } from "@/lib/cliente/ia/chat";
 import { etiquetaAccion } from "@/lib/cliente/ia/herramientas";
 import { TAMANO_MODELO } from "@/lib/cliente/ia/motor";
@@ -21,6 +22,19 @@ function Burbuja({ m }: { m: MensajeChat }) {
           {m.errores?.map((e, i) => <li key={`e${i}`} className="chat-chip chip-error">{e}</li>)}
         </ul>
       ) : null}
+      {m.opciones && (
+        <div className="chat-opciones">
+          {m.opciones.lista.map((op) => (
+            <button key={op.n} className="chat-opcion"
+              onClick={() => void elegirAlternativa(m, m.opciones!.curso, op.n)}>
+              <span className="chat-opcion-n">{op.n}</span>
+              <span className="chat-opcion-detalle">
+                {op.etiqueta.split(" + ").map((linea, i) => <span key={i}>{linea}</span>)}
+              </span>
+            </button>
+          ))}
+        </div>
+      )}
       {m.pendientes && (
         <div className="chat-confirmar">
           <p>Esto borra algo — ¿lo hago?</p>
@@ -60,10 +74,17 @@ function CuerpoChat() {
             <p>{c.parcial}<span className="caret-ia" aria-hidden="true" /></p>
           </div>
         ) : (
-          <div className="chat-burbuja es-ia chat-pensando">
-            {c.progreso.texto
-              ? `${c.progreso.texto}${c.progreso.pct != null ? ` ${Math.round(c.progreso.pct * 100)}%` : ""}`
-              : "Cupito está pensando…"}
+          <div className="chat-burbuja es-ia chat-pensando" aria-label="Cupito está pensando">
+            {/* Solo hablar de descarga cuando DE VERDAD está bajando algo;
+                el resto del tiempo, puntitos de tipeo (+ pista si tarda). */}
+            {c.progreso.texto && c.progreso.pct != null && c.progreso.pct < 1
+              ? `${c.progreso.texto} ${Math.round(c.progreso.pct * 100)}%`
+              : (
+                <>
+                  <span className="puntos-ia" aria-hidden="true"><i /><i /><i /></span>
+                  {c.pista && <span className="chat-pista">{c.pista}</span>}
+                </>
+              )}
           </div>
         ))}
         <div ref={finRef} />
@@ -143,14 +164,22 @@ export default function ChatIA() {
       )}
 
       {c.fase === "cargando" && (
-        <div className="chat-estado">
-          <p>{c.progreso.texto || "Cargando…"}</p>
+        <div className="chat-estado chat-carga">
+          <div className="chat-carga-icono" aria-hidden="true"><IconoChispa /></div>
+          <p className="chat-carga-pct">
+            {c.progreso.pct != null ? `${Math.round(c.progreso.pct * 100)}%` : "…"}
+          </p>
           <div className="chat-progreso" role="progressbar"
             aria-valuenow={c.progreso.pct != null ? Math.round(c.progreso.pct * 100) : undefined}
             aria-valuemin={0} aria-valuemax={100}>
             <div style={{ width: `${Math.round((c.progreso.pct ?? 0) * 100)}%` }} />
           </div>
-          {c.progreso.pct != null && <small>{Math.round(c.progreso.pct * 100)}%</small>}
+          <p>{c.progreso.texto || "Despertando a Cupito…"}</p>
+          <small>
+            Solo esta primera vez toca esperar — el modelo queda guardado en tu
+            navegador y después Cupito abre al instante. Podés cerrar este panel:
+            la descarga sigue y el avance se ve en el botón de arriba.
+          </small>
         </div>
       )}
 

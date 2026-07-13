@@ -69,12 +69,16 @@ export interface Editor {
 
 /* El chat vive en E como el resto del estado, pero NO se persiste: cada
  * visita arranca con la conversación limpia (el modelo sí queda cacheado). */
-import type { AccionIA } from "./ia/herramientas";
+import type { AccionIA, OpcionesChat } from "./ia/herramientas";
 export interface MensajeChat {
   rol: "usuario" | "ia";
   texto: string;
   hechos?: string[];
   errores?: string[];
+  /** Contexto extra que solo ve el modelo (p. ej. listados numerados). */
+  notas?: string[];
+  /** Alternativas de horario que la UI pinta como tarjetas tocables. */
+  opciones?: OpcionesChat | null;
   pendientes?: AccionIA[] | null;
 }
 export type FaseChat =
@@ -89,6 +93,8 @@ export interface ChatIA {
   pensando: boolean;
   /** Texto del "mensaje" que Cupito lleva escrito (streaming en vivo). */
   parcial: string;
+  /** Pista bajo los puntitos cuando una respuesta tarda (ej. el primer turno). */
+  pista: string;
   error: string;
 }
 
@@ -135,7 +141,7 @@ export const E = {
   chat: {
     abierto: false, fase: "cerrado", tier: null,
     progreso: { texto: "", pct: null }, mensajes: [], pensando: false,
-    parcial: "", error: "",
+    parcial: "", pista: "", error: "",
   } as ChatIA,
   toast: "",
   modalPensum: false,

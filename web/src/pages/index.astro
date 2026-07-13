@@ -37,7 +37,10 @@ const FAQ: Array<[string, string]> = [
   ["¿Cuánto cuesta?",
     "Nada. Es gratis, sin anuncios y open source (licencia MIT, código en GitHub)."],
 ];
-const jsonLd = JSON.stringify([
+/* Un <script ld+json> POR OBJETO (no un array): hay consumidores ingenuos
+ * (extensiones, lectores) que hacen `parsed["@context"]` sobre el top-level
+ * y explotan con un array — era el TypeError de consola en Safari. */
+const jsonLdBloques = [
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
@@ -77,7 +80,7 @@ const jsonLd = JSON.stringify([
       acceptedAnswer: { "@type": "Answer", text: r },
     })),
   },
-]);
+].map((o) => JSON.stringify(o));
 ---
 
 <!doctype html>
@@ -110,7 +113,7 @@ const jsonLd = JSON.stringify([
       rel="icon"
       href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%234f46e5'/><text x='50' y='62' font-size='34' text-anchor='middle' fill='white' font-family='system-ui' font-weight='900' letter-spacing='-2.5'>NHC</text></svg>"
     />
-    <script type="application/ld+json" set:html={jsonLd} />
+    {jsonLdBloques.map((bloque) => <script type="application/ld+json" set:html={bloque} />)}
     <script is:inline>
       // Aplicar el tema ANTES de pintar para evitar el destello claro/oscuro.
       try {

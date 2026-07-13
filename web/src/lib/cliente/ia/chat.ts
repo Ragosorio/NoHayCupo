@@ -132,6 +132,7 @@ export async function enviarMensaje(texto: string) {
       texto: m.rol === "ia"
         ? [m.texto,
             ...(m.hechos ?? []).map((h) => `[hecho] ${h}`),
+            ...(m.notas ?? []).map((n) => `[hecho] ${n}`),
             ...(m.errores ?? []).map((e) => `[falló] ${e}`),
           ].filter(Boolean).join("\n")
         : m.texto,
@@ -139,16 +140,39 @@ export async function enviarMensaje(texto: string) {
   E.chat.mensajes.push({ rol: "usuario", texto: limpio });
   E.chat.pensando = true;
   E.chat.parcial = "";
+  E.chat.pista = "";
   E.chat.progreso = { texto: "", pct: null };
   touch();
+
+  const primerTurno = E.chat.mensajes.filter((m) => m.rol === "ia").length <= 1;
+  /* Aviso de lentitud: la PRIMERA respuesta paga el prefill del prompt del
+   * sistema y arranca el modelo — puede tardar. Sin esta pista, el usuario
+   * ve solo puntitos y cree que se colgó. */
+  const avisoLento = setTimeout(() => {
+    E.chat.pista = primerTurno
+      ? "La primera respuesta tarda un poco más (Cupito está arrancando)…"
+      : "Dame un segundo, estoy pensando…";
+    touch();
+  }, 9000);
+  /* Cuelgue de verdad: si a los 2 min no salió nada, cortar y avisar en vez
+   * de dejar los puntitos para siempre (visto en WebGPU con prefill largo). */
+  let venció = false;
+  const timeout = setTimeout(() => {
+    venció = true;
+    motor?.abortar?.();
+  }, 120000);
+
   try {
     const crudo = await motor.generarJSON(
       construirMensajes(historial, limpio), SCHEMA_RESPUESTA,
       (acumulado) => {
+        clearTimeout(avisoLento);
+        if (E.chat.pista) E.chat.pista = "";   // ya está escribiendo
         const p = mensajeParcial(acumulado);
         if (p !== E.chat.parcial) { E.chat.parcial = p; touch(); }
       },
     );
+    if (venció) throw new Error("timeout");
     const r = parsearRespuesta(crudo);
     if (!r) {
       pushIA({ texto: "No logré entender eso. ¿Me lo decís de otra forma?" });
@@ -158,15 +182,23 @@ export async function enviarMensaje(texto: string) {
     } else if (r.tipo === "respuesta" || !r.acciones.length) {
       pushIA({ texto: r.mensaje || "Listo." });
     } else {
-      const { hechos, errores, pendientes } = await ejecutarAcciones(r.acciones);
-      pushIA({ texto: r.mensaje || "Listo.", hechos, errores, pendientes });
+      const { hechos, errores, notas, opciones, pendientes } = await ejecutarAcciones(r.acciones);
+      pushIA({ texto: r.mensaje || "Listo.", hechos, errores, notas, opciones, pendientes });
       if (hechos.length) resaltarSeccion(focoDe(r.acciones));
     }
   } catch (e) {
-    pushIA({ texto: `Algo falló generando la respuesta (${(e as Error).message}). Probá de nuevo.` });
+    pushIA({
+      texto: venció
+        ? "Uf, esta se me trabó (tu equipo se quedó sin fuelle para esta consulta). Probá con algo más corto o volvé a intentar."
+        : `Algo falló generando la respuesta (${(e as Error).message}). Probá de nuevo.`,
+    });
+  } finally {
+    clearTimeout(avisoLento);
+    clearTimeout(timeout);
   }
   E.chat.pensando = false;
   E.chat.parcial = "";
+  E.chat.pista = "";
   touch();
 }
 
@@ -177,12 +209,25 @@ export async function confirmarPendientes(mensaje: MensajeChat) {
   mensaje.pendientes = null;
   E.chat.pensando = true;
   touch();
-  const { hechos, errores } = await ejecutarAcciones(cola, true);
+  const { hechos, errores, notas, opciones } = await ejecutarAcciones(cola, true);
   mensaje.hechos = [...(mensaje.hechos ?? []), ...hechos];
   mensaje.errores = [...(mensaje.errores ?? []), ...errores];
+  mensaje.notas = [...(mensaje.notas ?? []), ...notas];
+  if (opciones) mensaje.opciones = opciones;
   E.chat.pensando = false;
   touch();
   if (hechos.length) resaltarSeccion(focoDe(cola));
+}
+
+/** El usuario tocó una tarjeta de alternativa: mover el curso ahí mismo,
+ * sin pasar por el modelo (la elección ya es inequívoca). */
+export async function elegirAlternativa(mensaje: MensajeChat, curso: string, n: number) {
+  if (E.chat.pensando) return;
+  mensaje.opciones = null;   // consumidas: que no queden tarjetas viejas
+  const r = await ejecutarAcciones([{ accion: "mover_curso", curso, alternativa: n }], true);
+  pushIA({ texto: "", hechos: r.hechos, errores: r.errores });
+  touch();
+  if (r.hechos.length) resaltarSeccion(".calendario");
 }
 
 export function descartarPendientes(mensaje: MensajeChat) {

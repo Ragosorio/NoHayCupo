@@ -7,7 +7,8 @@
  * que vuelve al chat (y al modelo en el siguiente turno).
  */
 import {
-  agregarCurso, aplicarSwap, comboMostrado, elegirEstrategia, elegirOpcion,
+  agregarCurso, alternarAprobado, aplicarSwap, cambiarCarnet, cambiarCarrera,
+  cambiarPeriodo, cambiarSync, comboMostrado, elegirEstrategia, elegirOpcion,
   entrarEditor, estrategiaActiva, generar, limpiarBloqueos, opcionesQueCaben,
   pintarCelda, quitarCurso, salirEditor, setModal,
 } from "../acciones";
@@ -16,7 +17,7 @@ import { E, guardarLocal, touch } from "../estado";
 import { ESTRATEGIAS } from "../../engine/strategies";
 import {
   aHHMM, aMin, DIAS_NOMBRE, DIAS_ORDEN, GRID_FIN, GRID_INI, nombreBonito,
-  normalizar, SLOT_MIN,
+  normalizar, PERIODOS, SLOT_MIN,
 } from "../util";
 
 export type AccionIA =
@@ -31,7 +32,12 @@ export type AccionIA =
   | { accion: "alternativas"; curso: string }
   | { accion: "mover_curso"; curso: string; alternativa?: number }
   | { accion: "exportar"; formato: "png" | "excel" | "ics" | "prompt" }
-  | { accion: "compartir" };
+  | { accion: "compartir" }
+  | { accion: "periodo"; id: string }
+  | { accion: "carnet"; valor: string }
+  | { accion: "carrera"; nombre: string }
+  | { accion: "aprobar_curso"; curso: string; aprobado?: boolean }
+  | { accion: "sync_pensum"; activo?: boolean };
 
 export interface RespuestaIA {
   tipo: "acciones" | "respuesta" | "fuera_de_tema";
@@ -39,9 +45,20 @@ export interface RespuestaIA {
   acciones: AccionIA[];
 }
 
+/** Listado de horarios alternativos que la UI pinta como tarjetas tocables
+ * (en vez de un ladrillo de texto en un chip). */
+export interface OpcionesChat {
+  curso: string;
+  lista: Array<{ n: number; etiqueta: string }>;
+}
+
 export interface ResultadoEjecucion {
   hechos: string[];
   errores: string[];
+  /** Contexto extra SOLO para el modelo (no se muestra): p. ej. el listado
+   * numerado de alternativas, para que «la 2» signifique algo. */
+  notas: string[];
+  opciones: OpcionesChat | null;
   /** Cola pausada en la primera acción destructiva: la UI pide confirmación
    * y, si el usuario acepta, se reejecuta con `confirmadas: true`. */
   pendientes: AccionIA[] | null;
@@ -51,8 +68,27 @@ const ACCIONES_VALIDAS = new Set([
   "bloquear", "borrar_bloqueo", "limpiar_bloqueos", "agregar_curso",
   "quitar_curso", "generar", "estrategia", "opcion",
   "alternativas", "mover_curso", "exportar", "compartir",
+  "periodo", "carnet", "carrera", "aprobar_curso", "sync_pensum",
 ]);
 const DESTRUCTIVAS = new Set(["quitar_curso", "limpiar_bloqueos"]);
+
+/* Los modelos chicos a veces copian los valores de EJEMPLO de la
+ * documentación de acciones («nombre del curso») en vez de omitir la acción.
+ * Esas acciones se descartan en silencio: son ruido, no intención. */
+const PLACEHOLDERS = new Set([
+  "", "nombre del curso", "codigo o nombre", "codigo", "nombre", "curso",
+  "codigo del curso", "x", "...", "…",
+]);
+const esPlaceholder = (v: unknown) =>
+  typeof v !== "string" || PLACEHOLDERS.has(normalizar(v.trim()));
+
+function esAccionUtil(a: AccionIA): boolean {
+  if (!a || !ACCIONES_VALIDAS.has(a.accion)) return false;
+  if ("curso" in a && esPlaceholder(a.curso)) return false;
+  if (a.accion === "carrera" && esPlaceholder(a.nombre)) return false;
+  if (a.accion === "carnet" && esPlaceholder(a.valor)) return false;
+  return true;
+}
 
 /** Parseo defensivo: aunque el decoding restringido garantiza JSON válido,
  * acá se revalida la forma por si el motor degradó a texto libre. */
@@ -62,9 +98,7 @@ export function parsearRespuesta(crudo: string): RespuestaIA | null {
     if (!d || typeof d !== "object") return null;
     if (!["acciones", "respuesta", "fuera_de_tema"].includes(d.tipo)) return null;
     if (typeof d.mensaje !== "string") return null;
-    const acciones = Array.isArray(d.acciones)
-      ? d.acciones.filter((a: AccionIA) => a && ACCIONES_VALIDAS.has(a.accion))
-      : [];
+    const acciones = Array.isArray(d.acciones) ? d.acciones.filter(esAccionUtil) : [];
     return { tipo: d.tipo, mensaje: d.mensaje.trim(), acciones: d.tipo === "acciones" ? acciones : [] };
   } catch { return null; }
 }
@@ -102,13 +136,16 @@ function ajustarHora(txt: unknown, modo: "inicio" | "fin"): number | null {
 
 /* ---------- resolución de cursos contra el catálogo real ---------- */
 
-function resolverCurso(texto: string, entre: "catalogo" | "seleccion"):
+function resolverCurso(texto: string, entre: "catalogo" | "seleccion" | "pensum"):
   { codigo: string; nombre: string } | { error: string } {
   const n = normalizar(String(texto ?? "").trim());
   if (!n) return { error: "No me dijeron qué curso" };
-  const cursos = entre === "seleccion"
-    ? E.seleccion.map((c) => E.porCodigo.get(c)).filter((c) => !!c)
-    : E.catalogo?.cursos ?? [];
+  const cursos: Array<{ codigo: string; nombre: string }> =
+    entre === "seleccion"
+      ? E.seleccion.map((c) => E.porCodigo.get(c)).filter((c) => !!c)
+      : entre === "pensum"
+        ? E.pensum ?? []
+        : E.catalogo?.cursos ?? [];
   const porCodigo = cursos.find((c) =>
     c.codigo === n || c.codigo === n.padStart(4, "0"));
   if (porCodigo) return { codigo: porCodigo.codigo, nombre: porCodigo.nombre };
@@ -126,7 +163,9 @@ function resolverCurso(texto: string, entre: "catalogo" | "seleccion"):
   return {
     error: entre === "seleccion"
       ? `«${texto}» no está entre tus cursos elegidos`
-      : `No encontré «${texto}» en el catálogo de este periodo`,
+      : entre === "pensum"
+        ? `No encontré «${texto}» en tu pénsum`
+        : `No encontré «${texto}» en el catálogo de este periodo`,
   };
 }
 
@@ -151,6 +190,13 @@ export function etiquetaAccion(a: AccionIA): string {
     case "mover_curso": return `Mover «${a.curso}» a otra sección`;
     case "exportar": return `Exportar el horario (${a.formato})`;
     case "compartir": return "Abrir el panel de compartir";
+    case "periodo": return `Cambiar al periodo «${a.id}»`;
+    case "carnet": return `Guardar el carnet ${a.valor}`;
+    case "carrera": return `Poner la carrera «${a.nombre}»`;
+    case "aprobar_curso": return a.aprobado === false
+      ? `Desmarcar «${a.curso}» como aprobado` : `Marcar «${a.curso}» como aprobado`;
+    case "sync_pensum": return a.activo === false
+      ? "Apagar la sincronización con el pénsum" : "Elegir cursos según el pénsum";
   }
 }
 
@@ -173,16 +219,20 @@ function alternativasDelMostrado(texto: string) {
   return { ...r, alternativas: opcionesQueCaben(r.codigo, ids) };
 }
 
+/** Versión compacta para el modelo (la etiqueta ya trae sección y horario). */
 function describirAlternativas(alts: ReturnType<typeof opcionesQueCaben>): string {
-  return alts.map((a, i) =>
-    `${i + 1}) ${a.etiqueta}: ${a.componentes
-      .map((c) => `${c.dias.join("·")} ${c.inicio}–${c.fin}`).join(" + ")}`,
-  ).join(" — ");
+  return alts.map((a, i) => `${i + 1}) ${a.etiqueta}`).join(" · ");
+}
+
+function comoOpciones(codigo: string, alts: ReturnType<typeof opcionesQueCaben>): OpcionesChat {
+  return { curso: codigo, lista: alts.map((a, i) => ({ n: i + 1, etiqueta: a.etiqueta })) };
 }
 
 /* ---------- ejecución ---------- */
 
-async function ejecutarUna(a: AccionIA): Promise<{ hecho?: string; error?: string }> {
+type Paso = { hecho?: string; error?: string; nota?: string; opciones?: OpcionesChat };
+
+async function ejecutarUna(a: AccionIA): Promise<Paso> {
   switch (a.accion) {
     case "bloquear":
     case "borrar_bloqueo": {
@@ -266,7 +316,11 @@ async function ejecutarUna(a: AccionIA): Promise<{ hecho?: string; error?: strin
       if (!r.alternativas.length) {
         return { hecho: `${r.codigo} ${nombreBonito(r.nombre)} no tiene otra sección que quepa con el resto del horario` };
       }
-      return { hecho: `Alternativas para ${r.codigo}: ${describirAlternativas(r.alternativas)}` };
+      return {
+        hecho: `Encontré ${r.alternativas.length} horario${r.alternativas.length === 1 ? "" : "s"} más para ${nombreBonito(r.nombre)} — tocá el que querás`,
+        nota: `Alternativas de ${r.codigo}: ${describirAlternativas(r.alternativas)}`,
+        opciones: comoOpciones(r.codigo, r.alternativas),
+      };
     }
     case "mover_curso": {
       const r = alternativasDelMostrado(a.curso);
@@ -284,7 +338,11 @@ async function ejecutarUna(a: AccionIA): Promise<{ hecho?: string; error?: strin
       } else if (r.alternativas.length === 1) {
         elegida = r.alternativas[0];
       } else {
-        return { hecho: `Para ${r.codigo} caben: ${describirAlternativas(r.alternativas)}. Decime a cuál lo muevo (el número)` };
+        return {
+          hecho: `Para ${nombreBonito(r.nombre)} caben ${r.alternativas.length} horarios — tocá al que lo querás mover`,
+          nota: `Alternativas de ${r.codigo}: ${describirAlternativas(r.alternativas)}`,
+          opciones: comoOpciones(r.codigo, r.alternativas),
+        };
       }
       // El mismo flujo que «Ajustar» a mano: el resultado queda guardado
       // como «Mi horario» y el combo original no se pierde.
@@ -306,6 +364,65 @@ async function ejecutarUna(a: AccionIA): Promise<{ hecho?: string; error?: strin
       setModal("compartir", true);
       return { hecho: "Abrí el panel de compartir — desde ahí copiás el enlace para tus amigos" };
     }
+    case "periodo": {
+      const p = PERIODOS.find((x) => x.valor === a.id);
+      if (!p) return { error: `No conozco el periodo «${a.id}»` };
+      if (E.semestre === p.valor) return { hecho: `Ya estabas en ${p.nombre}` };
+      cambiarPeriodo(p.valor);
+      return { hecho: `Cambié al periodo ${p.nombre} — el catálogo se está recargando` };
+    }
+    case "carnet": {
+      const v = String(a.valor ?? "").replace(/\D/g, "");
+      if (!/^\d{7,10}$/.test(v)) {
+        return { error: `«${a.valor}» no parece un carnet de la USAC` };
+      }
+      cambiarCarnet(v);
+      return { hecho: `Guardé tu carnet ${v}: con él detecto tu pénsum y las secciones restringidas` };
+    }
+    case "carrera": {
+      const carreras = [...new Set(E.indicePensums.map((p) => p.carrera))];
+      if (!carreras.length) {
+        return { error: "Todavía no cargó el índice de carreras — probá de nuevo en unos segundos" };
+      }
+      const n = normalizar(String(a.nombre ?? ""));
+      const matches = carreras.filter((c) => normalizar(c).includes(n));
+      if (!matches.length) {
+        return { error: `No encontré la carrera «${a.nombre}». Hay: ${carreras.join("; ")}` };
+      }
+      if (matches.length > 1) return { error: `¿Cuál de estas? ${matches.join("; ")}` };
+      if (E.carrera === matches[0]) return { hecho: `Ya estabas en ${matches[0]}` };
+      cambiarCarrera(matches[0]);
+      return { hecho: `Puse tu carrera: ${matches[0]} — cargando el pénsum que te toca` };
+    }
+    case "aprobar_curso": {
+      if (!E.pensum) {
+        return { error: "Todavía no hay pénsum cargado — contame tu carrera (y tu carnet) primero" };
+      }
+      const r = resolverCurso(a.curso, "pensum");
+      if ("error" in r) return { error: r.error };
+      const marcar = a.aprobado !== false;
+      if (marcar === E.aprobados.has(r.codigo)) {
+        return { hecho: `${r.codigo} ${nombreBonito(r.nombre)} ya estaba ${marcar ? "aprobado" : "sin aprobar"}` };
+      }
+      alternarAprobado(r.codigo, marcar);
+      return {
+        hecho: marcar
+          ? `Marqué ${r.codigo} — ${nombreBonito(r.nombre)} como aprobado`
+          : `Desmarqué ${r.codigo} — ${nombreBonito(r.nombre)}`,
+      };
+    }
+    case "sync_pensum": {
+      if (!E.pensum) {
+        return { error: "Todavía no hay pénsum cargado — contame tu carrera (y tu carnet) primero" };
+      }
+      const activo = a.activo !== false;
+      cambiarSync(activo);
+      return {
+        hecho: activo
+          ? `Activé la sincronización: seleccioné lo que podés llevar según tu pénsum (${E.seleccion.length} cursos)`
+          : "Apagué la sincronización con el pénsum",
+      };
+    }
   }
 }
 
@@ -314,16 +431,20 @@ export async function ejecutarAcciones(
 ): Promise<ResultadoEjecucion> {
   const hechos: string[] = [];
   const errores: string[] = [];
+  const notas: string[] = [];
+  let opciones: OpcionesChat | null = null;
   for (let i = 0; i < lista.length; i++) {
     const a = lista[i];
     if (!confirmadas && DESTRUCTIVAS.has(a.accion)) {
       // Pausar acá y no después: lo que sigue (p. ej. un generar) depende
       // de que la destructiva se haya aplicado.
-      return { hechos, errores, pendientes: lista.slice(i) };
+      return { hechos, errores, notas, opciones, pendientes: lista.slice(i) };
     }
     const r = await ejecutarUna(a);
     if (r.hecho) hechos.push(r.hecho);
     if (r.error) errores.push(r.error);
+    if (r.nota) notas.push(r.nota);
+    if (r.opciones) opciones = r.opciones;
   }
-  return { hechos, errores, pendientes: null };
+  return { hechos, errores, notas, opciones, pendientes: null };
 }

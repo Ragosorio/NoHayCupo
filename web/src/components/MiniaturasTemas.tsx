@@ -269,7 +269,12 @@ export default function MiniaturaTema({ tema }: { tema: Tema }) {
           <rect x="0" y="15.4" width="24" height="2.4" fill="#cf2027" />
           <rect x="0" y="17.8" width="24" height="2.4" fill="#ffffff" />
           {[0, 60, 120, 180, 240, 300].map((a) => {
-            const r = 4.6, x = 9 + r * Math.cos((a * Math.PI) / 180), y = 15 + r * Math.sin((a * Math.PI) / 180);
+            /* Redondear a 3 decimales: el último dígito de sin/cos difiere
+             * entre motores JS (Node al prerender vs Safari al hidratar) y
+             * React lo reporta como hydration mismatch. */
+            const r = 4.6;
+            const x = +(9 + r * Math.cos((a * Math.PI) / 180)).toFixed(3);
+            const y = +(15 + r * Math.sin((a * Math.PI) / 180)).toFixed(3);
             return <circle key={a} cx={x} cy={y} r="1" fill="#fcd116" />;
           })}
         </M>

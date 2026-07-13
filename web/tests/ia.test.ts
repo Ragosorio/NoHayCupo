@@ -37,6 +37,12 @@ beforeEach(() => {
   E.resultado = null;
   E.miHorario = null;
   E.editor = null;
+  E.carnet = "";
+  E.sync = false;
+  E.aprobados = new Set();
+  E.pensum = null;
+  E.pensumPorCodigo = new Map();
+  E.indicePensums = [];
 });
 
 describe("parsearRespuesta", () => {
@@ -63,6 +69,20 @@ describe("parsearRespuesta", () => {
   it("devuelve null ante basura", () => {
     expect(parsearRespuesta("no soy json")).toBeNull();
     expect(parsearRespuesta(JSON.stringify({ tipo: "otra_cosa", mensaje: "x" }))).toBeNull();
+  });
+
+  it("descarta acciones con placeholders copiados de la documentación", () => {
+    const r = parsearRespuesta(JSON.stringify({
+      tipo: "acciones",
+      mensaje: "¡Hola! ¿Qué cursos llevás?",
+      acciones: [
+        { accion: "agregar_curso", curso: "nombre del curso" },
+        { accion: "agregar_curso", curso: "Código o nombre" },
+        { accion: "carrera", nombre: "..." },
+        { accion: "agregar_curso", curso: "0770" },   // esta sí es real
+      ],
+    }));
+    expect(r?.acciones).toEqual([{ accion: "agregar_curso", curso: "0770" }]);
   });
 });
 
@@ -195,11 +215,15 @@ describe("mover cursos y alternativas", () => {
     E.opcion = 0;
   });
 
-  it("alternativas lista solo secciones que caben, numeradas", async () => {
+  it("alternativas: hecho corto, listado en nota (modelo) y tarjetas (UI)", async () => {
     const r = await ejecutarAcciones([{ accion: "alternativas", curso: "0770" }]);
     expect(r.errores).toEqual([]);
-    expect(r.hechos[0]).toContain("1) Clase B");
-    expect(r.hechos[0]).toContain("MA·JU 09:00–10:40");
+    expect(r.hechos[0]).toContain("1 horario");           // chip humano, sin ladrillo
+    expect(r.notas[0]).toContain("1) Clase B");           // el modelo sí ve los números
+    expect(r.opciones).toEqual({
+      curso: "0770",
+      lista: [{ n: 1, etiqueta: "Clase B" }],
+    });
   });
 
   it("un curso sin alternativas lo dice sin inventar", async () => {
@@ -237,6 +261,66 @@ describe("mover cursos y alternativas", () => {
     E.resultado = null;
     const r = await ejecutarAcciones([{ accion: "exportar", formato: "excel" }]);
     expect(r.errores[0]).toContain("generá");
+  });
+});
+
+describe("perfil por chat", () => {
+  const PENSUM = [
+    { codigo: "0101", nombre: "MATEMATICA BASICA 1", creditos: 5, semestre: 1, prerrequisitos: [] },
+    { codigo: "0770", nombre: "ARQUITECTURA DE COMPUTADORES 1", creditos: 5, semestre: 6, prerrequisitos: [] },
+  ];
+
+  it("periodo cambia el semestre y valida ids", async () => {
+    const r = await ejecutarAcciones([{ accion: "periodo", id: "v1" }]);
+    expect(r.hechos[0]).toContain("Vacaciones junio");
+    expect(E.semestre).toBe("v1");
+    const mal = await ejecutarAcciones([{ accion: "periodo", id: "9" }]);
+    expect(mal.errores[0]).toContain("No conozco el periodo");
+  });
+
+  it("carnet: guarda solo lo que parece carnet", async () => {
+    const ok = await ejecutarAcciones([{ accion: "carnet", valor: "2021 12345" }]);
+    expect(ok.hechos[0]).toContain("202112345");
+    expect(E.carnet).toBe("202112345");
+    const mal = await ejecutarAcciones([{ accion: "carnet", valor: "hola" }]);
+    expect(mal.errores[0]).toContain("no parece un carnet");
+  });
+
+  it("carrera matchea por nombre parcial contra el índice real", async () => {
+    E.indicePensums = [
+      { id: 28, carrera: "Ingeniería en Ciencias y Sistemas", plan: "CLAR", vigencia_desde: 2025 },
+      { id: 12, carrera: "Ingeniería Civil", plan: "CLAR", vigencia_desde: 2021 },
+    ];
+    const r = await ejecutarAcciones([{ accion: "carrera", nombre: "sistemas" }]);
+    expect(r.hechos[0]).toContain("Ciencias y Sistemas");
+    expect(E.carrera).toBe("Ingeniería en Ciencias y Sistemas");
+    const mal = await ejecutarAcciones([{ accion: "carrera", nombre: "medicina" }]);
+    expect(mal.errores[0]).toContain("No encontré la carrera");
+  });
+
+  it("aprobar_curso exige pénsum y marca por nombre", async () => {
+    const sin = await ejecutarAcciones([{ accion: "aprobar_curso", curso: "mate" }]);
+    expect(sin.errores[0]).toContain("no hay pénsum");
+    E.pensum = PENSUM;
+    E.pensumPorCodigo = new Map(PENSUM.map((c) => [c.codigo, c]));
+    const r = await ejecutarAcciones([{ accion: "aprobar_curso", curso: "matematica basica 1" }]);
+    expect(r.hechos[0]).toContain("0101");
+    expect(E.aprobados.has("0101")).toBe(true);
+    const des = await ejecutarAcciones([{ accion: "aprobar_curso", curso: "0101", aprobado: false }]);
+    expect(des.hechos[0]).toContain("Desmarqué");
+    expect(E.aprobados.has("0101")).toBe(false);
+  });
+
+  it("sync_pensum selecciona los elegibles con oferta", async () => {
+    E.pensum = PENSUM;
+    E.pensumPorCodigo = new Map(PENSUM.map((c) => [c.codigo, c]));
+    E.seleccion = [];
+    E.manuales = new Set();
+    const r = await ejecutarAcciones([{ accion: "sync_pensum", activo: true }]);
+    expect(E.sync).toBe(true);
+    // 0101 no tiene oferta en el catálogo de prueba; 0770 sí.
+    expect(E.seleccion).toContain("0770");
+    expect(r.hechos[0]).toContain("sincronización");
   });
 });
 
