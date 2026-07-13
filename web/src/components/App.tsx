@@ -59,7 +59,7 @@ export default function App() {
           <PanelCursos />
           <PanelTiempo />
           <section className="panel panel-generar">
-            <div className="modo-switch no-print" role="tablist" aria-label="Modo">
+            <div id="modoSwitch" className="modo-switch no-print" role="tablist" aria-label="Modo">
               <button role="tab" aria-selected={E.modo === "generar"}
                 className={E.modo === "generar" ? "activa" : ""}
                 onClick={() => setModo("generar")}>
