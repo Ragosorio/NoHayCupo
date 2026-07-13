@@ -1,0 +1,55 @@
+{
+  "periodo": "2",
+  "actualizado": "2026-07-13",
+  "_nota": "Generado por scripts/grupos/importar.mjs. NO editar a mano: corré el script con tu Excel. Cada valor es un código de curso, una sección o un link de grupo de WhatsApp/Telegram validado contra el catálogo real.",
+  "grupos": {
+    "0040": {
+      "C": {
+        "whatsapp": "https://chat.whatsapp.com/Im1kCYd8zOA329MWUfrTXJ"
+      }
+    },
+    "0103": {
+      "J": {
+        "whatsapp": "https://chat.whatsapp.com/L9dXS27ya9H0FTfTdQig07"
+      },
+      "L": {
+        "whatsapp": "https://chat.whatsapp.com/LURsgTCOp3Z70kXOwrZ81E"
+      }
+    },
+    "0601": {
+      "C": {
+        "whatsapp": "https://chat.whatsapp.com/K2knxu2fqpYALo7WORlv6f"
+      }
+    },
+    "0729": {
+      "A": {
+        "whatsapp": "https://chat.whatsapp.com/JGHclcjNdHo8PsqTFbpnBI"
+      }
+    },
+    "0768": {
+      "A": {
+        "whatsapp": "https://chat.whatsapp.com/Bz9ecHEQYUyDR2JJOjXnas"
+      }
+    },
+    "0785": {
+      "B": {
+        "whatsapp": "https://chat.whatsapp.com/DttOv32UCyTBh6uuknKzh8"
+      }
+    },
+    "0786": {
+      "A": {
+        "whatsapp": "https://chat.whatsapp.com/CIsmHGSxDwz5wgyWDhxdMy"
+      }
+    },
+    "0960": {
+      "E": {
+        "whatsapp": "https://chat.whatsapp.com/Fp32n1O2Qz388cImSoijS8"
+      }
+    },
+    "0964": {
+      "C": {
+        "whatsapp": "https://chat.whatsapp.com/JQzaYQfsodf3T5y9YAzTVt"
+      }
+    }
+  }
+}

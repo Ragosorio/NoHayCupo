@@ -1,7 +1,7 @@
 /** Isla principal: layout completo de la app (sidebar + resultados + modales). */
 import { useStore } from "@nanostores/react";
 import { useEffect } from "react";
-import { abrirMenuMovil, cerrarMenuMovil, generar, iniciarApp, setModal } from "@/lib/cliente/acciones";
+import { abrirMenuMovil, cerrarDetalleCurso, cerrarMenuMovil, generar, generarConsulta, iniciarApp, setModal, setModo } from "@/lib/cliente/acciones";
 import { quitarAmigo } from "@/lib/cliente/compartir";
 import { cerrarChat, precargarIA } from "@/lib/cliente/ia/chat";
 import { $v, E } from "@/lib/cliente/estado";
@@ -9,6 +9,8 @@ import { iniciarTour } from "@/lib/cliente/tour";
 import ChatIA from "./ChatIA";
 import { IconoCalendarioHero } from "./Iconos";
 import { AnimacionTema, ModalAcerca, ModalBienvenida, ModalCompartir, ModalPensum, Toast } from "./Modales";
+import ModalContribuir from "./ModalContribuir";
+import ModalCurso from "./ModalCurso";
 import PanelCursos from "./PanelCursos";
 import PanelPerfil from "./PanelPerfil";
 import PanelTiempo from "./PanelTiempo";
@@ -27,6 +29,8 @@ export default function App() {
         setModal("export", false);
         setModal("temas", false);
         setModal("compartir", false);
+        setModal("contribuir", false);
+        cerrarDetalleCurso();
         cerrarChat();
       }
     };
@@ -53,10 +57,34 @@ export default function App() {
           <PanelCursos />
           <PanelTiempo />
           <section className="panel panel-generar">
-            <button id="btnGenerar" className="btn btn-primary"
-              disabled={E.seleccion.length === 0} onClick={() => generar(3)}>
-              Generar horarios
-            </button>
+            <div className="modo-switch no-print" role="tablist" aria-label="Modo">
+              <button role="tab" aria-selected={E.modo === "generar"}
+                className={E.modo === "generar" ? "activa" : ""}
+                onClick={() => setModo("generar")}>
+                Buscar el mejor
+              </button>
+              <button role="tab" aria-selected={E.modo === "consulta"}
+                className={E.modo === "consulta" ? "activa" : ""}
+                onClick={() => setModo("consulta")}>
+                Ya tengo mi horario
+              </button>
+            </div>
+            {E.modo === "generar" ? (
+              <button id="btnGenerar" className="btn btn-primary"
+                disabled={E.seleccion.length === 0} onClick={() => generar(3)}>
+                Generar horarios
+              </button>
+            ) : (
+              <button id="btnGenerar" className="btn btn-primary"
+                disabled={E.seleccion.length === 0} onClick={() => generarConsulta()}>
+                Armar mi horario
+              </button>
+            )}
+            <p className="modo-nota no-print">
+              {E.modo === "generar"
+                ? "Comparo todas las combinaciones sin traslapes y te muestro las mejores."
+                : "Elegí tu sección exacta de cada curso y mirá cómo queda tu semana, con sus grupos."}
+            </p>
             {E.estadoGenerar && <p className="estado-generar">{E.estadoGenerar}</p>}
           </section>
         </aside>
@@ -96,6 +124,8 @@ export default function App() {
       </main>
 
       <ChatIA />
+      <ModalCurso />
+      <ModalContribuir />
       <ModalPensum />
       <ModalAcerca />
       <ModalBienvenida />

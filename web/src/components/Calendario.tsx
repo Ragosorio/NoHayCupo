@@ -1,8 +1,8 @@
 /** El calendario semanal: eventos, bloqueos sombreados y ghosts del editor. */
 import { useStore } from "@nanostores/react";
 import {
-  aplicarSwap, bloqueosComoRangos, comboMostrado, ghostsPara, seccionMostrada,
-  seleccionarEnEditor, type CursoMostrado,
+  abrirDetalleCurso, aplicarSwap, bloqueosComoRangos, comboMostrado, ghostsPara,
+  seccionMostrada, seleccionarEnEditor, type CursoMostrado,
 } from "@/lib/cliente/acciones";
 import { coincideConAmigo } from "@/lib/cliente/compartir";
 import { $v, colorDe, E } from "@/lib/cliente/estado";
@@ -100,7 +100,7 @@ export default function Calendario({ mostrado }: { mostrado: CursoMostrado[] }) 
                 return (
                   <div key={`e${i}`}
                     className={"evento" + (esLab ? " lab" : "")
-                      + (E.editor ? " editable" : "")
+                      + (E.editor ? " editable" : " clickable")
                       + (conAmigo ? " coincide" : "")
                       + (sel === e.codigo ? " seleccionado" : "")
                       + (sel && sel !== e.codigo ? " atenuado" : "")}
@@ -113,8 +113,10 @@ export default function Calendario({ mostrado }: { mostrado: CursoMostrado[] }) 
                     } as React.CSSProperties}
                     title={`${e.codigo} ${nombreBonito(e.nombre)}\n${e.categoria} ${e.seccion} · ${e.horas}\n${nombreBonito(e.catedratico)}`
                       + (conAmigo ? `\nEn esta clase coincidís con ${E.amigo!.de}` : "")
-                      + (E.editor ? "\n(clic para ver a dónde se puede mover)" : "")}
-                    onClick={E.editor ? () => seleccionarEnEditor(e.codigo) : undefined}>
+                      + (E.editor ? "\n(clic para ver a dónde se puede mover)" : "\n(clic para ver el detalle del curso)")}
+                    onClick={E.editor
+                      ? () => seleccionarEnEditor(e.codigo)
+                      : () => abrirDetalleCurso(e.codigo)}>
                     {esLab && (
                       <span className="ev-tag">
                         {e.categoria === "Laboratorio" ? "LAB" : e.categoria.slice(0, 5).toUpperCase()}

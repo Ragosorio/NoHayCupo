@@ -570,6 +570,28 @@ export function verMasOpciones() {
   generar(Math.min(E.topN + 7, 25));
 }
 
+/* ---------- modo generar / consulta ---------- */
+
+/** Cambia entre «buscar el mejor horario» y «ya tengo mi horario». Solo
+ * afecta el framing y el punto de entrada: el motor es el mismo. */
+export function setModo(m: "generar" | "consulta") {
+  if (E.modo === m) return;
+  E.modo = m;
+  guardarLocal();
+  touch();
+}
+
+/** Modo consulta: genera las combinaciones (para tener res.opciones) y deja
+ * al estudiante armando su horario sección por sección. Si ya tenía un
+ * horario propio guardado, lo muestra en vez de forzar el editor. */
+export async function generarConsulta() {
+  await generar();
+  if (!E.resultado) return;
+  if (E.miHorario) E.opcion = "mia";
+  else entrarEditor();
+  touch();
+}
+
 export function quitarYRegenerar(codigo: string) {
   quitarCurso(codigo);
   generar();
@@ -684,14 +706,34 @@ export function deshacerSwap() {
 
 /* ---------- modales ---------- */
 
-export function setModal(cual: "pensum" | "acerca" | "bienvenida" | "export" | "temas" | "compartir", abierto: boolean) {
+export function setModal(cual: "pensum" | "acerca" | "bienvenida" | "export" | "temas" | "compartir" | "contribuir", abierto: boolean) {
   if (cual === "pensum") E.modalPensum = abierto;
   if (cual === "acerca") E.modalAcerca = abierto;
   if (cual === "bienvenida") E.modalBienvenida = abierto;
   if (cual === "export") E.menuExportar = abierto;
   if (cual === "temas") E.menuTemas = abierto;
   if (cual === "compartir") E.modalCompartir = abierto;
+  if (cual === "contribuir") E.modalContribuir = abierto;
   touch();
+}
+
+/* ---------- detalle de un curso (modal al tocar una tarjeta) ---------- */
+
+export function abrirDetalleCurso(codigo: string) {
+  E.cursoDetalle = codigo;
+  touch();
+}
+
+export function cerrarDetalleCurso() {
+  if (E.cursoDetalle == null) return;
+  E.cursoDetalle = null;
+  touch();
+}
+
+/** El curso mostrado (con su opción/secciones) cuyo detalle está abierto. */
+export function detalleCursoActivo(): CursoMostrado | null {
+  if (E.cursoDetalle == null) return null;
+  return comboMostrado()?.find((c) => c.codigo === E.cursoDetalle) ?? null;
 }
 
 /* ---------- arranque ---------- */

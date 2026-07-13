@@ -8,7 +8,7 @@ import { compartirHorario } from "@/lib/cliente/compartir";
 import { $v, E } from "@/lib/cliente/estado";
 import { iniciarTour } from "@/lib/cliente/tour";
 import { ORDINAL_SEM } from "@/lib/cliente/util";
-import { IconoPlay, LogoNHC } from "./Iconos";
+import { IconoAlerta, IconoPlay, LogoNHC } from "./Iconos";
 
 export function ModalPensum() {
   useStore($v);
@@ -105,6 +105,10 @@ export function ModalAcerca() {
           <button className="btn-enlace"
             onClick={() => { setModal("acerca", false); iniciarTour(); }}>
             <IconoPlay /> ver el tour de la página
+          </button>
+          <button className="btn-enlace"
+            onClick={() => { setModal("acerca", false); setModal("contribuir", true); }}>
+            <IconoAlerta /> ¿cómo subir un grupo de WhatsApp/Telegram?
           </button>
         </div>
         <div className="acerca-autor">

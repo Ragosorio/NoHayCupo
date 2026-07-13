@@ -122,6 +122,9 @@ export const E = {
   amigo: null as { de: string; secciones: Record<string, Array<{ cat: string; sec: string }>> } | null,
   modalCompartir: false,
   topN: 3,
+  /** «generar» = optimizador busca el mejor horario; «consulta» = ya tengo
+   * mis secciones y solo quiero verlas armadas (elijo sección por sección). */
+  modo: "generar" as "generar" | "consulta",
   resultado: null as Resultado | null,
   estadoGenerar: "",
   estrategia: null as string | null,
@@ -142,6 +145,8 @@ export const E = {
    * quedó en la A pero el sistema muestra la B, mismo horario). Solo
    * cosmético — no toca el motor ni las combinaciones. */
   etiquetas: {} as Record<string, string>,
+  /** Código del curso cuyo detalle está abierto en el modal (o null). */
+  cursoDetalle: null as string | null,
   editor: null as Editor | null,
   chat: {
     abierto: false, fase: "cerrado", tier: null,
@@ -152,6 +157,7 @@ export const E = {
   modalPensum: false,
   modalAcerca: false,
   modalBienvenida: false,
+  modalContribuir: false,   // «cómo subir grupos»
   menuExportar: false,
 };
 
@@ -188,6 +194,7 @@ export function guardarLocal() {
     tema: E.tema,
     sidebarOculta: E.sidebarOculta,
     topN: E.topN,
+    modo: E.modo,
     miHorario: E.miHorario,
     etiquetas: E.etiquetas,
     amigo: E.amigo,
@@ -218,6 +225,7 @@ export function cargarLocal() {
     E.tema = d.tema || null;
     E.sidebarOculta = !!d.sidebarOculta;
     E.topN = d.topN || 3;
+    E.modo = d.modo === "consulta" ? "consulta" : "generar";
     E.miHorario = d.miHorario || null;
     E.etiquetas = d.etiquetas || {};
     E.amigo = d.amigo || null;

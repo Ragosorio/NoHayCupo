@@ -185,6 +185,7 @@ export default function Resultados() {
   const res = E.resultado;
   if (!res) return null;
 
+  const consulta = E.modo === "consulta";
   const est = estrategiaActiva();
   const combos = est?.combos ?? [];
   const mostrado = comboMostrado();
@@ -206,7 +207,18 @@ export default function Resultados() {
         </div>
       )}
 
-      {res.sacrificios.length > 0 && (
+      {consulta && (
+        <div className="consulta-guia no-print">
+          <div className="titulo"><IconoLapiz /> Armá tu horario</div>
+          <p>
+            Tocá cada curso en el calendario y elegí tu sección. Cuando esté
+            listo, guardalo y podrás ver los grupos de cada sección tocando el
+            curso, o exportarlo.
+          </p>
+        </div>
+      )}
+
+      {!consulta && res.sacrificios.length > 0 && (
         <div className="sacrificios no-print">
           <div className="titulo">Si sacrificás un curso, esto se destraba:</div>
           <div className="sacrificios-lista">
@@ -227,21 +239,23 @@ export default function Resultados() {
         </div>
       )}
 
-      <nav className="tabs no-print" id="tabsEstrategias">
-        {res.estrategias.map((e) => (
-          <button key={e.id}
-            className={"tab" + (e.id === E.estrategia && E.opcion !== "mia" ? " activa" : "")}
-            onClick={() => elegirEstrategia(e.id)}>
-            <span className="t-nombre">{e.nombre}</span>
-            <span className="t-desc">{e.descripcion}</span>
-          </button>
-        ))}
-      </nav>
+      {!consulta && (
+        <nav className="tabs no-print" id="tabsEstrategias">
+          {res.estrategias.map((e) => (
+            <button key={e.id}
+              className={"tab" + (e.id === E.estrategia && E.opcion !== "mia" ? " activa" : "")}
+              onClick={() => elegirEstrategia(e.id)}>
+              <span className="t-nombre">{e.nombre}</span>
+              <span className="t-desc">{e.descripcion}</span>
+            </button>
+          ))}
+        </nav>
+      )}
 
       <div className="resultado-header no-print">
         <div className="resultado-izq">
           <div className="pager">
-            {combos.map((_, i) => (
+            {!consulta && combos.map((_, i) => (
               <button key={i} className={i === E.opcion ? "activa" : ""}
                 onClick={() => elegirOpcion(i)}>
                 Opción {i + 1}
@@ -255,19 +269,21 @@ export default function Resultados() {
               </button>
             )}
           </div>
-          {combos.length > 0 && res.total_validas > combos.length && E.topN < 25 && (
+          {!consulta && combos.length > 0 && res.total_validas > combos.length && E.topN < 25 && (
             <button className="btn-enlace" onClick={verMasOpciones}>ver más opciones</button>
           )}
         </div>
         <div className="acciones">
-          <span className="resumen-total">
-            {res.total_validas > 0
-              ? `${res.total_validas.toLocaleString("es")} combinaciones válidas`
-              : "Sin combinaciones válidas"}
-          </span>
+          {!consulta && (
+            <span className="resumen-total">
+              {res.total_validas > 0
+                ? `${res.total_validas.toLocaleString("es")} combinaciones válidas`
+                : "Sin combinaciones válidas"}
+            </span>
+          )}
           {!E.editor && mostrado && (
             <button id="btnEditar" className="btn" onClick={entrarEditor}>
-              <IconoLapiz /> Ajustar
+              <IconoLapiz /> {consulta ? "Elegir mis secciones" : "Ajustar"}
             </button>
           )}
           <div className="menu-export">
@@ -318,7 +334,7 @@ export default function Resultados() {
           {!E.editor && <SeccionesEquivalentes />}
           <Calendario mostrado={mostrado} />
           {E.editor && <Alternativas />}
-          {!E.editor && (E.opcion === "mia"
+          {!consulta && !E.editor && (E.opcion === "mia"
             ? (() => { const pb = planBDelMostrado(); return pb && <PlanB combo={pb} />; })()
             : comboActivo && <PlanB combo={comboActivo} />)}
         </>

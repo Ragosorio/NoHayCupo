@@ -6,6 +6,8 @@ export default defineConfig({
     alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) },
   },
   test: {
-    include: ["tests/**/*.test.ts"],
+    // .mjs para probar los scripts Node de la comunidad (scripts/grupos/*),
+    // que son JS puro fuera del typecheck de la app.
+    include: ["tests/**/*.test.ts", "tests/**/*.test.mjs"],
   },
 });
