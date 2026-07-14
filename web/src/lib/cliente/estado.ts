@@ -120,6 +120,10 @@ export const E = {
   animTema: null as string | null,   // id de la animación de bienvenida del tema
   /** Invitación de un amigo (llegó por URL #amigo=): sus secciones elegidas. */
   amigo: null as { de: string; secciones: Record<string, Array<{ cat: string; sec: string }>> } | null,
+  /** true SOLO en la carga que viene de un link #amigo= recién abierto: al
+   * generar, armamos el horario EXACTO del amigo como punto de partida. No se
+   * persiste (en recargas normales el usuario ya tiene su propia versión). */
+  amigoInicial: false,
   modalCompartir: false,
   topN: 3,
   /** «generar» = optimizador busca el mejor horario; «consulta» = ya tengo

@@ -6,7 +6,7 @@ import {
   cargarLocal, E, guardarLocal, touch,
   type ComponenteJson, type CursoCatalogo, type ComboJson, type OpcionJson, type Resultado,
 } from "./estado";
-import { leerInvitacionDeUrl } from "./compartir";
+import { leerInvitacionDeUrl, leerRespaldoDeUrl } from "./compartir";
 import { generarResultado, metricasDeOpciones, type BloqueoRango } from "./generarCliente";
 import { TEMAS, temaPorId } from "./temas";
 import {
@@ -149,6 +149,7 @@ async function autoMostrarUltimoHorario() {
      el cast refleja que generar() lo mutó. */
   const res = E.resultado as Resultado | null;
   if (!res) return;
+  if (E.amigoInicial) { construirHorarioDeAmigo(); E.amigoInicial = false; }
   if (res.estrategias.some((e) => e.id === vista.estrategia)) {
     E.estrategia = vista.estrategia;
   }
@@ -159,6 +160,28 @@ async function autoMostrarUltimoHorario() {
   }
   guardarLocal();
   touch();
+}
+
+/** Arma `E.miHorario` con las secciones EXACTAS que eligió el amigo, para que
+ * quien recibe el link vea de una el horario de su amigo como punto de partida
+ * (y desde ahí lo ajuste). Si una sección del amigo no está disponible para
+ * quien recibe (restringida/bloqueada), ese curso cae a su horario por defecto. */
+function construirHorarioDeAmigo() {
+  const res = E.resultado;
+  if (!res || !E.amigo) return;
+  const codigos = res.cursos_incluidos.filter((c) => E.amigo!.secciones[c]);
+  if (!codigos.length) return;
+  const ids: Record<string, number> = {};
+  for (const cod of codigos) {
+    const objetivo = E.amigo.secciones[cod];
+    const ops = res.opciones[cod] ?? [];
+    let idx = ops.findIndex((op) =>
+      objetivo.every((t) => op.componentes.some((k) => k.categoria === t.cat && k.seccion === t.sec)));
+    if (idx < 0) idx = 0;   // esa sección no está disponible para quien recibe
+    ids[cod] = idx;
+  }
+  E.miHorario = { codigos, ids };
+  E.opcion = "mia";
 }
 
 /* ---------- pénsum (multi-carrera, por carnet) ---------- */
@@ -790,6 +813,7 @@ export function detalleCursoActivo(): CursoMostrado | null {
 /* ---------- arranque ---------- */
 
 export function iniciarApp() {
+  const restaurado = leerRespaldoDeUrl();   // #respaldo= pisa TODO el localStorage
   cargarLocal();
   leerInvitacionDeUrl();   // #amigo= pisa la selección guardada
   document.body.classList.toggle("sidebar-oculta", E.sidebarOculta);
@@ -797,5 +821,6 @@ export function iniciarApp() {
   cargarCatalogo(false);
   cargarIndicePensums();
   if (!localStorage.getItem("nhc_visto")) E.modalBienvenida = true;
+  if (restaurado) toast("Restauramos tus datos en este navegador");
   touch();
 }

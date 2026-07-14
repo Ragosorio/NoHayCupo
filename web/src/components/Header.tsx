@@ -2,10 +2,11 @@
 import { useStore } from "@nanostores/react";
 import React from "react";
 import { alternarSidebar, cambiarTema, setModal } from "@/lib/cliente/acciones";
+import { copiarRespaldo } from "@/lib/cliente/compartir";
 import { alternarChat } from "@/lib/cliente/ia/chat";
 import { $v, E } from "@/lib/cliente/estado";
 import { TEMAS } from "@/lib/cliente/temas";
-import { IconoBasura, IconoChispa, IconoMenu, IconoPaleta, IconoX, LogoNHC } from "./Iconos";
+import { IconoBasura, IconoChispa, IconoLink, IconoMenu, IconoPaleta, IconoX, LogoNHC } from "./Iconos";
 import MiniaturaTema from "./MiniaturasTemas";
 
 export default function Header() {
@@ -26,6 +27,11 @@ export default function Header() {
       </div>
       <div className="topbar-controls no-print">
         <span className="estado-catalogo">{E.estadoCatalogo}</span>
+        <button className="btn btn-icono" title="Copiar un link con TODOS mis datos para pasarlos a otro navegador"
+          aria-label="Copiar link de respaldo de mis datos"
+          onClick={() => void copiarRespaldo()}>
+          <IconoLink />
+        </button>
         <button className="btn btn-icono" title="Borrar mis datos de este navegador (conserva el tema)"
           aria-label="Borrar mis datos guardados"
           onClick={() => setModal("reset", true)}>

@@ -95,9 +95,9 @@ export default function App() {
           {E.amigo && (
             <div className="banner-amigo no-print">
               <span>
-                <strong>{E.amigo.de}</strong> te compartió su horario: estos son sus
-                cursos y secciones. Armá tu versión — las clases donde coincidan se
-                marcan en el calendario.
+                Este es el horario de <strong>{E.amigo.de}</strong>: sus cursos en sus
+                secciones exactas. Ajustalo para armar el tuyo — las clases donde
+                coincidan se marcan en el calendario.
               </span>
               <button className="btn btn-mini" onClick={quitarAmigo}>Dejar de comparar</button>
             </div>

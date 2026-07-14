@@ -57,7 +57,8 @@ export async function compartirHorario(apodo: string) {
 }
 
 /** Se llama al arrancar: si la URL trae #amigo=, importa la invitación,
- * reemplaza la selección de cursos y deja programada la auto-generación. */
+ * reemplaza la selección de cursos y deja programada la auto-generación con
+ * el horario EXACTO del amigo como punto de partida. */
 export function leerInvitacionDeUrl() {
   const m = location.hash.match(/amigo=([^&]+)/);
   if (!m) return;
@@ -72,11 +73,51 @@ export function leerInvitacionDeUrl() {
     E.manuales = new Set(codigos);
     E.excluidos.clear();
     E.miHorario = null;
-    E.vista = { generado: true, estrategia: null, opcion: 0 };   // auto-generar al cargar
+    E.amigoInicial = true;   // al generar, arrancamos con el horario del amigo
+    E.vista = { generado: true, estrategia: null, opcion: "mia" };   // auto-generar al cargar
     guardarLocal();
-    toast(`${E.amigo.de} te compartió su horario — generando…`);
+    toast(`${E.amigo.de} te compartió su horario — abriéndolo…`);
   } catch { /* URL rota: seguir como visita normal */ }
   history.replaceState(null, "", location.pathname + location.search);
+}
+
+/* ---------- respaldo total: pasar TODOS tus datos a otro navegador ----------
+ * A diferencia de una invitación (solo cursos+secciones), esto copia EXACTO lo
+ * que guardamos en localStorage: cursos, horario, carnet, pénsum, bloqueos,
+ * tema… todo. Sirve para migrar de dispositivo o para que podamos leer el
+ * estado completo de alguien. Nada sale de tu navegador salvo que compartas el
+ * link a propósito. */
+
+/** Link que lleva una copia exacta del localStorage de esta app. */
+export function urlDeRespaldo(): string {
+  guardarLocal();   // asegurar que localStorage refleja el estado actual
+  const raw = localStorage.getItem("nhc") || "{}";
+  return `${location.origin}/#respaldo=${aB64url(raw)}`;
+}
+
+export async function copiarRespaldo() {
+  const url = urlDeRespaldo();
+  try {
+    await navigator.clipboard.writeText(url);
+    toast("Link de respaldo copiado — abrilo en otro navegador para pasar TODOS tus datos");
+  } catch {
+    toast("No se pudo copiar; copiá la URL de la barra");
+  }
+}
+
+/** Se llama ANTES de cargarLocal: si la URL trae #respaldo=, escribe esa copia
+ * exacta en localStorage para que cargarLocal la levante. Devuelve true si
+ * restauró algo. */
+export function leerRespaldoDeUrl(): boolean {
+  const m = location.hash.match(/respaldo=([^&]+)/);
+  if (!m) return false;
+  try {
+    const json = deB64url(m[1]);
+    JSON.parse(json);   // validar que es JSON antes de pisar nada
+    localStorage.setItem("nhc", json);
+    history.replaceState(null, "", location.pathname + location.search);
+    return true;
+  } catch { return false; }
 }
 
 /** ¿Este componente (curso+categoría+sección) coincide con lo que eligió el
